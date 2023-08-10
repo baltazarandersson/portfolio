@@ -5,10 +5,7 @@
 
   let barWidth = 0;
   let barLeft = 0;
-  let prevActiveNavEl: Element;
   let activeNavEl: Element;
-
-  const activeElTextColor = "text-orange-400";
 
   function updateActiveNavEl() {
     activeNavEl = getActiveNavSection();
@@ -27,10 +24,6 @@
     updateActiveNavEl();
     updateNavBar();
   }, 300);
-
-  $: if (prevActiveNavEl !== activeNavEl) {
-    prevActiveNavEl = activeNavEl;
-  }
 
   handleUpdateNav();
 

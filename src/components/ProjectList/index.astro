@@ -1,0 +1,16 @@
+---
+import ProjectItem from "./ProjectItem.astro";
+import type { ProjectType } from "types/projects";
+
+interface Props {
+  projects: ProjectType[];
+}
+
+const { projects } = Astro.props;
+---
+
+<ul
+  class="grid w-full grow grid-flow-row grid-cols-1 sm:grid-cols-[repeat(auto-fit,_minmax(500px,_1fr))]"
+>
+  {projects.map((project) => <ProjectItem {project} />)}
+</ul>
