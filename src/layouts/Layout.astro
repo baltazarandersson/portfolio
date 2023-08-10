@@ -32,10 +32,8 @@ const { title } = Astro.props;
       ) {
         return localStorage.getItem("theme");
       }
-      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-        return "dark";
-      }
-      return "light";
+      // Default to dark if no preference is found in local storage
+      return "dark";
     })();
 
     if (theme === "light") {
