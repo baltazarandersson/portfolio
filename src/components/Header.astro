@@ -4,6 +4,7 @@ import { SECTIONS } from "@constants/index";
 import type { SectionType } from "types/index";
 import NavBar from "@components/Header/NavBar.svelte";
 import { getNavSectionId } from "@utils/getNavSectionId";
+import ThemeSwitch from "./ThemeSwitch.svelte";
 
 const [presentationSection, ...otherSections] = SECTIONS;
 
@@ -12,15 +13,15 @@ const parseSection = (section: SectionType) =>
 ---
 
 <header
-  class="fixed w-full h-20 backdrop-blur-md bg-zinc-900/80 bg-opacity-40 z-10 border-b-2 border-zinc-800 font-heming flex justify-between items-center"
+  class="fixed z-10 flex items-center justify-between w-full h-20 border-b-2 backdrop-blur-md bg-zinc-200 border-zinc-200 dark:bg-zinc-900/80 bg-opacity-80 dark:bg-opacity-40 dark:border-zinc-800 font-heming"
 >
   <div
-    class="relative w-full h-full flex justify-between items-center p-layout"
+    class="relative flex items-center justify-between w-full h-full p-layout"
   >
     <Text size="p3">
       <a
         href={`/#${presentationSection}`}
-        class="hover:text-orange-400 transition underline decoration-transparent hover:decoration-inherit"
+        class="underline transition hover:text-orange-400 decoration-transparent hover:decoration-inherit"
         id={getNavSectionId(presentationSection)}
       >
         Baltazar Andersson
@@ -33,7 +34,7 @@ const parseSection = (section: SectionType) =>
           <Text size="p3">
             <a
               href={`/#${section}`}
-              class="hover:text-orange-400 transition underline decoration-transparent hover:decoration-inherit"
+              class="underline transition hover:text-orange-400 decoration-transparent hover:decoration-inherit"
               id={getNavSectionId(section)}
             >
               {parseSection(section)}
@@ -41,6 +42,7 @@ const parseSection = (section: SectionType) =>
           </Text>
         ))
       }
+      <ThemeSwitch client:load />
       <Text size="p3">{`>`}</Text>
     </nav>
     <NavBar client:only />

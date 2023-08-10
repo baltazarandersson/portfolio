@@ -9,7 +9,7 @@ interface Props {
 const { technologies } = Astro.props;
 ---
 
-<ul class="flex gap-4 items-center">
+<ul class="flex items-center gap-4">
   {
     technologies.map(({ source, iconClass, alt, icon }) => (
       <li>
@@ -21,7 +21,7 @@ const { technologies } = Astro.props;
           <img
             alt={alt}
             src={icon}
-            class="object-contain hover:scale-110 transition-transform"
+            class="object-contain transition-transform hover:scale-110"
           />
         </a>
       </li>

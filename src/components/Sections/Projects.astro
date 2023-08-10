@@ -15,7 +15,7 @@ const { id = "" } = Astro.props;
 
 <Section id={id} class="flex flex-col">
   <ul
-    class="grid w-full grow grid-flow-row grid-cols-[repeat(auto-fit,_minmax(500px,_1fr))]"
+    class="grid w-full grow grid-flow-row grid-cols-1 sm:grid-cols-[repeat(auto-fit,_minmax(500px,_1fr))]"
   >
     {ProjectList.map((project) => <ProjectItem {project} />)}
   </ul>

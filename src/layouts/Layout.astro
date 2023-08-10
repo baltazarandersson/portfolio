@@ -1,6 +1,5 @@
 ---
 import Header from "@components/Header.astro";
-
 interface Props {
   title: string;
 }
@@ -19,29 +18,27 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body
-    class="font-helvetica bg-zinc-200 dark:text-indigo-50 text-black dark:bg-zinc-900 overflow-x-hidden scroll-smooth"
+    class="text-black font-helvetica bg-zinc-100 dark:text-indigo-50 dark:bg-zinc-900 scroll-smooth"
   >
     <Header />
     <slot />
   </body>
-  <script is:inline>
+  <script>
+    import { getCurrentTheme, updateStoredTheme } from "@utils/theme";
+
     const theme = (() => {
-      if (
-        typeof localStorage !== "undefined" &&
-        localStorage.getItem("theme")
-      ) {
-        return localStorage.getItem("theme");
-      }
+      if (typeof localStorage !== "undefined" && getCurrentTheme())
+        return getCurrentTheme();
+
       // Default to dark if no preference is found in local storage
       return "dark";
     })();
 
     if (theme === "light") {
       document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
     }
-    window.localStorage.setItem("theme", theme);
+
+    updateStoredTheme(theme);
   </script>
 </html>
 <style is:global>
