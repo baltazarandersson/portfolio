@@ -1,12 +1,14 @@
 <svg
-  class="h-full w-full"
-  fill="currentColor"
+  xmlns="http://www.w3.org/2000/svg"
+  fill="none"
   viewBox="0 0 24 24"
-  height="24px"
-  width="24px"
+  stroke-width="1.5"
+  stroke="currentColor"
+  class="w-6 h-6"
 >
-  <path fill="none" d="M0 0h24v24H0V0z" />
   <path
-    d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.79zM1 10.5h3v2H1zM11 .55h2V3.5h-2zm8.04 2.495l1.408 1.407-1.79 1.79-1.407-1.408zm-1.8 15.115l1.79 1.8 1.41-1.41-1.8-1.79zM20 10.5h3v2h-3zm-8-5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm-1 4h2v2.95h-2zm-7.45-.96l1.41 1.41 1.79-1.8-1.41-1.41z"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
   />
 </svg>

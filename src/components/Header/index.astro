@@ -1,0 +1,50 @@
+---
+import Text from "@components/Text.astro";
+import { SECTIONS } from "@constants/index";
+import type { SectionType } from "types/index";
+import NavBar from "@components/Header/NavBar.svelte";
+import ThemeSwitch from "../ThemeSwitch.svelte";
+import Hamburguer from "./Hamburguer.svelte";
+import Drawer from "../Drawer.svelte";
+import NavSection from "@components/NavSection.svelte";
+
+const [presentationSection, ...otherSections] = SECTIONS;
+
+const parseSection = (section: SectionType) =>
+  section.charAt(0).toUpperCase() + section.slice(1);
+---
+
+<script>
+  import { getNavSectionById } from "@utils/getNavSection";
+  import { closeDrawer } from "src/store/drawer";
+
+  const homeNavEl = getNavSectionById("presentation");
+
+  homeNavEl.addEventListener("click", closeDrawer);
+</script>
+<header
+  class="fixed z-10 flex items-center justify-between w-full h-20 border-b-2 backdrop-blur-md bg-zinc-200 border-zinc-200 dark:bg-zinc-900/80 bg-opacity-80 dark:bg-opacity-40 dark:border-zinc-800 font-heming"
+>
+  <div
+    class="relative flex items-center justify-between w-full h-full p-layout"
+  >
+    <NavSection
+      section={presentationSection}
+      label="Baltazar Andersson"
+      client:load
+    />
+
+    <nav class="hidden gap-8 sm:flex">
+      <Text size="p3">{`<`}</Text>
+      {otherSections.map((section) => <NavSection client:load {section} />)}
+      <ThemeSwitch client:load />
+      <Text size="p3">{`>`}</Text>
+    </nav>
+    <NavBar client:only />
+    <div class="flex items-center h-10 gap-4 sm:hidden">
+      <ThemeSwitch client:only />
+      <Hamburguer client:only />
+    </div>
+  </div>
+  <Drawer client:only items={otherSections} />
+</header>
