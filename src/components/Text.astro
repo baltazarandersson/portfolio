@@ -1,0 +1,20 @@
+---
+interface Props {
+  size?: "p5" | "p4" | "p3" | "p2" | "p1";
+  class?: string;
+}
+
+const sizeVariants = {
+  p5: "text-xs md:text-sm",
+  p4: "text-sm md:text-base",
+  p3: "text-base md:text-lg",
+  p2: "text-lg md:text-xl",
+  p1: "text-xl md:text-2xl",
+};
+
+const { size: As = "p4", class: className = "" } = Astro.props;
+---
+
+<As class:list={[sizeVariants[As], className]}>
+  <slot />
+</As>

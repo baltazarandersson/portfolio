@@ -1,0 +1,48 @@
+---
+import Text from "@components/Text.astro";
+import { SECTIONS } from "@constants/index";
+import type { SectionType } from "types/index";
+import NavBar from "@components/Header/NavBar.svelte";
+import { getNavSectionId } from "@utils/getNavSectionId";
+
+const [presentationSection, ...otherSections] = SECTIONS;
+
+const parseSection = (section: SectionType) =>
+  section.charAt(0).toUpperCase() + section.slice(1);
+---
+
+<header
+  class="fixed w-full h-20 backdrop-blur-md bg-zinc-900/80 bg-opacity-40 z-10 border-b-2 border-zinc-800 font-heming flex justify-between items-center"
+>
+  <div
+    class="relative w-full h-full flex justify-between items-center p-layout"
+  >
+    <Text size="p3">
+      <a
+        href={`/#${presentationSection}`}
+        class="hover:text-orange-400 transition underline decoration-transparent hover:decoration-inherit"
+        id={getNavSectionId(presentationSection)}
+      >
+        Baltazar Andersson
+      </a>
+    </Text>
+    <nav class="flex gap-8">
+      <Text size="p3">{`<`}</Text>
+      {
+        otherSections.map((section) => (
+          <Text size="p3">
+            <a
+              href={`/#${section}`}
+              class="hover:text-orange-400 transition underline decoration-transparent hover:decoration-inherit"
+              id={getNavSectionId(section)}
+            >
+              {parseSection(section)}
+            </a>
+          </Text>
+        ))
+      }
+      <Text size="p3">{`>`}</Text>
+    </nav>
+    <NavBar client:only />
+  </div>
+</header>

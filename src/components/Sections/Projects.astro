@@ -1,0 +1,22 @@
+---
+import Section from "@components/Section.astro";
+import ProjectItem from "@components/ProjectItem/index.astro";
+import { getProjects } from "@services/projects";
+import type { SectionType } from "types/index";
+
+const ProjectList = await getProjects();
+
+interface Props {
+  id?: SectionType;
+}
+
+const { id = "" } = Astro.props;
+---
+
+<Section id={id} class="flex flex-col">
+  <ul
+    class="grid w-full grow grid-flow-row grid-cols-[repeat(auto-fit,_minmax(500px,_1fr))]"
+  >
+    {ProjectList.map((project) => <ProjectItem {project} />)}
+  </ul>
+</Section>

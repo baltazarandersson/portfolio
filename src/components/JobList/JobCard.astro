@@ -1,0 +1,51 @@
+---
+import type { JobType } from "types/jobs";
+import { getMonthsBetweenDates } from "@utils/getMonthsBetweenDates";
+import { formatTimestamp } from "@utils/formatTimestamp";
+import Text from "@components/Text.astro";
+import VairixLogo from "@components/Logos/VairixLogo.astro";
+import TechnologiesList from "@components/TechnologiesList/index.astro";
+import { parseTags } from "@services/tags";
+
+interface Props {
+  job: JobType;
+}
+
+const {
+  job: { position, company, type, from, to, description, stack, logo },
+} = Astro.props;
+
+const technologies = await parseTags({ tags: stack });
+---
+
+<div
+  class="flex flex-col p-8 border-2 border-zinc-700 bg-zinc-800 rounded-sm gap-8 transition-all"
+>
+  <div
+    class="flex flex-col md:flex-row gap-4 w-full justify-between items-center"
+  >
+    <img class="h-8" src={logo} />
+    <Text>{position} ~ {type}</Text>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <Text size="p2">
+      <time
+        >{formatTimestamp({ timestamp: from })} ~ {
+          formatTimestamp({ timestamp: to })
+        }</time
+      >
+    </Text>
+    <Text size="p4" class="text-zinc-500">
+      ({getMonthsBetweenDates(from, to)} months)
+    </Text>
+  </div>
+  <Text>
+    {description}
+  </Text>
+  <div class="flex items-start gap-8">
+    <Text size="p4" class="font-bold font-heming">STACK</Text>
+
+    <TechnologiesList {technologies} />
+  </div>
+</div>

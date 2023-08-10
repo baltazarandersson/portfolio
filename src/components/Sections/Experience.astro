@@ -1,0 +1,22 @@
+---
+import Heading from "@components/Heading.astro";
+import JobList from "@components/JobList/index.astro";
+import Section from "@components/Section.astro";
+import type { SectionType } from "types/index";
+import { getJobs } from "@services/jobs";
+
+interface Props {
+  id?: SectionType;
+}
+
+const { id = "" } = Astro.props;
+
+const jobs = await getJobs();
+---
+
+<Section class="p-layout flex items-start" id={id}>
+  <div class="flex flex-col mt-20 gap-20 w-full">
+    <Heading size="h3">Professional experience</Heading>
+    <JobList {jobs} />
+  </div>
+</Section>

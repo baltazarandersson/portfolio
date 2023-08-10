@@ -1,0 +1,30 @@
+---
+import ProjectTag from "@components/ProjectItem/ProjectTag.astro";
+import type { TagType } from "types/tags";
+
+interface Props {
+  technologies: TagType[];
+}
+
+const { technologies } = Astro.props;
+---
+
+<ul class="flex gap-4 items-center">
+  {
+    technologies.map(({ source, iconClass, alt, icon }) => (
+      <li>
+        <a
+          href={source}
+          class:list={["h-8 w-8 flex justify-center", iconClass]}
+          target="_blank"
+        >
+          <img
+            alt={alt}
+            src={icon}
+            class="object-contain hover:scale-110 transition-transform"
+          />
+        </a>
+      </li>
+    ))
+  }
+</ul>

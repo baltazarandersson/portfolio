@@ -1,0 +1,68 @@
+---
+import Heading from "@components/Heading.astro";
+import ExternalLinkIcon from "@components/Icons/ExternalLinkIcon.astro";
+import Text from "@components/Text.astro";
+import GitHubIcon from "@components/Icons/GitHubIcon.astro";
+import type { ProjectType } from "types/projects";
+import TechnologiesList from "@components/TechnologiesList/index.astro";
+
+interface Props {
+  project: ProjectType;
+}
+
+const {
+  project: { thumbnail, title, description, tags, repository, deploy },
+} = Astro.props;
+---
+
+<li
+  class="h-full w-full relative flex min-h-[300px] group"
+  style={`background-image: url(${thumbnail})`}
+>
+  <div
+    class="md:opacity-0 group-hover:opacity-100 flex border-transparent border-2 hover:border-zinc-700 backdrop-blur-[1px] transition duration-300 h-full w-full bg-zinc-800/80 px-12 py-16 flex-col justify-between items-start"
+  >
+    <div class="flex flex-col items-start gap-2">
+      <a href={deploy} target="_blank">
+        <Heading
+          size="h5"
+          class="font-bold underline decoration-transparent hover:decoration-inherit transition-all"
+        >
+          {title}
+        </Heading>
+      </a>
+      <Text>
+        {description}
+      </Text>
+    </div>
+    <div class="flex justify-between items-center w-full">
+      <TechnologiesList technologies={tags} />
+      <div class="flex gap-4">
+        <a
+          href={repository}
+          target="_blank"
+          class="h-10 w-10 p-2 hover:scale-110 transition-transform bg-zinc-300 text-zinc-800 rounded-full flex justify-center items-center"
+        >
+          <GitHubIcon class="h-full w-full" />
+        </a>
+        {
+          deploy && (
+            <a
+              href={deploy}
+              target="_blank"
+              class="h-10 w-10 p-2 hover:scale-110 transition-transform bg-zinc-300 text-zinc-800 rounded-full flex justify-center items-center"
+            >
+              <ExternalLinkIcon />
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</li>
+<style>
+  li {
+    background-position: center;
+    background-size: cover;
+  }
+</style>
