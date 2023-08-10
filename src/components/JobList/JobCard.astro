@@ -3,7 +3,6 @@ import type { JobType } from "types/jobs";
 import { getMonthsBetweenDates } from "@utils/getMonthsBetweenDates";
 import { formatTimestamp } from "@utils/formatTimestamp";
 import Text from "@components/Text.astro";
-import VairixLogo from "@components/Logos/VairixLogo.astro";
 import TechnologiesList from "@components/TechnologiesList/index.astro";
 import { parseTags } from "@services/tags";
 
@@ -12,14 +11,14 @@ interface Props {
 }
 
 const {
-  job: { position, company, type, from, to, description, stack, logo },
+  job: { position, type, from, to, description, stack, logo },
 } = Astro.props;
 
 const technologies = await parseTags({ tags: stack });
 ---
 
 <div
-  class="flex flex-col gap-8 p-8 border-2 rounded-sm dark:border-zinc-700 dark:bg-zinc-800"
+  class="flex flex-col gap-8 py-8 px-4 sm:px-8 border-2 rounded-sm dark:border-zinc-700 dark:bg-zinc-800"
 >
   <div
     class="flex flex-col items-center justify-between w-full gap-4 md:flex-row"
@@ -28,7 +27,7 @@ const technologies = await parseTags({ tags: stack });
     <Text>{position} ~ {type}</Text>
   </div>
 
-  <div class="flex items-center gap-4">
+  <div class="flex items-center gap-x-4 flex-col sm:flex-row">
     <Text size="p2">
       <time
         >{formatTimestamp({ timestamp: from })} ~ {

@@ -15,6 +15,12 @@ const sizeVariants = {
 const { size: As = "h1", class: className = "" } = Astro.props;
 ---
 
-<As class:list={["font-heming", sizeVariants[As], className]}>
+<As
+  class:list={[
+    "font-heming text-center sm:text-start",
+    sizeVariants[As],
+    className,
+  ]}
+>
   <slot />
 </As>
