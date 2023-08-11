@@ -30,7 +30,7 @@
 <a
   on:click={closeDrawer}
   href={`/#${section}`}
-  class={`text-base  transition md:text-lg dark:hover:text-orange-400 hover:text-orange-500 decoration-transparent hover:decoration-inherit ${
+  class={`text-lg  transition dark:hover:text-orange-400 hover:text-orange-500 decoration-transparent hover:decoration-inherit ${
     activeSectionId === sectionId
       ? "text-orange-500 dark:text-orange-400"
       : "underline"

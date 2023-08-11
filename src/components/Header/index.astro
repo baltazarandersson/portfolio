@@ -1,7 +1,6 @@
 ---
 import Text from "@components/Text.astro";
-import { SECTIONS } from "@constants/index";
-import type { SectionType } from "types/index";
+import { SECTIONS, HEADER_HEIGHT } from "@constants/index";
 import NavBar from "@components/Header/NavBar.svelte";
 import ThemeSwitch from "../ThemeSwitch.svelte";
 import Hamburguer from "./Hamburguer.svelte";
@@ -10,8 +9,7 @@ import NavSection from "@components/NavSection.svelte";
 
 const [presentationSection, ...otherSections] = SECTIONS;
 
-const parseSection = (section: SectionType) =>
-  section.charAt(0).toUpperCase() + section.slice(1);
+const height = `${HEADER_HEIGHT}px`;
 ---
 
 <script>
@@ -23,7 +21,7 @@ const parseSection = (section: SectionType) =>
   homeNavEl.addEventListener("click", closeDrawer);
 </script>
 <header
-  class="fixed z-10 flex items-center justify-between w-full h-20 border-b-2 backdrop-blur-md bg-zinc-200 border-zinc-200 dark:bg-zinc-900/80 bg-opacity-80 dark:bg-opacity-40 dark:border-zinc-800 font-heming"
+  class="fixed z-10 flex items-center justify-between w-full border-b-2 backdrop-blur-md bg-zinc-200 border-zinc-200 dark:bg-zinc-900/80 bg-opacity-80 dark:bg-opacity-40 dark:border-zinc-800 font-heming"
 >
   <div
     class="relative flex items-center justify-between w-full h-full p-layout"
@@ -48,3 +46,8 @@ const parseSection = (section: SectionType) =>
   </div>
   <Drawer client:only items={otherSections} />
 </header>
+<style define:vars={{ height }}>
+  header {
+    height: var(--height);
+  }
+</style>
