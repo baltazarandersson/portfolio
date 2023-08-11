@@ -12,7 +12,11 @@
   };
 </script>
 
-<button class="transition-transform hover:rotate-12" on:click={handleClick}>
+<button
+  class="transition-transform hover:rotate-12"
+  on:click={handleClick}
+  aria-label="switch-theme"
+>
   {#if theme === "dark"}
     <SunIcon />
   {:else}

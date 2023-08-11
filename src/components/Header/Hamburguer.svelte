@@ -1,13 +1,6 @@
 <script lang="ts">
-  import Drawer from "@components/Drawer.svelte";
   import Hamburger from "@components/Icons/Hamburger.svelte";
-  import {
-    closeDrawer,
-    drawerStore,
-    openDrawer,
-    toggleDrawer,
-  } from "src/store/drawer";
-  import { get } from "svelte/store";
+  import { toggleDrawer } from "src/store/drawer";
 </script>
 
-<button on:click={toggleDrawer}><Hamburger /></button>
+<button on:click={toggleDrawer} aria-label="drawer"><Hamburger /></button>

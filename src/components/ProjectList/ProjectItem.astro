@@ -23,14 +23,14 @@ const {
     class="transition-opacity duration-200 md:opacity-0 group-hover:opacity-100 flex border-transparent border-2 hover:border-zinc-300 dark:hover:border-zinc-700 backdrop-blur-[1px] h-full w-full bg-zinc-200/70 dark:bg-zinc-800/80 px-12 py-16 flex-col justify-between items-start"
   >
     <div class="flex flex-col items-start gap-2">
-      <a href={deploy} target="_blank">
-        <Heading
-          size="h5"
-          class="font-bold underline transition decoration-transparent hover:decoration-inherit"
-        >
+      <Text
+        size="p1"
+        class="font-bold underline transition font-heming decoration-transparent hover:decoration-inherit"
+      >
+        <a href={deploy || repository} target="_blank">
           {title}
-        </Heading>
-      </a>
+        </a>
+      </Text>
       <Text size="p4" class="font-bold">
         {description}
       </Text>
@@ -40,6 +40,7 @@ const {
       <div class="flex gap-4">
         <a
           href={repository}
+          aria-label="repository-link"
           target="_blank"
           class="flex items-center justify-center w-10 h-10 p-2 transition-transform rounded-full hover:scale-110 bg-zinc-300 text-zinc-800"
         >
@@ -49,6 +50,7 @@ const {
           deploy && (
             <a
               href={deploy}
+              aria-label="deploy-link"
               target="_blank"
               class="flex items-center justify-center w-10 h-10 p-2 transition-transform rounded-full hover:scale-110 bg-zinc-300 text-zinc-800"
             >
