@@ -34,7 +34,7 @@
 
 <div
   style="--width:{barWidth}px; --left:{barLeft}px;"
-  class="absolute bottom-0 hidden w-40 h-1 duration-150 bg-orange-400 rounded-t-sm sm:block"
+  class="absolute bottom-0 hidden w-40 h-1 duration-150 bg-orange-500 rounded-t-sm dark:bg-orange-400 sm:block"
 />
 
 <style>
