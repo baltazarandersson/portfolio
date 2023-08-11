@@ -44,7 +44,7 @@ const { title } = Astro.props;
 <style is:global>
   @font-face {
     font-family: "Heming Variable";
-    src: url("fonts/heming_variable.ttf") format("woff");
+    src: url("/fonts/heming_variable.ttf") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -52,7 +52,7 @@ const { title } = Astro.props;
 
   @font-face {
     font-family: "Helvetica Light";
-    src: url("fonts/helvetica_light.woff") format("woff");
+    src: url("/fonts/helvetica_light.woff") format("woff");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -64,6 +64,10 @@ const { title } = Astro.props;
 
   html {
     scroll-behavior: smooth;
+  }
+
+  * {
+    -webkit-tap-highlight-color: transparent; /* remove tap highlight */
   }
 
   .p-layout {
