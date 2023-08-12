@@ -32,14 +32,14 @@ const height = `${HEADER_HEIGHT}px`;
       client:load
     />
 
-    <nav class="hidden gap-8 sm:flex">
+    <nav class="hidden gap-4 lg:gap-8 md:flex">
       <Text size="p3">{`<`}</Text>
       {otherSections.map((section) => <NavSection client:load {section} />)}
       <ThemeSwitch client:load />
       <Text size="p3">{`/ >`}</Text>
     </nav>
     <NavBar client:only />
-    <div class="flex items-center h-10 gap-4 sm:hidden">
+    <div class="flex items-center h-10 gap-4 md:hidden">
       <ThemeSwitch client:load />
       <Hamburguer client:only />
     </div>

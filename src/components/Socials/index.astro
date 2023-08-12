@@ -1,0 +1,30 @@
+---
+import GitHubIcon from "@components/Icons/GitHubIcon.astro";
+import LinkedInIcon from "@components/Icons/LinkedInIcon.astro";
+import PlatziIcon from "@components/Icons/PlatziIcon.astro";
+import SocialItem from "./SocialItem.astro";
+
+interface Props {
+  orientation?: "row" | "column";
+}
+
+const { orientation = "row" } = Astro.props;
+---
+
+<ul class={`flex gap-4 ${orientation === "row" ? "flex-row" : "flex-col"}`}>
+  <li class="transition-transform duration-200 hover:scale-[1.2]">
+    <SocialItem href="https://github.com/baltazarandersson">
+      <GitHubIcon />
+    </SocialItem>
+  </li>
+  <li class="transition-transform duration-200 hover:scale-[1.2]">
+    <SocialItem href="https://www.linkedin.com/in/baltazar-andersson/">
+      <LinkedInIcon />
+    </SocialItem>
+  </li>
+  <li class="transition-transform duration-200 hover:scale-[1.2]">
+    <SocialItem href="https://platzi.com/p/baltazarander/">
+      <PlatziIcon />
+    </SocialItem>
+  </li>
+</ul>
