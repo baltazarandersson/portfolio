@@ -29,11 +29,17 @@
     });
   };
 
-  !isMobileDevice && updateCoords();
+  if (isMobileDevice) {
+    setTimeout(() => {
+      updateCoords();
 
-  setInterval(() => {
-    if (isMobileDevice) updateCoords();
-  }, 5000);
+      setInterval(() => {
+        if (isMobileDevice) updateCoords();
+      }, 5000);
+    }, 1500);
+  } else {
+    updateCoords();
+  }
 
   $: isMobileDevice = innerWidth < MOBILE_WIDTH;
 </script>
