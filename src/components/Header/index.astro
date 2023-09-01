@@ -29,22 +29,22 @@ const height = `${HEADER_HEIGHT}px`;
     <NavSection
       section={presentationSection}
       label="Baltazar Andersson"
-      client:load
+      client:idle
     />
 
     <nav class="hidden gap-4 lg:gap-8 md:flex">
       <Text size="p3">{`<`}</Text>
-      {otherSections.map((section) => <NavSection client:load {section} />)}
-      <ThemeSwitch client:load />
+      {otherSections.map((section) => <NavSection client:idle {section} />)}
+      <ThemeSwitch client:idle />
       <Text size="p3">{`/ >`}</Text>
     </nav>
     <NavBar client:only />
     <div class="flex items-center h-10 gap-4 md:hidden">
-      <ThemeSwitch client:load />
-      <Hamburguer client:only />
+      <ThemeSwitch client:idle />
+      <Hamburguer client:idle />
     </div>
   </div>
-  <Drawer client:only items={otherSections} />
+  <Drawer client:idle items={otherSections} />
 </header>
 <style define:vars={{ height }}>
   header {

@@ -1,0 +1,31 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "words": [
+    "astro",
+    "linecap",
+    "linejoin",
+    "tailwind",
+    "astrojs",
+    "tailwindcss",
+    "heming",
+    "Heming",
+    "tsconfigs",
+    "Baltazar's",
+    "miterlimit",
+    "noreferrer",
+    "Platzi",
+    "Baltazar",
+    "Andersson",
+    "Hamburguer",
+    "hamburguer",
+    "xlink",
+    "Vercel",
+    "Preact",
+    "Codespaces",
+    "svgrepo",
+    "evenodd",
+    "minmax"
+  ],
+  "ignorePaths": ["node_modules/**", "src/mocks/**", "dist/**"]
+}
