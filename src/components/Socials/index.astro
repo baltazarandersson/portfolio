@@ -2,29 +2,55 @@
 import GitHubIcon from "@components/Icons/GitHubIcon.astro";
 import LinkedInIcon from "@components/Icons/LinkedInIcon.astro";
 import PlatziIcon from "@components/Icons/PlatziIcon.astro";
+import MailIcon from "@components/Icons/MailIcon.astro";
+import FileDownloadIcon from "@components/Icons/FileDownloadIcon.astro";
+
 import SocialItem from "./SocialItem.astro";
-
-interface Props {
-  orientation?: "row" | "column";
-}
-
-const { orientation = "row" } = Astro.props;
+import Text from "@components/Text.astro";
 ---
 
-<ul class={`flex gap-4 ${orientation === "row" ? "flex-row" : "flex-col"}`}>
-  <li class="transition-transform duration-200 hover:scale-[1.2]">
-    <SocialItem href="https://github.com/baltazarandersson">
-      <GitHubIcon />
-    </SocialItem>
-  </li>
-  <li class="transition-transform duration-200 hover:scale-[1.2]">
-    <SocialItem href="https://www.linkedin.com/in/baltazar-andersson/">
+<ul
+  class="grid grid-flow-row lg:w-fit grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 font-heming text-center"
+>
+  <SocialItem href="https://www.linkedin.com/in/baltazar-andersson/">
+    <div class="shrink-0">
       <LinkedInIcon />
-    </SocialItem>
-  </li>
-  <li class="transition-transform duration-200 hover:scale-[1.2]">
-    <SocialItem href="https://platzi.com/p/baltazarander/">
+    </div>
+
+    <Text size="p2" class="hidden sm:inline">Baltazar Andersson</Text>
+  </SocialItem>
+
+  <SocialItem href="mailto:baltazardevv@gmail.com">
+    <div class="shrink-0">
+      <MailIcon />
+    </div>
+
+    <Text size="p2" class="hidden sm:inline">baltazardevv@gmail.com</Text>
+  </SocialItem>
+
+  <SocialItem href="https://github.com/baltazarandersson">
+    <div class="shrink-0">
+      <GitHubIcon />
+    </div>
+
+    <Text size="p2" class="hidden sm:inline">@baltazarandersson</Text>
+  </SocialItem>
+
+  <SocialItem href="https://platzi.com/p/baltazarander/">
+    <div class="shrink-0">
       <PlatziIcon />
+    </div>
+
+    <Text size="p2" class="hidden sm:inline">@baltazarander</Text>
+  </SocialItem>
+
+  <div style="grid-column: 1/-1;">
+    <SocialItem href="/Baltazar%20Andersson%20CV.pdf">
+      <div class="shrink-0">
+        <FileDownloadIcon />
+      </div>
+
+      <Text size="p2">Download my portfolio by clicking here</Text>
     </SocialItem>
-  </li>
+  </div>
 </ul>

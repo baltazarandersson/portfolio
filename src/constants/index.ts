@@ -1,9 +1,4 @@
-export const SECTIONS = [
-  "presentation",
-  "experience",
-  "projects",
-  "contact",
-] as const;
+export const SECTIONS = ["presentation", "experience", "projects", "contact"];
 
 export const DEFAULT_LANGUAGE = "en-EN";
 

@@ -1,0 +1,19 @@
+---
+import Heading from "@components/Heading.astro";
+import Section from "@components/Section.astro";
+import type { SectionType } from "types/index";
+import Socials from "@components/Socials/index.astro";
+
+interface Props {
+  id?: SectionType;
+}
+
+const { id = "" } = Astro.props;
+---
+
+<Section class="p-layout flex items-start" id={id}>
+  <div class="flex flex-col mt-20 gap-20 w-full">
+    <Heading size="h3">Get in touch</Heading>
+    <Socials />
+  </div>
+</Section>
