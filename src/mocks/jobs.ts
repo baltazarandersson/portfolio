@@ -1,6 +1,5 @@
 import type { JobType } from "types/jobs";
-
-const vairixLogo = "images/logos/vairix.svg";
+import vairixLogo from "/public/images/logos/vairix.svg";
 
 const jobs: JobType[] = [
   {

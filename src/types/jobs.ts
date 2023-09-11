@@ -8,5 +8,5 @@ export type JobType = {
   to: number;
   description: string;
   stack: TagKeys[];
-  logo: string;
+  logo: ImageMetadata;
 };

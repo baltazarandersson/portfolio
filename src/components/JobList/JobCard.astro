@@ -5,6 +5,7 @@ import { formatTimestamp } from "@utils/formatTimestamp";
 import Text from "@components/Text.astro";
 import TechnologiesList from "@components/TechnologiesList/index.astro";
 import { parseTags } from "@services/tags";
+import Image from "astro/components/Image.astro";
 
 interface Props {
   job: JobType;
@@ -23,7 +24,7 @@ const technologies = await parseTags({ tags: stack });
   <div
     class="flex flex-col items-center justify-between w-full gap-4 md:flex-row"
   >
-    <img class="h-8" src={logo} alt={`${company}-logo`} />
+    <Image class="h-8" src={logo} alt={`${company}-logo`} />
     <Text>{position} ~ {type}</Text>
   </div>
 

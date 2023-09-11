@@ -1,7 +1,7 @@
 import type { TagKeys, TagType } from "./tags";
 
 export type ProjectWithKeysType = {
-  thumbnail: string;
+  thumbnail: ImageMetadata;
   title: string;
   description: string;
   repository: string;

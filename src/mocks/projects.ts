@@ -1,13 +1,13 @@
-import pokeduxThumb from "/images/projects/pokedux.webp";
-import chattioThumb from "/images/projects/chattio.webp";
-import forecastThumb from "/images/projects/bolt.webp";
-import giffiThumb from "/images/projects/giffi.webp";
-import glacssifyThumb from "/images/projects/glacssify.webp";
-import simonsaysThumb from "/images/projects/simonsays.webp";
-import lolprofileThumb from "/images/projects/lolprofile.webp";
-import countryQuizThumb from "/images/projects/countryquiz.webp";
-import avostoreThumb from "/images/projects/avostore.webp";
-import devtterThumb from "/images/projects/devtter.webp";
+import pokeduxThumb from "/public/images/projects/pokedux.webp";
+import chattioThumb from "/public/images/projects/chattio.webp";
+import forecastThumb from "/public/images/projects/bolt.webp";
+import giffiThumb from "/public/images/projects/giffi.webp";
+import glacssifyThumb from "/public/images/projects/glacssify.webp";
+import simonsaysThumb from "/public/images/projects/simonsays.webp";
+import lolprofileThumb from "/public/images/projects/lolprofile.webp";
+import countryQuizThumb from "/public/images/projects/countryquiz.webp";
+import avostoreThumb from "/public/images/projects/avostore.webp";
+import devtterThumb from "/public/images/projects/devtter.webp";
 import type { ProjectWithKeysType } from "types/projects";
 
 const projects: ProjectWithKeysType[] = [
