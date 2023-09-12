@@ -1,72 +1,68 @@
 ---
-import ExternalLinkIcon from "@components/Icons/ExternalLinkIcon.astro";
-import Text from "@components/Text.astro";
-import GitHubIcon from "@components/Icons/GitHubIcon.astro";
-import type { ProjectType } from "types/projects";
-import TechnologiesList from "@components/TechnologiesList/index.astro";
-import Image from "astro/components/Image.astro";
+import ExternalLinkIcon from '@components/Icons/ExternalLinkIcon.astro'
+import Text from '@components/Text.astro'
+import GitHubIcon from '@components/Icons/GitHubIcon.astro'
+import type { ProjectType } from 'types/projects'
+import TechnologiesList from '@components/TechnologiesList/index.astro'
+import { Image } from 'astro:assets'
 
 interface Props {
-  project: ProjectType;
+	project: ProjectType
 }
 
 const {
-  project: { thumbnail, title, description, tags, repository, deploy },
-} = Astro.props;
+	project: { thumbnail, title, description, tags, repository, deploy }
+} = Astro.props
 ---
 
-<li class="h-full w-full relative flex min-h-[300px] group">
-  <div
-    class="transition-opacity duration-200 md:opacity-0 group-hover:opacity-100 flex border-transparent border-2 hover:border-zinc-300 dark:hover:border-zinc-700 backdrop-blur-[1px] h-full w-full bg-zinc-200/70 dark:bg-zinc-800/80 px-12 py-16 flex-col justify-between items-start"
-  >
-    <div class="flex flex-col items-start gap-2">
-      <Text
-        size="p1"
-        class="font-bold underline transition font-heming decoration-transparent hover:decoration-inherit"
-      >
-        <a href={deploy || repository} target="_blank">
-          {title}
-        </a>
-      </Text>
-      <Text size="p4" class="font-bold">
-        {description}
-      </Text>
-    </div>
-    <div class="flex items-center justify-between w-full">
-      <TechnologiesList technologies={tags} />
-      <div class="flex gap-4">
-        <a
-          href={repository}
-          aria-label="repository-link"
-          target="_blank"
-          class="flex items-center justify-center w-10 h-10 p-2 transition-transform rounded-full hover:scale-110 bg-zinc-300 text-zinc-800"
-        >
-          <GitHubIcon />
-        </a>
-        {
-          deploy && (
-            <a
-              href={deploy}
-              aria-label="deploy-link"
-              target="_blank"
-              class="flex items-center justify-center w-10 h-10 p-2 transition-transform rounded-full hover:scale-110 bg-zinc-300 text-zinc-800"
-            >
-              <ExternalLinkIcon />
-            </a>
-          )
-        }
-      </div>
-    </div>
-  </div>
-  <Image
-    src={thumbnail}
-    alt={title}
-    class="absolute -z-10 h-full w-full object-cover"
-  />
+<li class="group relative flex h-full min-h-[300px] w-full">
+	<div
+		class="flex h-full w-full flex-col items-start justify-between border-2 border-transparent bg-zinc-200/70 px-12 py-16 backdrop-blur-[1px] transition-opacity duration-200 hover:border-zinc-300 group-hover:opacity-100 dark:bg-zinc-800/80 dark:hover:border-zinc-700 md:opacity-0"
+	>
+		<div class="flex flex-col items-start gap-2">
+			<Text
+				size="p1"
+				class="font-heming font-bold underline decoration-transparent transition hover:decoration-inherit"
+			>
+				<a href={deploy || repository} target="_blank">
+					{title}
+				</a>
+			</Text>
+			<Text size="p4" class="font-bold">
+				{description}
+			</Text>
+		</div>
+		<div class="flex w-full items-center justify-between">
+			<TechnologiesList technologies={tags} />
+			<div class="flex gap-4">
+				<a
+					href={repository}
+					aria-label="repository-link"
+					target="_blank"
+					class="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-300 p-2 text-zinc-800 transition-transform hover:scale-110"
+				>
+					<GitHubIcon />
+				</a>
+				{
+					deploy && (
+						<a
+							href={deploy}
+							aria-label="deploy-link"
+							target="_blank"
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-300 p-2 text-zinc-800 transition-transform hover:scale-110"
+						>
+							<ExternalLinkIcon />
+						</a>
+					)
+				}
+			</div>
+		</div>
+	</div>
+	<Image src={thumbnail} alt={title} class="absolute -z-10 h-full w-full object-cover" />
 </li>
 <style>
-  li {
-    background-position: center;
-    background-size: cover;
-  }
+	li {
+		background-position: center;
+		background-size: cover;
+	}
 </style>
