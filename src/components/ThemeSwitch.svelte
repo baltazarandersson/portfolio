@@ -1,25 +1,25 @@
 <script>
-  import { toggleCurrentTheme, getCurrentTheme } from "@utils/theme";
-  import SunIcon from "./Icons/SunIcon.svelte";
-  import MoonIcon from "./Icons/MoonIcon.svelte";
+	import { toggleCurrentTheme, getCurrentTheme } from '@utils/theme'
+	import SunIcon from './Icons/SunIcon.svelte'
+	import MoonIcon from './Icons/MoonIcon.svelte'
 
-  let theme = getCurrentTheme();
+	let theme = getCurrentTheme()
 
-  const handleClick = () => {
-    toggleCurrentTheme();
+	const handleClick = () => {
+		toggleCurrentTheme()
 
-    theme = getCurrentTheme();
-  };
+		theme = getCurrentTheme()
+	}
 </script>
 
 <button
-  class="transition-transform hover:rotate-12"
-  on:click={handleClick}
-  aria-label="switch-theme"
+	class="transition-transform hover:rotate-12"
+	on:click={handleClick}
+	aria-label="switch-theme"
 >
-  {#if theme === "dark"}
-    <SunIcon />
-  {:else}
-    <MoonIcon />
-  {/if}
+	{#if theme === 'dark'}
+		<SunIcon />
+	{:else}
+		<MoonIcon />
+	{/if}
 </button>

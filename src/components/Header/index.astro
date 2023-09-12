@@ -1,53 +1,47 @@
 ---
-import Text from "@components/Text.astro";
-import { SECTIONS, HEADER_HEIGHT } from "@constants/index";
-import NavBar from "@components/Header/NavBar.svelte";
-import ThemeSwitch from "../ThemeSwitch.svelte";
-import Hamburguer from "./Hamburguer.svelte";
-import Drawer from "../Drawer.svelte";
-import NavSection from "@components/NavSection.svelte";
+import Text from '@components/Text.astro'
+import { SECTIONS, HEADER_HEIGHT } from '@constants/index'
+import NavBar from '@components/Header/NavBar.svelte'
+import ThemeSwitch from '../ThemeSwitch.svelte'
+import Hamburguer from './Hamburguer.svelte'
+import Drawer from '../Drawer.svelte'
+import NavSection from '@components/NavSection.svelte'
 
-const [presentationSection, ...otherSections] = SECTIONS;
+const [presentationSection, ...otherSections] = SECTIONS
 
-const height = `${HEADER_HEIGHT}px`;
+const height = `${HEADER_HEIGHT}px`
 ---
 
 <script>
-  import { getNavSectionById } from "@utils/getNavSection";
-  import { closeDrawer } from "src/store/drawer";
+	import { getNavSectionById } from '@utils/getNavSection'
+	import { closeDrawer } from 'src/store/drawer'
 
-  const homeNavEl = getNavSectionById("presentation");
+	const homeNavEl = getNavSectionById('presentation')
 
-  homeNavEl.addEventListener("click", closeDrawer);
+	homeNavEl.addEventListener('click', closeDrawer)
 </script>
 <header
-  class="fixed z-10 flex items-center justify-between w-full border-b-2 backdrop-blur-md bg-zinc-200 border-zinc-200 dark:bg-zinc-900/80 bg-opacity-80 dark:bg-opacity-40 dark:border-zinc-800 font-heming"
+	class="fixed z-10 flex w-full items-center justify-between border-b-2 border-zinc-200 bg-zinc-200 bg-opacity-80 font-heming backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/80 dark:bg-opacity-40"
 >
-  <div
-    class="relative flex items-center justify-between w-full h-full p-layout"
-  >
-    <NavSection
-      section={presentationSection}
-      label="Baltazar Andersson"
-      client:idle
-    />
+	<div class="p-layout relative flex h-full w-full items-center justify-between">
+		<NavSection section={presentationSection} label="Baltazar Andersson" client:idle />
 
-    <nav class="hidden gap-4 lg:gap-8 md:flex">
-      <Text size="p3">{`<`}</Text>
-      {otherSections.map((section) => <NavSection client:idle {section} />)}
-      <ThemeSwitch client:idle />
-      <Text size="p3">{`/ >`}</Text>
-    </nav>
-    <NavBar client:only />
-    <div class="flex items-center h-10 gap-4 md:hidden">
-      <ThemeSwitch client:idle />
-      <Hamburguer client:idle />
-    </div>
-  </div>
-  <Drawer client:idle items={otherSections} />
+		<nav class="hidden gap-4 md:flex lg:gap-8">
+			<Text size="p3">{`<`}</Text>
+			{otherSections.map((section) => <NavSection client:idle {section} />)}
+			<ThemeSwitch client:idle />
+			<Text size="p3">{`/ >`}</Text>
+		</nav>
+		<NavBar client:only />
+		<div class="flex h-10 items-center gap-4 md:hidden">
+			<ThemeSwitch client:idle />
+			<Hamburguer client:idle />
+		</div>
+	</div>
+	<Drawer client:idle items={otherSections} />
 </header>
 <style define:vars={{ height }}>
-  header {
-    height: var(--height);
-  }
+	header {
+		height: var(--height);
+	}
 </style>

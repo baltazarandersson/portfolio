@@ -1,20 +1,18 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "allowImportingTsExtensions": true,
-    "baseUrl": "./",
-    "paths": {
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@fixtures/*": ["src/fixtures/*"],
-      "@constants/*": ["src/constants/*"],
-      "@layouts/*": ["src/layouts/*"],
-      "@images/*": ["public/images/*"],
-      "types/*": ["src/types/*"],
-      "@services/*": ["src/services/*"],
-      "@utils/*": ["src/utils/*"]
-    }
-  }
+	"extends": "astro/tsconfigs/strict",
+	"compilerOptions": {
+		"module": "esnext",
+		"baseUrl": ".",
+		"paths": {
+			"@components/*": ["src/components/*"],
+			"@assets/*": ["src/assets/*"],
+			"@fixtures/*": ["src/fixtures/*"],
+			"@constants/*": ["src/constants/*"],
+			"@layouts/*": ["src/layouts/*"],
+			"@images/*": ["public/images/*"],
+			"types/*": ["src/types/*"],
+			"@services/*": ["src/services/*"],
+			"@utils/*": ["src/utils/*"]
+		}
+	}
 }

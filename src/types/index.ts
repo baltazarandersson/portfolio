@@ -1,3 +1,3 @@
-import type { SECTIONS } from "@constants/index";
+import type { SECTIONS } from '@constants/index'
 
-export type SectionType = (typeof SECTIONS)[number];
+export type SectionType = (typeof SECTIONS)[number]

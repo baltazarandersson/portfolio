@@ -1,56 +1,73 @@
 ---
-import GitHubIcon from "@components/Icons/GitHubIcon.astro";
-import LinkedInIcon from "@components/Icons/LinkedInIcon.astro";
-import PlatziIcon from "@components/Icons/PlatziIcon.astro";
-import MailIcon from "@components/Icons/MailIcon.astro";
-import FileDownloadIcon from "@components/Icons/FileDownloadIcon.astro";
+import GitHubIcon from '@components/Icons/GitHubIcon.astro'
+import LinkedInIcon from '@components/Icons/LinkedInIcon.astro'
+import PlatziIcon from '@components/Icons/PlatziIcon.astro'
+import MailIcon from '@components/Icons/MailIcon.astro'
+import SocialItem from './SocialItem.astro'
+import Text from '@components/Text.astro'
 
-import SocialItem from "./SocialItem.astro";
-import Text from "@components/Text.astro";
+interface Props {
+	labels?: boolean
+	class?: string
+}
+
+const { labels = false, class: className } = Astro.props
 ---
 
-<ul
-  class="grid grid-flow-row lg:w-fit grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8 font-heming text-center"
->
-  <SocialItem href="https://www.linkedin.com/in/baltazar-andersson/">
-    <div class="shrink-0">
-      <LinkedInIcon />
-    </div>
+<ul class={className}>
+	<SocialItem href="https://www.linkedin.com/in/baltazar-andersson/">
+		<div class="shrink-0">
+			<LinkedInIcon />
+		</div>
 
-    <Text size="p2" class="hidden sm:inline">Baltazar Andersson</Text>
-  </SocialItem>
+		{
+			labels && (
+				<Text size="p2" class="hidden sm:inline">
+					Baltazar Andersson
+				</Text>
+			)
+		}
+	</SocialItem>
 
-  <SocialItem href="mailto:baltazardevv@gmail.com">
-    <div class="shrink-0">
-      <MailIcon />
-    </div>
+	<SocialItem href="mailto:baltazardevv@gmail.com">
+		<div class="shrink-0">
+			<MailIcon />
+		</div>
 
-    <Text size="p2" class="hidden sm:inline">baltazardevv@gmail.com</Text>
-  </SocialItem>
+		{
+			labels && (
+				<Text size="p2" class="hidden sm:inline">
+					baltazardevv@gmail.com
+				</Text>
+			)
+		}
+	</SocialItem>
 
-  <SocialItem href="https://github.com/baltazarandersson">
-    <div class="shrink-0">
-      <GitHubIcon />
-    </div>
+	<SocialItem href="https://github.com/baltazarandersson">
+		<div class="shrink-0">
+			<GitHubIcon />
+		</div>
 
-    <Text size="p2" class="hidden sm:inline">@baltazarandersson</Text>
-  </SocialItem>
+		{
+			labels && (
+				<Text size="p2" class="hidden sm:inline">
+					@baltazarandersson
+				</Text>
+			)
+		}
+	</SocialItem>
 
-  <SocialItem href="https://platzi.com/p/baltazarander/">
-    <div class="shrink-0">
-      <PlatziIcon />
-    </div>
+	<SocialItem href="https://platzi.com/p/baltazarander/">
+		<div class="shrink-0">
+			<PlatziIcon />
+		</div>
 
-    <Text size="p2" class="hidden sm:inline">@baltazarander</Text>
-  </SocialItem>
-
-  <div style="grid-column: 1/-1;">
-    <SocialItem href="/Baltazar%20Andersson%20CV.pdf">
-      <div class="shrink-0">
-        <FileDownloadIcon />
-      </div>
-
-      <Text size="p2">Download my portfolio</Text>
-    </SocialItem>
-  </div>
+		{
+			labels && (
+				<Text size="p2" class="hidden sm:inline">
+					@baltazarander
+				</Text>
+			)
+		}
+	</SocialItem>
 </ul>

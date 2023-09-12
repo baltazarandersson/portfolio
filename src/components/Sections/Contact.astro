@@ -1,19 +1,37 @@
 ---
-import Heading from "@components/Heading.astro";
-import Section from "@components/Section.astro";
-import type { SectionType } from "types/index";
-import Socials from "@components/Socials/index.astro";
+import Heading from '@components/Heading.astro'
+import Section from '@components/Section.astro'
+import type { SectionType } from 'types/index'
+import Socials from '@components/Socials/index.astro'
+import SocialItem from '@components/Socials/SocialItem.astro'
+import FileDownloadIcon from '@components/Icons/FileDownloadIcon.astro'
+import Text from '@components/Text.astro'
 
 interface Props {
-  id?: SectionType;
+	id?: SectionType
 }
 
-const { id = "" } = Astro.props;
+const { id = '' } = Astro.props
 ---
 
 <Section class="p-layout flex items-start" id={id}>
-  <div class="flex flex-col mt-20 gap-20 w-full">
-    <Heading size="h3">Get in touch</Heading>
-    <Socials />
-  </div>
+	<div class="mt-20 flex w-full flex-col gap-20">
+		<Heading size="h3">Get in touch</Heading>
+
+		<div class="flex flex-col justify-center gap-12 font-heming lg:w-fit">
+			<Socials
+				class="grid grid-flow-row grid-cols-1 gap-4 lg:w-fit lg:grid-cols-2 lg:gap-8"
+				labels
+			/>
+			<div>
+				<SocialItem href="/Baltazar%20Andersson%20CV.pdf">
+					<div class="shrink-0">
+						<FileDownloadIcon />
+					</div>
+
+					<Text size="p2">Download my portfolio</Text>
+				</SocialItem>
+			</div>
+		</div>
+	</div>
 </Section>
