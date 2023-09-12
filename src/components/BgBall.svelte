@@ -51,7 +51,7 @@
 	style="--left:{coords.left}px; --top:{coords.top}px; transition:{isMobileDevice
 		? 'left 5s ease-in-out, top 5s ease-in-out'
 		: ''}"
-	class="fixed w-64 h-64 overflow-hidden rounded-full opacity-50 pointer-events-none blur-2xl -z-50 bg-gradient-to-br from-amber-200 via-orange-200 to-red-300 dark:from-orange-500 dark:via-amber-600 dark:to-amber-400 dark:opacity-20"
+	class="pointer-events-none fixed -z-50 h-64 w-64 overflow-hidden rounded-full bg-gradient-to-br from-amber-200 via-orange-200 to-red-300 opacity-50 blur-2xl dark:from-orange-500 dark:via-amber-600 dark:to-amber-400 dark:opacity-20"
 />
 
 <style>

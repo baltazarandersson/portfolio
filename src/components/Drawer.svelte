@@ -15,7 +15,7 @@
 
 {#if isDrawerOpenVal}
 	<div
-		class={`absolute z-50 w-screen bg-zinc-100 dark:bg-zinc-900 flex flex-col justify-start items-end gap-8 py-10 left-0 p-layout`}
+		class={`p-layout absolute left-0 z-50 flex w-screen flex-col items-end justify-start gap-8 bg-zinc-100 py-10 dark:bg-zinc-900`}
 		style={`top: ${HEADER_HEIGHT}px; height: calc(100vh - ${HEADER_HEIGHT}px);`}
 		transition:fly={{ x: 500, duration: 300 }}
 	>

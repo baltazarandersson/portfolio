@@ -1,26 +1,26 @@
 ---
 interface Props {
-  size?: "h5" | "h4" | "h3" | "h2" | "h1";
-  class?: string;
+	size?: 'h5' | 'h4' | 'h3' | 'h2' | 'h1'
+	class?: string
 }
 
 const sizeVariants = {
-  h5: "text-2xl md:text-3xl",
-  h4: "text-3xl md:text-4xl",
-  h3: "text-4xl md:text-5xl",
-  h2: "text-5xl md:text-5xl",
-  h1: "text-5xl md:text-6xl",
-};
+	h5: 'text-2xl md:text-3xl',
+	h4: 'text-3xl md:text-4xl',
+	h3: 'text-4xl md:text-5xl',
+	h2: 'text-5xl md:text-5xl',
+	h1: 'text-5xl md:text-6xl'
+}
 
-const { size: As = "h1", class: className = "" } = Astro.props;
+const { size: As = 'h1', class: className = '' } = Astro.props
 ---
 
 <As
-  class:list={[
-    "font-heming font-bold text-center sm:text-start tracking-widest",
-    sizeVariants[As],
-    className,
-  ]}
+	class:list={[
+		'text-center font-heming font-bold tracking-widest sm:text-start',
+		sizeVariants[As],
+		className
+	]}
 >
-  <slot />
+	<slot />
 </As>

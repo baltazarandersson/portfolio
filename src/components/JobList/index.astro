@@ -1,14 +1,14 @@
 ---
-import type { JobType } from "types/jobs";
-import JobCard from "./JobCard.astro";
+import type { JobType } from 'types/jobs'
+import JobCard from './JobCard.astro'
 
 interface Props {
-  jobs: JobType[];
+	jobs: JobType[]
 }
 
-const { jobs } = Astro.props;
+const { jobs } = Astro.props
 ---
 
-<ul class="flex flex-col w-full lg:w-2/3 gap-8 radiant">
-  {jobs.map((job) => <JobCard {job} />)}
+<ul class="radiant flex w-full flex-col gap-8 lg:w-2/3">
+	{jobs.map((job) => <JobCard {job} />)}
 </ul>

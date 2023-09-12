@@ -1,72 +1,72 @@
 ---
-import BgBall from "@components/BgBall.svelte";
-import Header from "@components/Header/index.astro";
+import BgBall from '@components/BgBall.svelte'
+import Header from '@components/Header/index.astro'
 interface Props {
-  title: string;
+	title: string
 }
 
-const { title } = Astro.props;
+const { title } = Astro.props
 ---
 
 <!doctype html>
 <html lang="en" class="dark">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-  </head>
-  <body
-    class="text-zinc-700 font-helvetica bg-zinc-100 dark:text-indigo-50 dark:bg-zinc-900 scroll-smooth"
-  >
-    <Header />
-    <slot />
-    <BgBall client:only />
-  </body>
-  <script>
-    import { getCurrentTheme, updateStoredTheme } from "@utils/theme";
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body
+		class="scroll-smooth bg-zinc-100 font-helvetica text-zinc-700 dark:bg-zinc-900 dark:text-indigo-50"
+	>
+		<Header />
+		<slot />
+		<BgBall client:only />
+	</body>
+	<script>
+		import { getCurrentTheme, updateStoredTheme } from '@utils/theme'
 
-    const theme = (() => getCurrentTheme())();
+		const theme = (() => getCurrentTheme())()
 
-    if (theme === "light") {
-      document.documentElement.classList.remove("dark");
-    }
+		if (theme === 'light') {
+			document.documentElement.classList.remove('dark')
+		}
 
-    updateStoredTheme(theme);
-  </script>
+		updateStoredTheme(theme)
+	</script>
 </html>
 <style is:global>
-  @font-face {
-    font-family: "Heming Variable";
-    src: url("/fonts/heming_variable.ttf") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
+	@font-face {
+		font-family: 'Heming Variable';
+		src: url('/fonts/heming_variable.ttf') format('woff');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
 
-  @font-face {
-    font-family: "Helvetica Light";
-    src: url("/fonts/helvetica_light.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
+	@font-face {
+		font-family: 'Helvetica Light';
+		src: url('/fonts/helvetica_light.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+		font-display: swap;
+	}
 
-  :root[class="dark"] {
-    color-scheme: dark;
-  }
+	:root[class='dark'] {
+		color-scheme: dark;
+	}
 
-  html {
-    scroll-behavior: smooth;
-  }
+	html {
+		scroll-behavior: smooth;
+	}
 
-  * {
-    -webkit-tap-highlight-color: transparent; /* remove tap highlight */
-  }
+	* {
+		-webkit-tap-highlight-color: transparent; /* remove tap highlight */
+	}
 
-  .p-layout {
-    @apply px-8 sm:px-12 md:px-20 lg:px-40 xl:px-40;
-  }
+	.p-layout {
+		@apply px-8 sm:px-12 md:px-20 lg:px-40 xl:px-40;
+	}
 </style>

@@ -1,18 +1,18 @@
 ---
-import Section from "@components/Section.astro";
-import ProjectList from "@components/ProjectList/index.astro";
-import { getProjects } from "@services/projects";
-import type { SectionType } from "types/index";
+import Section from '@components/Section.astro'
+import ProjectList from '@components/ProjectList/index.astro'
+import { getProjects } from '@services/projects'
+import type { SectionType } from 'types/index'
 
-const projects = await getProjects();
+const projects = await getProjects()
 
 interface Props {
-  id?: SectionType;
+	id?: SectionType
 }
 
-const { id = "" } = Astro.props;
+const { id = '' } = Astro.props
 ---
 
 <Section id={id} class="flex flex-col">
-  <ProjectList {projects} />
+	<ProjectList {projects} />
 </Section>

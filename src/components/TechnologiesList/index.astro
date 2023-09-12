@@ -1,29 +1,21 @@
 ---
-import type { TagType } from "types/tags";
+import type { TagType } from 'types/tags'
 
 interface Props {
-  technologies: TagType[];
+	technologies: TagType[]
 }
 
-const { technologies } = Astro.props;
+const { technologies } = Astro.props
 ---
 
 <ul class="flex items-center gap-4">
-  {
-    technologies.map(({ source, iconClass, alt, icon }) => (
-      <li>
-        <a
-          href={source}
-          class:list={["h-8 w-8 flex justify-center", iconClass]}
-          target="_blank"
-        >
-          <img
-            alt={alt}
-            src={icon}
-            class="object-contain transition-transform hover:scale-110"
-          />
-        </a>
-      </li>
-    ))
-  }
+	{
+		technologies.map(({ source, iconClass, alt, icon }) => (
+			<li>
+				<a href={source} class:list={['flex h-8 w-8 justify-center', iconClass]} target="_blank">
+					<img alt={alt} src={icon} class="object-contain transition-transform hover:scale-110" />
+				</a>
+			</li>
+		))
+	}
 </ul>

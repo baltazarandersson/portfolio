@@ -26,7 +26,7 @@
 <a
 	on:click={closeDrawer}
 	href={`/#${section}`}
-	class={`text-lg transition dark:hover:text-orange-400 hover:text-orange-500 decoration-transparent hover:decoration-inherit ${
+	class={`text-lg decoration-transparent transition hover:text-orange-500 hover:decoration-inherit dark:hover:text-orange-400 ${
 		activeSectionId === sectionId ? 'text-orange-500 dark:text-orange-400' : 'underline'
 	}`}
 	id={sectionId}

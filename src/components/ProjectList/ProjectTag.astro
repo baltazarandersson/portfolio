@@ -1,22 +1,14 @@
 ---
-import type { TagType } from "types/tags";
+import type { TagType } from 'types/tags'
 interface Props {
-  tag: TagType;
+	tag: TagType
 }
 
 const {
-  tag: { source, iconClass, icon, alt },
-} = Astro.props;
+	tag: { source, iconClass, icon, alt }
+} = Astro.props
 ---
 
-<a
-  href={source}
-  class:list={["flex justify-center", iconClass]}
-  target="_blank"
->
-  <img
-    alt={alt}
-    src={icon}
-    class="object-contain w-8 h-8 transition-transform hover:scale-110"
-  />
+<a href={source} class:list={['flex justify-center', iconClass]} target="_blank">
+	<img alt={alt} src={icon} class="h-8 w-8 object-contain transition-transform hover:scale-110" />
 </a>

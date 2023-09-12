@@ -9,7 +9,7 @@
 		"preview": "astro preview",
 		"astro": "astro",
 		"cspell": "cspell **",
-		"format": "prettier --write  --plugin prettier-plugin-svelte ."
+		"format": "prettier --write './src/**/*.{ts,svelte,astro}' "
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.2.0",
