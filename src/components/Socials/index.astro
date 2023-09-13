@@ -1,9 +1,9 @@
 ---
-import GitHubIcon from '@components/Icons/GitHubIcon.astro'
-import LinkedInIcon from '@components/Icons/LinkedInIcon.astro'
-import PlatziIcon from '@components/Icons/PlatziIcon.astro'
-import MailIcon from '@components/Icons/MailIcon.astro'
-import SocialItem from './SocialItem.astro'
+import GitHubIcon from '@components/Icons/GitHubIcon.svelte'
+import LinkedInIcon from '@components/Icons/LinkedInIcon.svelte'
+import PlatziIcon from '@components/Icons/PlatziIcon.svelte'
+import MailIcon from '@components/Icons/MailIcon.svelte'
+import SocialItem from './SocialItem.svelte'
 import Text from '@components/Text.astro'
 
 interface Props {
@@ -15,9 +15,9 @@ const { labels = false, class: className } = Astro.props
 ---
 
 <ul class={className}>
-	<SocialItem href="https://www.linkedin.com/in/baltazar-andersson/">
+	<SocialItem client:idle href="https://www.linkedin.com/in/baltazar-andersson">
 		<div class="shrink-0">
-			<LinkedInIcon />
+			<LinkedInIcon client:idle />
 		</div>
 
 		{
@@ -29,9 +29,9 @@ const { labels = false, class: className } = Astro.props
 		}
 	</SocialItem>
 
-	<SocialItem href="mailto:baltazardevv@gmail.com">
+	<SocialItem client:idle href="mailto:baltazardevv@gmail.com">
 		<div class="shrink-0">
-			<MailIcon />
+			<MailIcon client:idle />
 		</div>
 
 		{
@@ -43,9 +43,9 @@ const { labels = false, class: className } = Astro.props
 		}
 	</SocialItem>
 
-	<SocialItem href="https://github.com/baltazarandersson">
+	<SocialItem client:idle href="https://github.com/baltazarandersson">
 		<div class="shrink-0">
-			<GitHubIcon />
+			<GitHubIcon client:idle />
 		</div>
 
 		{
@@ -57,9 +57,9 @@ const { labels = false, class: className } = Astro.props
 		}
 	</SocialItem>
 
-	<SocialItem href="https://platzi.com/p/baltazarander/">
+	<SocialItem client:idle href="https://platzi.com/p/baltazarander">
 		<div class="shrink-0">
-			<PlatziIcon />
+			<PlatziIcon client:idle />
 		</div>
 
 		{

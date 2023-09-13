@@ -3,8 +3,8 @@ import Heading from '@components/Heading.astro'
 import Section from '@components/Section.astro'
 import type { SectionType } from 'types/index'
 import Socials from '@components/Socials/index.astro'
-import SocialItem from '@components/Socials/SocialItem.astro'
-import FileDownloadIcon from '@components/Icons/FileDownloadIcon.astro'
+import SocialItem from '@components/Socials/SocialItem.svelte'
+import FileDownloadIcon from '@components/Icons/FileDownloadIcon.svelte'
 import Text from '@components/Text.astro'
 
 interface Props {
@@ -24,9 +24,9 @@ const { id = '' } = Astro.props
 				labels
 			/>
 			<div>
-				<SocialItem href="/Baltazar%20Andersson%20CV.pdf">
+				<SocialItem href="/Baltazar%20Andersson%20CV.pdf" client:idle>
 					<div class="shrink-0">
-						<FileDownloadIcon />
+						<FileDownloadIcon client:idle />
 					</div>
 
 					<Text size="p2">Download my portfolio</Text>
