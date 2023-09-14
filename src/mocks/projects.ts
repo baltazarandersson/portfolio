@@ -14,7 +14,7 @@ const projects: ProjectWithKeysType[] = [
 	{
 		thumbnail: devtterThumb,
 		title: 'Devtter',
-		description: 'A functional Twitter clone made within the Next.js.',
+		description: 'Functional Twitter clone made within the Next.js.',
 		tags: ['next', 'firebase', 'tailwind'],
 		repository: 'https://github.com/baltazarandersson/nextjs-twitter-clone',
 		deploy: 'https://devtter-next.vercel.app/'
@@ -32,7 +32,7 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: countryQuizThumb,
 		title: 'Country Quiz',
 		description:
-			'A quiz game I made to practice with Redux Toolkit & Redux thunks, try to score your best!',
+			'Quiz game I made to practice with Redux Toolkit & Redux thunks, try to score your best!',
 		tags: ['react', 'redux', 'tailwind'],
 		repository: 'https://github.com/baltazarandersson/country-quiz',
 		deploy: 'https://countryquiz.vercel.app/'
@@ -41,7 +41,7 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: giffiThumb,
 		title: 'GIFFI',
 		description:
-			'A GIF search engine made with React. I learned about Routers, infinite scrolling, React context and more.',
+			'GIF search engine made with React. I learned about Routers, infinite scrolling, React context and more.',
 		tags: ['react', 'firebase'],
 		repository: 'https://github.com/baltazarandersson/react-giffi-app',
 		deploy: 'https://giffi-baltazar.vercel.app/'
@@ -75,7 +75,7 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: forecastThumb,
 		title: 'BOLT',
 		description:
-			'A forecast app to get the weather from almost everywhere in the world in where I learned about the React basics.',
+			'Forecast app to get the weather from almost everywhere in the world in where I learned about the React basics.',
 		tags: ['react'],
 		repository: 'https://github.com/baltazarandersson/react-weather-forecast',
 		deploy: 'https://forecast-baltazar.vercel.app/'
