@@ -2,7 +2,7 @@
 import Heading from '@components/Heading.astro'
 import Section from '@components/Section.astro'
 import type { SectionType } from 'types/index'
-import Socials from '@components/Socials/index.astro'
+import Socials from '@components/Socials/index.svelte'
 import SocialItem from '@components/Socials/SocialItem.svelte'
 import FileDownloadIcon from '@components/Icons/FileDownloadIcon.svelte'
 import Text from '@components/Text.astro'
@@ -20,18 +20,23 @@ const { id = '' } = Astro.props
 
 		<div class="flex flex-col justify-center gap-12 font-heming lg:w-fit">
 			<Socials
+				client:idle
 				class="grid grid-flow-row grid-cols-1 gap-4 lg:w-fit lg:grid-cols-2 lg:gap-8"
 				labels
 			/>
-			<div>
-				<SocialItem href="/Baltazar%20Andersson%20CV.pdf" client:idle>
-					<div class="shrink-0">
-						<FileDownloadIcon client:idle />
-					</div>
 
-					<Text size="p2">Download my portfolio</Text>
-				</SocialItem>
-			</div>
+			<a
+				href="/Baltazar%20Andersson%20CV.pdf"
+				aria-label="download Baltazar's portfolio"
+				target="_blank"
+				rel="noreferrer"
+				class={`flex px-8 py-4 items-start justify-center gap-4 rounded-lg bg-zinc-400/10 backdrop-blur-3xl transition-all duration-200 hover:scale-105 hover:bg-amber-600/10 hover:text-orange-500 dark:bg-zinc-200/10 dark:hover:bg-amber-400/10 dark:hover:text-orange-400`}
+			>
+				<div class="shrink-0">
+					<FileDownloadIcon client:idle />
+				</div>
+				<Text size="p2">Download my portfolio</Text>
+			</a>
 		</div>
 	</div>
 </Section>

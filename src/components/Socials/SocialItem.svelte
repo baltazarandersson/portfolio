@@ -1,6 +1,7 @@
 <script lang="ts">
 	export let href: string
 	export let size: 'sm' | 'md' = 'md'
+	export let ariaLabel: string = ''
 
 	const SIZES = {
 		sm: 'px-4 py-2',
@@ -13,6 +14,7 @@
 >
 	<a
 		{href}
+		aria-label={ariaLabel}
 		target="_blank"
 		rel="noreferrer"
 		class={`flex items-start justify-center gap-4 ${SIZES[size]}`}><slot /></a
