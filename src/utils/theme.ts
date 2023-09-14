@@ -1,7 +1,7 @@
 export type ThemeType = 'dark' | 'light'
 
 export const getCurrentTheme = () =>
-	(typeof localStorage !== 'undefined' && localStorage.getItem('theme')) || 'light'
+	(typeof localStorage !== 'undefined' && localStorage.getItem('theme')) || 'dark'
 
 export const updateStoredTheme = (theme: ThemeType) => localStorage.setItem('theme', theme)
 
