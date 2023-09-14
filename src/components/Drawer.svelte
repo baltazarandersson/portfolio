@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { drawerStore } from 'src/store/drawer'
+	import { closeDrawer, drawerStore, toggleDrawer } from 'src/store/drawer'
 	import { fly } from 'svelte/transition'
 	import type { SectionType } from 'types/index'
 	import NavSection from './NavSection.svelte'
@@ -16,7 +16,17 @@
 	drawerStore.subscribe((val) => {
 		isDrawerOpenVal = val
 	})
+
+	let x: number
+
+	const updateDrawer = () => {
+		if (x >= 768) {
+			closeDrawer()
+		}
+	}
 </script>
+
+<svelte:window bind:innerWidth={x} on:resize={updateDrawer} />
 
 {#if isDrawerOpenVal}
 	<div
