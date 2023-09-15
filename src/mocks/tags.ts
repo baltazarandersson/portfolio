@@ -9,6 +9,7 @@ const firebaseIcon = 'images/icons/firebase.svg'
 const reduxIcon = 'images/icons/redux.svg'
 const nextIcon = 'images/icons/next.svg'
 const cypressIcon = 'images/icons/cypress.svg'
+const typescriptIcon = 'images/icons/typescript.svg'
 
 const tags: Record<TagKeys, TagType> = {
 	react: {
@@ -67,6 +68,12 @@ const tags: Record<TagKeys, TagType> = {
 		alt: 'javascript',
 		icon: jsIcon,
 		source: 'https://js.org/index.html'
+	},
+	typescript: {
+		title: 'typescript',
+		alt: 'typescript',
+		icon: typescriptIcon,
+		source: 'https://www.typescriptlang.org/'
 	}
 }
 

@@ -10,7 +10,7 @@ const jobs: JobType[] = [
 		to: Date.now(),
 		description:
 			'Working as React developer for Vairix, facing multiple challenges while learning a lot of stuff on the road.',
-		stack: ['react', 'next', 'tailwind', 'cypress'],
+		stack: ['react', 'next', 'tailwind', 'cypress', 'typescript'],
 		logo: vairixLogo
 	}
 ]

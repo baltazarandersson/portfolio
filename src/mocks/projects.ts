@@ -49,8 +49,9 @@ const projects: ProjectWithKeysType[] = [
 	{
 		thumbnail: avostoreThumb,
 		title: 'Avostore',
-		description: 'Store in where I learned about Next.js and React context.',
-		tags: ['next', 'react', 'tailwind'],
+		description:
+			'Store in where I learned about Next.js, React context, and all about the Typescript world.',
+		tags: ['next', 'react', 'tailwind', 'typescript'],
 		repository: 'https://github.com/baltazarandersson/avostore',
 		deploy: 'https://avostore-baltazar.vercel.app/'
 	},

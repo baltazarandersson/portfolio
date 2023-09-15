@@ -16,3 +16,4 @@ export type TagKeys =
 	| 'tailwind'
 	| 'cypress'
 	| 'javascript'
+	| 'typescript'
