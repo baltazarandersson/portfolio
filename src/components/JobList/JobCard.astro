@@ -40,8 +40,6 @@ const technologies = await parseTags({ tags: stack })
 	<div class="flex items-center justify-center gap-8 sm:justify-start">
 		<Text size="p4" class="hidden font-heming font-bold sm:inline">STACK</Text>
 
-		<div class="w-fit">
-			<TechnologiesList {technologies} />
-		</div>
+		<TechnologiesList {technologies} />
 	</div>
 </li>
