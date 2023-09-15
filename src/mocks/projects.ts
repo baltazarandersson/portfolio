@@ -15,7 +15,7 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: devtterThumb,
 		title: 'Devtter',
 		description: 'Functional Twitter clone made with Next.js.',
-		tags: ['next', 'firebase', 'tailwind'],
+		tags: ['next', 'react', 'firebase', 'tailwind'],
 		repository: 'https://github.com/baltazarandersson/nextjs-twitter-clone',
 		deploy: 'https://devtter-next.vercel.app/'
 	},
