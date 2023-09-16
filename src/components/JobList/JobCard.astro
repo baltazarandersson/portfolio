@@ -26,7 +26,7 @@ const technologies = await parseTags({ tags: stack })
 		<Text>{position} ~ {type}</Text>
 	</div>
 
-	<div class="flex flex-col items-center justify-center gap-x-4 sm:flex-row">
+	<div class="flex flex-col items-center justify-start gap-x-4 sm:flex-row">
 		<Text size="p2">
 			<time>{formatTimestamp({ timestamp: from })} ~ {formatTimestamp({ timestamp: to })}</time>
 		</Text>
