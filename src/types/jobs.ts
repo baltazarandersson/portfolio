@@ -5,7 +5,7 @@ export type JobType = {
 	company: string
 	type: string
 	from: number
-	to: number
+	to: number | null
 	description: string
 	stack: TagKeys[]
 	logo: ImageMetadata

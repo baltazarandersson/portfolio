@@ -15,6 +15,8 @@ const {
 	job: { position, type, from, to, description, stack, logo, company }
 } = Astro.props
 
+const parsedToDate = to || Date.now()
+
 const technologies = await parseTags({ tags: stack })
 ---
 
@@ -28,10 +30,14 @@ const technologies = await parseTags({ tags: stack })
 
 	<div class="flex flex-col items-center justify-start gap-x-4 sm:flex-row">
 		<Text size="p2">
-			<time>{formatTimestamp({ timestamp: from })} ~ {formatTimestamp({ timestamp: to })}</time>
+			<time
+				>{formatTimestamp({ timestamp: from })} ~ {
+					formatTimestamp({ timestamp: parsedToDate })
+				}</time
+			>
 		</Text>
 		<Text size="p4" class="text-zinc-500 dark:text-zinc-400">
-			({getMonthsBetweenDates(from, to)} months)
+			({getMonthsBetweenDates(from, parsedToDate)} months)
 		</Text>
 	</div>
 	<Text>
