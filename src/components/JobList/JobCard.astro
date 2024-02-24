@@ -32,7 +32,7 @@ const technologies = await parseTags({ tags: stack })
 		<Text size="p2">
 			<time
 				>{formatTimestamp({ timestamp: from })} ~ {
-					formatTimestamp({ timestamp: parsedToDate })
+					to ? formatTimestamp({ timestamp: to }) : 'Present'
 				}</time
 			>
 		</Text>
