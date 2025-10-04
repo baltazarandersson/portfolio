@@ -11,20 +11,20 @@
 		"cspell": "cspell **",
 		"format": "prettier --write './src/**/*.{ts,svelte,astro}' "
 	},
-	"dependencies": {
-		"@astrojs/check": "^0.2.0",
-		"@astrojs/svelte": "^4.0.2",
-		"@astrojs/tailwind": "^5.0.0",
-		"astro": "^3.0.12",
-		"prettier": "^3.0.3",
-		"prettier-plugin-astro": "^0.12.0",
-		"prettier-plugin-svelte": "^3.0.3",
-		"prettier-plugin-tailwindcss": "^0.5.4",
-		"svelte": "^4.0.0",
-		"tailwindcss": "^3.0.24",
-		"typescript": "^5.2.2"
-	},
-	"devDependencies": {
-		"cspell": "^7.3.2"
-	}
+        "dependencies": {
+                "@astrojs/check": "^0.2.0",
+                "@astrojs/svelte": "^4.0.2",
+                "@astrojs/tailwind": "^5.0.0",
+                "astro": "^3.0.12",
+                "prettier": "^3.2.5",
+                "prettier-plugin-astro": "^0.13.0",
+                "prettier-plugin-svelte": "^3.1.2",
+                "prettier-plugin-tailwindcss": "^0.5.13",
+                "svelte": "^4.2.9",
+                "tailwindcss": "^3.4.1",
+                "typescript": "^5.4.5"
+        },
+        "devDependencies": {
+                "cspell": "^8.3.2"
+        }
 }
