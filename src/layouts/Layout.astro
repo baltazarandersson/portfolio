@@ -1,6 +1,7 @@
 ---
 import BgBall from '@components/BgBall.svelte'
 import Header from '@components/Header/index.astro'
+import StarryBackground from '@components/StarryBackground.svelte'
 interface Props {
 	title: string
 }
@@ -24,14 +25,16 @@ const { title } = Astro.props
 	<body
 		class="scroll-smooth bg-zinc-100 font-helvetica text-zinc-700 dark:bg-zinc-900 dark:text-indigo-50"
 	>
+		<StarryBackground client:only />
 		<Header />
 		<slot />
 		<BgBall client:only />
 	</body>
 	<script>
 		import { getCurrentTheme, updateStoredTheme } from '@utils/theme'
+		import type { ThemeType } from 'types/index'
 
-		const theme = (() => getCurrentTheme())()
+		const theme = (() => getCurrentTheme())() as ThemeType
 
 		if (theme === 'light') {
 			document.documentElement.classList.remove('dark')
@@ -55,6 +58,14 @@ const { title } = Astro.props
 		font-weight: normal;
 		font-style: normal;
 		font-display: swap;
+	}
+
+	:root {
+		--primary-color: rgb(245, 158, 11);
+	}
+
+	:root.dark {
+		--primary-color: rgb(217, 119, 6);
 	}
 
 	:root[class='dark'] {

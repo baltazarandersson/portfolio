@@ -4,6 +4,7 @@ module.exports = {
 	darkMode: 'class',
 	theme: {
 		extend: {
+			colors: { primary: 'rgb(var(--primary-color) / <alpha-value>)' },
 			fontFamily: {
 				heming: ['Heming Variable', 'ui-monospace', 'monospace'],
 				helvetica: ['Helvetica Light', 'ui-monospace', 'monospace']

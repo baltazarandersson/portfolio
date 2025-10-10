@@ -1,5 +1,5 @@
 import tags from 'src/mocks/tags'
-import type { TagKeys, TagType } from 'src/types/tags'
+import type { TagKeys, TagType } from 'types/tags'
 
 export async function getTags(): Promise<Record<TagKeys, TagType>> {
 	return tags
