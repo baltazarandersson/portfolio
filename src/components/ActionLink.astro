@@ -1,0 +1,44 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'a'> {
+	href: string
+	ariaLabel?: string
+}
+
+const {
+	class: className,
+	href,
+	target,
+	rel,
+	ariaLabel,
+	'aria-label': ariaLabelAttribute,
+	...attrs
+} = Astro.props
+
+const isExternal = /^(https?:)?\/\//.test(href)
+const resolvedTarget = target ?? (isExternal ? '_blank' : undefined)
+const relTokens = new Set((rel ?? '').split(/\s+/).filter(Boolean))
+
+if (resolvedTarget === '_blank') {
+	relTokens.add('noopener')
+	relTokens.add('noreferrer')
+}
+
+const resolvedRel = relTokens.size > 0 ? Array.from(relTokens).join(' ') : undefined
+const resolvedAriaLabel = ariaLabel ?? ariaLabelAttribute
+---
+
+<a
+	{...attrs}
+	{href}
+	target={resolvedTarget}
+	rel={resolvedRel}
+	aria-label={resolvedAriaLabel}
+	class:list={[
+		'rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-200 dark:focus-visible:ring-orange-400 dark:focus-visible:ring-offset-zinc-900',
+		className
+	]}
+>
+	<slot />
+</a>

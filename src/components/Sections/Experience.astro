@@ -16,7 +16,7 @@ const jobs = await getJobs()
 
 <Section class="p-layout flex items-start" id={id}>
 	<div class="mt-20 flex w-full flex-col gap-20">
-		<Heading size="h3">Professional experience</Heading>
+		<Heading as="h2" variant="section">Professional experience</Heading>
 		<JobList {jobs} />
 	</div>
 </Section>

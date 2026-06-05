@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {
+	as?: 'article' | 'div' | 'li' | 'section'
+	variant?: 'surface' | 'plain'
+}
+
+const { as = 'div', variant = 'surface', class: className, ...attrs } = Astro.props
+const Component = as
+
+const variantClasses = {
+	surface: 'bg-zinc-200/70 backdrop-blur-[1px] dark:bg-zinc-800/80',
+	plain: ''
+}
+---
+
+<Component {...attrs} class:list={[variantClasses[variant], className]}>
+	<slot />
+</Component>

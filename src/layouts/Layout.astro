@@ -22,9 +22,7 @@ const { title } = Astro.props
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 	</head>
-	<body
-		class="scroll-smooth bg-zinc-100 font-helvetica text-zinc-700 dark:bg-zinc-900 dark:text-indigo-50"
-	>
+	<body class="scroll-smooth bg-surface font-helvetica text-foreground">
 		<StarryBackground client:only />
 		<Header />
 		<slot />
@@ -61,11 +59,29 @@ const { title } = Astro.props
 	}
 
 	:root {
-		--primary-color: rgb(245, 158, 11);
+		--color-primary: 245 158 11;
+		--color-accent: 217 119 6;
+		--color-focus: 245 158 11;
+		--color-surface: 244 244 245;
+		--color-surface-muted: 228 228 231;
+		--color-surface-elevated: 250 250 250;
+		--color-border: 212 212 216;
+		--color-text: 63 63 70;
+		--color-text-muted: 113 113 122;
+		--primary-color: rgb(var(--color-primary));
 	}
 
 	:root.dark {
-		--primary-color: rgb(217, 119, 6);
+		--color-primary: 217 119 6;
+		--color-accent: 251 191 36;
+		--color-focus: 251 191 36;
+		--color-surface: 24 24 27;
+		--color-surface-muted: 39 39 42;
+		--color-surface-elevated: 63 63 70;
+		--color-border: 63 63 70;
+		--color-text: 238 242 255;
+		--color-text-muted: 161 161 170;
+		--primary-color: rgb(var(--color-primary));
 	}
 
 	:root[class='dark'] {
@@ -78,6 +94,11 @@ const { title } = Astro.props
 
 	* {
 		-webkit-tap-highlight-color: transparent; /* remove tap highlight */
+	}
+
+	:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+		outline: 2px solid rgb(var(--color-focus) / 0.95);
+		outline-offset: 3px;
 	}
 
 	.p-layout {

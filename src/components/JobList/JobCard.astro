@@ -6,6 +6,7 @@ import Text from '@components/Text.astro'
 import TechnologiesList from '@components/TechnologiesList/index.astro'
 import { parseTags } from '@services/tags'
 import { Image } from 'astro:assets'
+import Card from '@components/Card.astro'
 
 interface Props {
 	job: JobType
@@ -20,7 +21,9 @@ const parsedToDate = to || Date.now()
 const technologies = await parseTags({ tags: stack })
 ---
 
-<li
+<Card
+	as="li"
+	variant="plain"
 	class="flex flex-col gap-8 rounded-sm border-2 bg-zinc-100 px-4 py-8 dark:border-zinc-700 dark:bg-zinc-800 sm:px-8"
 >
 	<div class="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
@@ -29,14 +32,14 @@ const technologies = await parseTags({ tags: stack })
 	</div>
 
 	<div class="flex flex-col items-center justify-start gap-x-4 sm:flex-row">
-		<Text size="p2">
+		<Text variant="p2">
 			<time
 				>{formatTimestamp({ timestamp: from })} ~ {
 					to ? formatTimestamp({ timestamp: to }) : 'Present'
 				}</time
 			>
 		</Text>
-		<Text size="p4" class="text-zinc-500 dark:text-zinc-400">
+		<Text variant="p4" class="text-zinc-500 dark:text-zinc-400">
 			({getMonthsBetweenDates(from, parsedToDate)} months)
 		</Text>
 	</div>
@@ -44,8 +47,8 @@ const technologies = await parseTags({ tags: stack })
 		{description}
 	</Text>
 	<div class="flex items-center justify-center gap-8 sm:justify-start">
-		<Text size="p4" class="hidden font-heming font-bold sm:inline">STACK</Text>
+		<Text as="span" variant="p4" class="hidden font-heming font-bold sm:inline">STACK</Text>
 
 		<TechnologiesList {technologies} />
 	</div>
-</li>
+</Card>

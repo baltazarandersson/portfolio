@@ -7,6 +7,26 @@
 		sm: 'px-4 py-2',
 		md: 'px-8 py-4'
 	}
+
+	const getFallbackAriaLabel = (link: string) => {
+		if (link.startsWith('mailto:')) return `Email ${link.replace('mailto:', '')}`
+
+		try {
+			const url = new URL(link)
+			const host = url.hostname.replace(/^www\./, '')
+			const profile = url.pathname.split('/').filter(Boolean).at(-1)
+
+			if (host.includes('linkedin.com')) return `Open LinkedIn profile ${profile ?? ''}`.trim()
+			if (host.includes('github.com')) return `Open GitHub profile ${profile ?? ''}`.trim()
+			if (host.includes('platzi.com')) return `Open Platzi profile ${profile ?? ''}`.trim()
+
+			return `Open ${host}`
+		} catch {
+			return 'Open link'
+		}
+	}
+
+	$: linkAriaLabel = ariaLabel || getFallbackAriaLabel(href)
 </script>
 
 <li
@@ -14,9 +34,10 @@
 >
 	<a
 		{href}
-		aria-label={ariaLabel}
+		aria-label={linkAriaLabel}
 		target="_blank"
-		rel="noreferrer"
-		class={`flex items-start justify-center gap-4 ${SIZES[size]}`}><slot /></a
+		rel="noopener noreferrer"
+		class={`flex items-start justify-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-200 dark:focus-visible:ring-orange-400 dark:focus-visible:ring-offset-zinc-900 ${SIZES[size]}`}
+		><slot /></a
 	>
 </li>

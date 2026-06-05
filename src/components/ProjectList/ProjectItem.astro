@@ -5,6 +5,10 @@ import GitHubIcon from '@components/Icons/GitHubIcon.svelte'
 import type { ProjectType } from 'types/projects'
 import TechnologiesList from '@components/TechnologiesList/index.astro'
 import { Image } from 'astro:assets'
+import ActionLink from '@components/ActionLink.astro'
+import Card from '@components/Card.astro'
+import IconLink from '@components/IconLink.astro'
+import Heading from '@components/Heading.astro'
 
 interface Props {
 	project: ProjectType
@@ -16,50 +20,47 @@ const {
 ---
 
 <li class="group relative isolate flex h-full min-h-[300px] w-full overflow-hidden">
-	<div
-		class="relative z-10 flex h-full w-full flex-col items-start justify-between border-b-2 border-zinc-300 bg-zinc-200/70 px-12 py-16 backdrop-blur-[1px] transition-opacity duration-200 hover:border-zinc-300 group-hover:opacity-100 dark:border-transparent dark:bg-zinc-800/80 dark:hover:border-zinc-700 lg:border-2 lg:opacity-0"
+	<Card
+		class="relative z-10 flex h-full w-full flex-col items-start justify-between border-b-2 border-zinc-300 px-12 py-16 transition-opacity duration-200 hover:border-zinc-300 group-focus-within:opacity-100 group-hover:opacity-100 dark:border-transparent dark:hover:border-zinc-700 lg:border-2 lg:opacity-0"
 	>
 		<div class="flex flex-col items-start gap-2">
-			<Text
-				size="p1"
+			<Heading
+				as="h3"
+				variant="eyebrow"
 				class="font-heming font-bold underline decoration-transparent transition hover:decoration-inherit"
 			>
-				<a href={deploy || repository} target="_blank" rel="noopener noreferrer">
+				<ActionLink href={deploy || repository}>
 					{title}
-				</a>
-			</Text>
-			<Text size="p4" class="font-bold">
+				</ActionLink>
+			</Heading>
+			<Text variant="p4" class="font-bold">
 				{description}
 			</Text>
 		</div>
 		<div class="flex w-full items-center justify-between">
 			<TechnologiesList technologies={tags} />
 			<div class="flex gap-4">
-				<a
+				<IconLink
 					href={repository}
-					aria-label={`${title} repository`}
-					target="_blank"
-					rel="noopener noreferrer"
-					class="flex h-6 w-6 items-center justify-center rounded-full transition-transform hover:scale-110 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
+					ariaLabel={`${title} repository`}
+					class="h-6 w-6 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
 				>
 					<GitHubIcon client:idle />
-				</a>
+				</IconLink>
 				{
 					deploy && (
-						<a
+						<IconLink
 							href={deploy}
-							aria-label={`${title} live demo`}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="flex h-6 w-6 items-center justify-center rounded-full transition-transform hover:scale-110 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
+							ariaLabel={`${title} live demo`}
+							class="h-6 w-6 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
 						>
 							<ExternalLinkIcon />
-						</a>
+						</IconLink>
 					)
 				}
 			</div>
 		</div>
-	</div>
+	</Card>
 	<Image src={thumbnail} alt={title} class="absolute inset-0 z-0 h-full w-full object-cover" />
 </li>
 <style>

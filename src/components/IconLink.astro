@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import ActionLink from '@components/ActionLink.astro'
+
+interface Props extends HTMLAttributes<'a'> {
+	href: string
+	ariaLabel: string
+}
+
+const { class: className, href, ariaLabel, ...attrs } = Astro.props
+---
+
+<ActionLink
+	{...attrs}
+	{href}
+	{ariaLabel}
+	class:list={[
+		'group/icon flex items-center justify-center rounded-full transition-transform hover:scale-110',
+		className
+	]}
+>
+	<slot />
+</ActionLink>

@@ -64,8 +64,12 @@ Use `yarn run check`, not `yarn check`, because Yarn Classic treats `yarn check`
 
 - Preserve the current visual language: dark mode, `font-heming`, zinc/indigo surfaces, primary color variable, and Tailwind utilities.
 - Tailwind 3 is the current target. Do not migrate to Tailwind 4 as part of unrelated work.
+- Prefer semantic design-system primitives in `src/components` before repeating Tailwind utility clusters.
+- Use `Container` for page width/padding, `Heading` with separate `as` and `variant`, and `Text` with valid semantic tags.
+- Use `Card`, `ActionLink`, `IconLink`, and `Badge` for reusable surfaces, links, icon-only links, and compact labels.
 - For stacking contexts, use explicit local layering instead of global negative z-index when possible.
 - The header should stay above page content; project cards should keep their image/overlay layering local.
+- Blog content is Markdown-first. Do not add MDX support unless a post explicitly needs embedded components.
 
 ## Auto-Update Rule
 

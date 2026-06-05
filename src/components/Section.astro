@@ -1,14 +1,28 @@
 ---
 import { SECTION_CLASS } from '@constants/index'
 
-interface Props {
+type SectionVariant = 'landing' | 'content' | 'compact' | 'plain'
+
+type Props = {
+	variant?: SectionVariant
 	class?: string
 	id?: string
+} & Record<string, unknown>
+
+const variantClasses: Record<SectionVariant, string> = {
+	landing: 'min-h-screen w-full py-20',
+	content: 'w-full py-16 md:py-24',
+	compact: 'w-full py-10 md:py-16',
+	plain: 'w-full'
 }
 
-const { class: className = '', id = '' } = Astro.props
+const { variant = 'landing', class: className = '', id = '', ...attrs } = Astro.props as Props
 ---
 
-<section class={`min-h-screen py-20 w-full ${className} ${SECTION_CLASS}`} {id}>
+<section
+	{...attrs}
+	{id}
+	class:list={[variantClasses[variant], variant === 'landing' && SECTION_CLASS, className]}
+>
 	<slot />
 </section>

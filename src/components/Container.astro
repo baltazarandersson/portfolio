@@ -1,0 +1,24 @@
+---
+type ContainerVariant = 'site' | 'section' | 'article' | 'narrow'
+type ContainerTag = 'div' | 'main' | 'section' | 'article' | 'header' | 'footer'
+
+type Props = {
+	as?: ContainerTag
+	variant?: ContainerVariant
+	class?: string
+} & Record<string, unknown>
+
+const variantClasses: Record<ContainerVariant, string> = {
+	site: 'mx-auto w-full max-w-7xl px-8 sm:px-12 md:px-20 lg:px-40 xl:px-40',
+	section: 'mx-auto w-full max-w-6xl px-8 sm:px-12 md:px-20',
+	article: 'mx-auto w-full max-w-3xl px-8 sm:px-12',
+	narrow: 'mx-auto w-full max-w-2xl px-8 sm:px-12'
+}
+
+const { as = 'div', variant = 'site', class: className = '', ...attrs } = Astro.props as Props
+const Tag = as
+---
+
+<Tag {...attrs} class:list={[variantClasses[variant], className]}>
+	<slot />
+</Tag>

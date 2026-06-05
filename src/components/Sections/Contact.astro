@@ -5,6 +5,7 @@ import type { SectionType } from 'types/index'
 import Socials from '@components/Socials/index.svelte'
 import FileDownloadIcon from '@components/Icons/FileDownloadIcon.svelte'
 import Text from '@components/Text.astro'
+import ActionLink from '@components/ActionLink.astro'
 
 interface Props {
 	id?: SectionType
@@ -15,7 +16,7 @@ const { id = '' } = Astro.props
 
 <Section class="p-layout flex items-start" id={id}>
 	<div class="mt-20 flex w-full flex-col gap-20">
-		<Heading size="h3">Get in touch</Heading>
+		<Heading as="h2" variant="section">Get in touch</Heading>
 
 		<div class="flex flex-col justify-center gap-12 font-heming lg:w-fit">
 			<Socials
@@ -24,18 +25,17 @@ const { id = '' } = Astro.props
 				labels
 			/>
 
-			<a
+			<ActionLink
 				href="/Baltazar%20Andersson%20CV.pdf"
 				aria-label="download Baltazar's portfolio"
 				target="_blank"
-				rel="noreferrer"
 				class={`flex px-8 py-4 items-start justify-center gap-4 rounded-lg bg-zinc-400/10 backdrop-blur-3xl transition-all duration-200 hover:scale-105 hover:bg-amber-600/10 hover:text-orange-500 dark:bg-zinc-200/10 dark:hover:bg-amber-400/10 dark:hover:text-orange-400`}
 			>
 				<div class="shrink-0">
 					<FileDownloadIcon client:idle />
 				</div>
-				<Text size="p2">Download my CV</Text>
-			</a>
+				<Text as="span" variant="p2">Download my CV</Text>
+			</ActionLink>
 		</div>
 	</div>
 </Section>

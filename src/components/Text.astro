@@ -1,10 +1,19 @@
 ---
-interface Props {
-	size?: 'p5' | 'p4' | 'p3' | 'p2' | 'p1'
-	class?: string
-}
+type TextTag = 'p' | 'span' | 'div' | 'li' | 'small' | 'strong' | 'em' | 'label'
+type TextVariant = 'lead' | 'body' | 'small' | 'caption' | 'p5' | 'p4' | 'p3' | 'p2' | 'p1'
 
-const sizeVariants = {
+type Props = {
+	as?: TextTag
+	variant?: TextVariant
+	size?: TextVariant
+	class?: string
+} & Record<string, unknown>
+
+const variantClasses: Record<TextVariant, string> = {
+	lead: 'text-lg md:text-xl',
+	body: 'text-sm md:text-base',
+	small: 'text-xs md:text-sm',
+	caption: 'text-xs md:text-sm',
 	p5: 'text-xs md:text-sm',
 	p4: 'text-sm md:text-base',
 	p3: 'text-base md:text-lg',
@@ -12,9 +21,11 @@ const sizeVariants = {
 	p1: 'text-2xl md:text-3xl'
 }
 
-const { size: As = 'p4', class: className = '' } = Astro.props
+const { as = 'p', variant, size, class: className = '', ...attrs } = Astro.props as Props
+const selectedVariant = variant ?? size ?? 'p4'
+const Tag = as
 ---
 
-<As class:list={[sizeVariants[As], className]}>
+<Tag {...attrs} class:list={[variantClasses[selectedVariant], className]}>
 	<slot />
-</As>
+</Tag>

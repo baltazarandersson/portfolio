@@ -1,5 +1,7 @@
 ---
 import type { TagType } from 'types/tags'
+import Badge from '@components/Badge.astro'
+import IconLink from '@components/IconLink.astro'
 
 interface Props {
 	technologies: TagType[]
@@ -10,11 +12,17 @@ const { technologies } = Astro.props
 
 <ul class="flex w-fit items-center justify-start gap-4 sm:justify-start">
 	{
-		technologies.map(({ source, iconClass, alt, icon }) => (
+		technologies.map(({ source, iconClass, title, icon }) => (
 			<li>
-				<a href={source} class:list={['flex h-8 w-8 justify-center', iconClass]} target="_blank">
-					<img alt={alt} src={icon} class="object-contain transition-transform hover:scale-110" />
-				</a>
+				<Badge class="h-8 w-8">
+					<IconLink
+						href={source}
+						ariaLabel={`Open ${title} website`}
+						class:list={['h-8 w-8', iconClass]}
+					>
+						<img alt="" src={icon} class="object-contain" aria-hidden="true" />
+					</IconLink>
+				</Badge>
 			</li>
 		))
 	}
