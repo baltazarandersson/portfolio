@@ -10,11 +10,11 @@
 
 	export let label: string = parseSection(section)
 
-	let activeSectionId: SectionType
+	let activeSectionId: string | undefined
 
 	const updateActiveSection = throttle(() => {
 		if (typeof document !== 'undefined') {
-			activeSectionId = getActiveNavSection().getAttribute('id') as SectionType
+			activeSectionId = getActiveNavSection()?.getAttribute('id') ?? undefined
 		}
 	})
 

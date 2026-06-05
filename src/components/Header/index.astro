@@ -18,10 +18,10 @@ const height = `${HEADER_HEIGHT}px`
 
 	const homeNavEl = getNavSectionById('presentation')
 
-	homeNavEl.addEventListener('click', closeDrawer)
+	homeNavEl?.addEventListener('click', closeDrawer)
 </script>
 <header
-	class="fixed z-10 flex w-full items-center justify-between border-b-2 border-zinc-200 bg-zinc-200 bg-opacity-80 font-heming backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/80 dark:bg-opacity-40"
+	class="fixed z-50 flex w-full items-center justify-between border-b-2 border-zinc-200 bg-zinc-200 bg-opacity-80 font-heming backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/80 dark:bg-opacity-40"
 >
 	<div class="p-layout relative flex h-full w-full items-center justify-between">
 		<NavSection section={presentationSection} label="Baltazar Andersson" client:idle />

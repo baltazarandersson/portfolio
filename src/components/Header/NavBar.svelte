@@ -1,11 +1,12 @@
 <script lang="ts">
 	import { getActiveNavSection } from '@utils/getNavSection'
 	import { throttle } from '@utils/throttle'
+	import { onDestroy } from 'svelte'
 	import { drawerStore } from 'src/store/drawer'
 
 	let barWidth = 0
 	let barLeft = 0
-	let activeNavEl: Element
+	let activeNavEl: Element | null = null
 
 	function updateActiveNavEl() {
 		activeNavEl = getActiveNavSection()
@@ -17,6 +18,9 @@
 
 			barLeft = Math.floor(left)
 			barWidth = Math.floor(width)
+		} else {
+			barLeft = 0
+			barWidth = 0
 		}
 	}
 
@@ -27,7 +31,9 @@
 
 	handleUpdateNav()
 
-	drawerStore.subscribe(handleUpdateNav)
+	const unsubscribeDrawer = drawerStore.subscribe(handleUpdateNav)
+
+	onDestroy(unsubscribeDrawer)
 </script>
 
 <svelte:window on:scroll={handleUpdateNav} on:resize={handleUpdateNav} />

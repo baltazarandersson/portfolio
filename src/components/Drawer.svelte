@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { closeDrawer, drawerStore, toggleDrawer } from 'src/store/drawer'
-	import { fly } from 'svelte/transition'
+	import { closeDrawer, drawerStore } from 'src/store/drawer'
 	import type { SectionType } from 'types/index'
 	import NavSection from './NavSection.svelte'
 	import { HEADER_HEIGHT } from '@constants/index'
@@ -9,13 +8,16 @@
 	import LinkedInIcon from './Icons/LinkedInIcon.svelte'
 	import MailIcon from './Icons/MailIcon.svelte'
 	import PlatziIcon from './Icons/PlatziIcon.svelte'
+	import { onDestroy } from 'svelte'
 
 	export let items: SectionType[]
 	let isDrawerOpenVal: boolean
 
-	drawerStore.subscribe((val) => {
+	const unsubscribeDrawer = drawerStore.subscribe((val) => {
 		isDrawerOpenVal = val
 	})
+
+	onDestroy(unsubscribeDrawer)
 
 	let x: number
 
@@ -24,15 +26,20 @@
 			closeDrawer()
 		}
 	}
+
+	const slideDrawer = (_node: Element, { x = 500, duration = 300 } = {}) => ({
+		duration,
+		css: (t: number, u: number) => `transform: translateX(${u * x}px); opacity: ${t};`
+	})
 </script>
 
 <svelte:window bind:innerWidth={x} on:resize={updateDrawer} />
 
 {#if isDrawerOpenVal}
 	<div
-		class={`p-layout fixed bottom-0 left-0 right-0 z-10 flex flex-col justify-between bg-zinc-100 py-10 dark:bg-zinc-900`}
+		class={`p-layout fixed bottom-0 left-0 right-0 z-40 flex flex-col justify-between bg-zinc-100 py-10 dark:bg-zinc-900`}
 		style={`top: ${HEADER_HEIGHT}px;`}
-		transition:fly={{ x: 500, duration: 300 }}
+		transition:slideDrawer={{ x: 500, duration: 300 }}
 	>
 		<ul class="flex flex-col items-end gap-8">
 			{#each items as item}

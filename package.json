@@ -3,35 +3,36 @@
 	"type": "module",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "astro check & astro dev",
+		"dev": "astro dev",
 		"start": "astro dev",
-		"build": "astro build",
+		"build": "yarn run check && astro build",
 		"preview": "astro preview",
 		"astro": "astro",
-		"cspell": "cspell **",
-		"format": "prettier --write './src/**/*.{ts,svelte,astro}' ",
+		"check": "astro check",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"spellcheck": "cspell .",
 		"audit": "yarn audit"
 	},
 	"dependencies": {
-		"@astrojs/check": "^0.9.4",
-		"@astrojs/svelte": "^7.2.0",
+		"@astrojs/svelte": "^8.1.2",
 		"@astrojs/tailwind": "^6.0.2",
-		"@tailwindcss/postcss": "^4.1.14",
-		"astro": "^5.14.3",
-		"prettier": "^3.6.2",
-		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-svelte": "^3.4.0",
-		"prettier-plugin-tailwindcss": "^0.6.14",
-		"sharp": "^0.34.4",
-		"svelte": "^5.39.11",
-		"tailwindcss": "3.4.0",
-		"typescript": "^5.9.3",
-		"vite-plugin-compression2": "^2.2.1"
+		"astro": "^6.4.4",
+		"sharp": "^0.34.5",
+		"svelte": "^5.56.2"
 	},
 	"devDependencies": {
-		"cspell": "^9.2.1"
+		"@astrojs/check": "^0.9.9",
+		"cspell": "^10.0.1",
+		"prettier": "^3.6.2",
+		"prettier-plugin-astro": "^0.14.1",
+		"prettier-plugin-svelte": "^4.1.0",
+		"prettier-plugin-tailwindcss": "^0.7.4",
+		"tailwindcss": "^3.4.19",
+		"typescript": "^6.0.3"
 	},
 	"engines": {
 		"node": ">=22.0.0"
-	}
+	},
+	"packageManager": "yarn@1.22.22"
 }

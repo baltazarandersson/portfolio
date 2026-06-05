@@ -1,39 +1,54 @@
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte'
 
-	let isMobile = false
-	let stars = []
+	type Star = {
+		id: number
+		x: string
+		y: string
+		size: string
+		delay: string
+		translateX: string
+		translateY: string
+		durationX: string
+		durationY: string
+	}
 
-	function generateStars(count) {
-		stars = []
+	let isMobile: boolean | undefined
+	let stars: Star[] = []
+
+	function generateStars(count: number) {
+		const nextStars: Star[] = []
 		for (let i = 0; i < count; i++) {
-			stars.push({
+			nextStars.push({
 				id: i,
 				x: Math.random() * 100 + '%',
 				y: Math.random() * 100 + '%',
-				size: Math.random() * 3 + 1 + 'px', // 1-4px
-				delay: Math.random() * 4 + 's', // Random delay up to 4s
-				translateX: (Math.random() - 0.5) * 200 + 'px', // -100 to 100px
+				size: Math.random() * 3 + 1 + 'px',
+				delay: Math.random() * 4 + 's',
+				translateX: (Math.random() - 0.5) * 200 + 'px',
 				translateY: (Math.random() - 0.5) * 200 + 'px',
-				durationX: Math.random() * 20 + 10 + 's', // 10-30s
+				durationX: Math.random() * 20 + 10 + 's',
 				durationY: Math.random() * 20 + 10 + 's'
 			})
 		}
+
+		return nextStars
 	}
 
 	onMount(() => {
-		const updateMobile = () => {
-			isMobile = window.innerWidth < 768
-		}
-		updateMobile()
-		window.addEventListener('resize', updateMobile)
-		return () => window.removeEventListener('resize', updateMobile)
-	})
+		const updateStarsForViewport = () => {
+			const nextIsMobile = window.innerWidth < 768
 
-	// Reactive statement to update stars when isMobile changes
-	$: if (isMobile !== undefined) {
-		generateStars(isMobile ? 50 : 80)
-	}
+			if (nextIsMobile === isMobile) return
+
+			isMobile = nextIsMobile
+			stars = generateStars(isMobile ? 50 : 80)
+		}
+
+		updateStarsForViewport()
+		window.addEventListener('resize', updateStarsForViewport)
+		return () => window.removeEventListener('resize', updateStarsForViewport)
+	})
 </script>
 
 <div class="starry-bg">

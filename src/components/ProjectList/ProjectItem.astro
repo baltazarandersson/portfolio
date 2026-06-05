@@ -15,16 +15,16 @@ const {
 } = Astro.props
 ---
 
-<li class="group relative flex h-full min-h-[300px] w-full">
+<li class="group relative isolate flex h-full min-h-[300px] w-full overflow-hidden">
 	<div
-		class="flex h-full w-full flex-col items-start justify-between border-b-2 border-zinc-300 bg-zinc-200/70 px-12 py-16 backdrop-blur-[1px] transition-opacity duration-200 hover:border-zinc-300 group-hover:opacity-100 dark:border-transparent dark:bg-zinc-800/80 dark:hover:border-zinc-700 lg:border-2 lg:opacity-0"
+		class="relative z-10 flex h-full w-full flex-col items-start justify-between border-b-2 border-zinc-300 bg-zinc-200/70 px-12 py-16 backdrop-blur-[1px] transition-opacity duration-200 hover:border-zinc-300 group-hover:opacity-100 dark:border-transparent dark:bg-zinc-800/80 dark:hover:border-zinc-700 lg:border-2 lg:opacity-0"
 	>
 		<div class="flex flex-col items-start gap-2">
 			<Text
 				size="p1"
 				class="font-heming font-bold underline decoration-transparent transition hover:decoration-inherit"
 			>
-				<a href={deploy || repository} target="_blank">
+				<a href={deploy || repository} target="_blank" rel="noopener noreferrer">
 					{title}
 				</a>
 			</Text>
@@ -37,8 +37,9 @@ const {
 			<div class="flex gap-4">
 				<a
 					href={repository}
-					aria-label="repository-link"
+					aria-label={`${title} repository`}
 					target="_blank"
+					rel="noopener noreferrer"
 					class="flex h-6 w-6 items-center justify-center rounded-full transition-transform hover:scale-110 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
 				>
 					<GitHubIcon client:idle />
@@ -47,8 +48,9 @@ const {
 					deploy && (
 						<a
 							href={deploy}
-							aria-label="deploy-link"
+							aria-label={`${title} live demo`}
 							target="_blank"
+							rel="noopener noreferrer"
 							class="flex h-6 w-6 items-center justify-center rounded-full transition-transform hover:scale-110 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
 						>
 							<ExternalLinkIcon />
@@ -58,7 +60,7 @@ const {
 			</div>
 		</div>
 	</div>
-	<Image src={thumbnail} alt={title} class="absolute -z-10 h-full w-full object-cover" />
+	<Image src={thumbnail} alt={title} class="absolute inset-0 z-0 h-full w-full object-cover" />
 </li>
 <style>
 	li {

@@ -5,12 +5,12 @@ export const drawerStore = writable(false)
 
 export const openDrawer = () => {
 	drawerStore.update(() => true)
-	document.body.classList.add('overflow-hidden')
+	if (typeof document !== 'undefined') document.body.classList.add('overflow-hidden')
 }
 
 export const closeDrawer = () => {
 	drawerStore.update(() => false)
-	document.body.classList.remove('overflow-hidden')
+	if (typeof document !== 'undefined') document.body.classList.remove('overflow-hidden')
 }
 
 export const toggleDrawer = throttle(() => {
