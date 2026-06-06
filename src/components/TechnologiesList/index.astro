@@ -12,7 +12,7 @@ const { technologies } = Astro.props
 
 <ul class="flex w-fit items-center justify-start gap-4 sm:justify-start">
 	{
-		technologies.map(({ source, iconClass, title, icon }) => (
+		technologies.map(({ source, iconClass, title, icon, iconDark }) => (
 			<li>
 				<Badge class="h-8 w-8">
 					<IconLink
@@ -20,7 +20,19 @@ const { technologies } = Astro.props
 						ariaLabel={`Open ${title} website`}
 						class:list={['h-8 w-8', iconClass]}
 					>
-						<img alt="" src={icon} class="object-contain" aria-hidden="true" />
+						{iconDark ? (
+							<>
+								<img alt="" src={icon} class="object-contain dark:hidden" aria-hidden="true" />
+								<img
+									alt=""
+									src={iconDark}
+									class="hidden object-contain dark:block"
+									aria-hidden="true"
+								/>
+							</>
+						) : (
+							<img alt="" src={icon} class="object-contain" aria-hidden="true" />
+						)}
 					</IconLink>
 				</Badge>
 			</li>

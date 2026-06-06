@@ -10,6 +10,9 @@ const reduxIcon = 'images/icons/redux.svg'
 const nextIcon = 'images/icons/next.svg'
 const cypressIcon = 'images/icons/cypress.svg'
 const typescriptIcon = 'images/icons/typescript.svg'
+const astroIcon = 'images/icons/astro.svg'
+const astroIconDark = 'images/icons/astro-dark.svg'
+const svelteIcon = 'images/icons/svelte.svg'
 
 const tags: Record<TagKeys, TagType> = {
 	react: {
@@ -74,6 +77,19 @@ const tags: Record<TagKeys, TagType> = {
 		alt: 'typescript',
 		icon: typescriptIcon,
 		source: 'https://www.typescriptlang.org/'
+	},
+	astro: {
+		title: 'Astro',
+		alt: 'astro',
+		icon: astroIcon,
+		iconDark: astroIconDark,
+		source: 'https://astro.build/'
+	},
+	svelte: {
+		title: 'Svelte',
+		alt: 'svelte',
+		icon: svelteIcon,
+		source: 'https://svelte.dev/'
 	}
 }
 

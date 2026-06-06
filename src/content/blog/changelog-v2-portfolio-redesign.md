@@ -1,5 +1,5 @@
 ---
-title: 'Changelog v2.0.0 — A design system and a real blog'
+title: 'v2.0.0 — A design system and a real blog'
 description: 'The portfolio grows from a single page into a themed design system with a Markdown blog, a warm sunset light theme, and smoother navigation. Here is everything that shipped in the v2 base.'
 publishedAt: 2026-06-06
 readingTime: 4 min read
@@ -10,6 +10,7 @@ tags:
   - Changelog
   - Release
   - Design system
+heroImage: /images/og/changelog-v2.webp
 ---
 
 This release closes a long cycle of foundational work. Until now the site was a
@@ -48,6 +49,15 @@ Think of this as the **v2 base** — the platform the next features build on.
     loading="lazy"
   />
   <figcaption>The new blog index: a sticky sidebar with the intro, article count, and topics.</figcaption>
+</figure>
+
+<figure>
+  <img
+    src="/images/blog/changelog-v2/blog-post.webp"
+    alt="A blog article in dark mode: the article card on the left and a sticky 'On this page' table of contents on the right."
+    loading="lazy"
+  />
+  <figcaption>Inside a post: prose typography, a scroll-spy table of contents, and the EN/ES and share controls in the header.</figcaption>
 </figure>
 
 ## Changed

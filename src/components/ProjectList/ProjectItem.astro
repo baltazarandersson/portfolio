@@ -19,9 +19,12 @@ const {
 } = Astro.props
 ---
 
-<li class="group relative isolate flex h-full min-h-[300px] w-full overflow-hidden">
+<li
+	data-project-item
+	class="group relative isolate flex h-full min-h-[300px] w-full overflow-hidden"
+>
 	<Card
-		class="relative z-10 flex h-full w-full flex-col items-start justify-between border-b-2 border-border px-12 py-16 transition-opacity duration-200 hover:border-border group-focus-within:opacity-100 group-hover:opacity-100 dark:border-transparent dark:hover:border-zinc-700 lg:border-2 lg:opacity-0"
+		class="relative z-10 flex h-full w-full flex-col items-start justify-between border-b-2 border-border px-12 py-16 opacity-0 transition-opacity duration-200 hover:border-border group-focus-within:opacity-100 group-hover:opacity-100 group-[.is-active]:opacity-100 dark:border-transparent dark:hover:border-zinc-700 lg:border-2"
 	>
 		<div class="flex flex-col items-start gap-2">
 			<Heading

@@ -8,9 +8,19 @@ import lolprofileThumb from '/public/images/projects/lolprofile.webp'
 import countryQuizThumb from '/public/images/projects/countryquiz.webp'
 import avostoreThumb from '/public/images/projects/avostore.webp'
 import devtterThumb from '/public/images/projects/devtter.webp'
+import portfolioV2Thumb from '/public/images/projects/portfolio-v2-home.webp'
 import type { ProjectWithKeysType } from 'types/projects'
 
 const projects: ProjectWithKeysType[] = [
+	{
+		thumbnail: portfolioV2Thumb,
+		title: 'Portfolio v2',
+		description:
+			'This very site, rebuilt from scratch. It grew into a small design system with its own blog and a warm light theme, made with Astro and Svelte.',
+		tags: ['astro', 'svelte', 'tailwind', 'typescript'],
+		repository: 'https://github.com/baltazarandersson/portfolio',
+		deploy: 'https://baltazar.vercel.app/'
+	},
 	{
 		thumbnail: devtterThumb,
 		title: 'Devtter',

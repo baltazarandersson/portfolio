@@ -1,7 +1,7 @@
 {
 	"name": "portfolio-astro",
 	"type": "module",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"scripts": {
 		"dev": "astro dev",
 		"start": "astro dev",
@@ -12,7 +12,9 @@
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"spellcheck": "cspell .",
-		"audit": "yarn audit"
+		"gate": "yarn run format:check && yarn run check && yarn run spellcheck",
+		"audit": "yarn audit",
+		"prepare": "husky"
 	},
 	"dependencies": {
 		"@astrojs/svelte": "^8.1.2",
@@ -21,9 +23,17 @@
 		"sharp": "^0.34.5",
 		"svelte": "^5.56.2"
 	},
+	"optionalDependencies": {
+		"@img/sharp-libvips-linux-x64": "1.2.4",
+		"@img/sharp-linux-x64": "0.34.5"
+	},
+	"resolutions": {
+		"sharp": "0.34.5"
+	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.9",
 		"cspell": "^10.0.1",
+		"husky": "^9.1.7",
 		"prettier": "^3.6.2",
 		"prettier-plugin-astro": "^0.14.1",
 		"prettier-plugin-svelte": "^4.1.0",

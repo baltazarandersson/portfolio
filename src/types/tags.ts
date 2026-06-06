@@ -4,6 +4,7 @@ export type TagType = {
 	icon: string
 	source: string
 	iconClass?: string
+	iconDark?: string
 }
 
 export type TagKeys =
@@ -17,3 +18,5 @@ export type TagKeys =
 	| 'cypress'
 	| 'javascript'
 	| 'typescript'
+	| 'astro'
+	| 'svelte'

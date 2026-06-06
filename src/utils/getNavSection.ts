@@ -9,6 +9,12 @@ export const getNavSectionById = (section: SectionType): HTMLElement | null =>
 export const getActiveNavSection = () => {
 	if (typeof document === 'undefined' || typeof window === 'undefined') return null
 
+	// Blog routes have no scroll sections, so keep the "Blog" tab lit like a real
+	// tab — the underline and active color both read this single source.
+	if (window.location.pathname.startsWith('/blog')) {
+		return getNavSectionById('blog')
+	}
+
 	let maxPercentage = 0
 	let mostVisibleSectionId: SectionType = 'presentation'
 	const sections = document.querySelectorAll<HTMLElement>(`.${SECTION_CLASS}`)

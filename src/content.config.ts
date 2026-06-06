@@ -14,7 +14,8 @@ const blog = defineCollection({
 		translationKey: z.string().optional(),
 		draft: z.boolean().default(false),
 		tags: z.array(z.string()).default([]),
-		version: z.string().optional()
+		version: z.string().optional(),
+		heroImage: z.string().optional()
 	})
 })
 

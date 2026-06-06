@@ -5,6 +5,7 @@ import { getCollection, render } from 'astro:content'
 import Container from '@components/Container.astro'
 import ArticleHeader from '@components/Blog/ArticleHeader.astro'
 import LanguageSwitcher from '@components/Blog/LanguageSwitcher.astro'
+import ShareLinks from '@components/Blog/ShareLinks.svelte'
 import Prose from '@components/Blog/Prose.astro'
 import TableOfContents from '@components/Blog/TableOfContents.astro'
 
@@ -40,9 +41,17 @@ const tableOfContentsItems = headings
 	.map((heading) => ({ id: heading.slug, label: heading.text }))
 
 const hasToc = tableOfContentsItems.length > 0
+const hasLanguageSwitcher = languageSwitcherLinks.length === 2
+const postUrl = new URL(`/blog/${getSlug(post.id)}/`, Astro.site).href
 ---
 
-<Layout title={`${post.data.title} | Baltazar Andersson`} lang={post.data.language}>
+<Layout
+	title={`${post.data.title} | Baltazar Andersson`}
+	lang={post.data.language}
+	description={post.data.description}
+	image={post.data.heroImage}
+	type="article"
+>
 	<Container
 		as="main"
 		variant={hasToc ? 'section' : 'article'}
@@ -66,11 +75,20 @@ const hasToc = tableOfContentsItems.length > 0
 					tags={post.data.tags}
 					backHref="/blog/"
 				>
-					<LanguageSwitcher
-						slot="actions"
-						currentLanguage={post.data.language}
-						links={languageSwitcherLinks}
-					/>
+					<div slot="actions" class="flex items-center gap-3">
+						<ShareLinks
+							client:idle
+							url={postUrl}
+							title={post.data.title}
+							lang={post.data.language}
+						/>
+						{
+							hasLanguageSwitcher && (
+								<span aria-hidden="true" class="h-4 w-px bg-border dark:bg-zinc-700" />
+							)
+						}
+						<LanguageSwitcher currentLanguage={post.data.language} links={languageSwitcherLinks} />
+					</div>
 				</ArticleHeader>
 				<Prose>
 					<Content />

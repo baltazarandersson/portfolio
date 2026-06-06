@@ -10,7 +10,70 @@ const { projects } = Astro.props
 ---
 
 <ul
+	data-project-list
 	class="grid w-full grow grid-flow-row grid-cols-1 sm:grid-cols-[repeat(auto-fit,_minmax(500px,_1fr))]"
 >
 	{projects.map((project) => <ProjectItem {project} />)}
 </ul>
+
+<script>
+	import { throttle } from '@utils/throttle'
+	import { MOBILE_WIDTH } from '@constants/index'
+
+	// On small screens the cards are stacked and their info overlay starts hidden;
+	// reveal only the one closest to the middle of the viewport so the reader sees
+	// a single project at a time while scrolling. Desktop keeps its hover behavior.
+	const setupSpotlight = () => {
+		const list = document.querySelector<HTMLElement>('[data-project-list]')
+		if (!list) return () => {}
+
+		const items = Array.from(list.querySelectorAll<HTMLElement>('[data-project-item]'))
+		if (items.length === 0) return () => {}
+
+		const mobile = window.matchMedia(`(max-width: ${MOBILE_WIDTH - 1}px)`)
+		const clear = () => items.forEach((item) => item.classList.remove('is-active'))
+
+		const update = () => {
+			if (!mobile.matches) {
+				clear()
+				return
+			}
+
+			const viewportCenter = window.innerHeight / 2
+			let active: HTMLElement | null = null
+			let smallestDistance = Infinity
+
+			for (const item of items) {
+				const rect = item.getBoundingClientRect()
+				const distance = Math.abs(rect.top + rect.height / 2 - viewportCenter)
+				if (distance < smallestDistance) {
+					smallestDistance = distance
+					active = item
+				}
+			}
+
+			items.forEach((item) => item.classList.toggle('is-active', item === active))
+		}
+
+		const onScroll = throttle(update, 100)
+		window.addEventListener('scroll', onScroll, { passive: true })
+		window.addEventListener('resize', onScroll, { passive: true })
+		mobile.addEventListener('change', update)
+		update()
+
+		return () => {
+			window.removeEventListener('scroll', onScroll)
+			window.removeEventListener('resize', onScroll)
+			mobile.removeEventListener('change', update)
+			clear()
+		}
+	}
+
+	let teardown = () => {}
+	// Re-bind across view transitions (the project list lives on the home page).
+	document.addEventListener('astro:page-load', () => {
+		teardown()
+		teardown = setupSpotlight()
+	})
+	document.addEventListener('astro:before-swap', () => teardown())
+</script>

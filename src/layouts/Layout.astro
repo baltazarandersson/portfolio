@@ -6,23 +6,53 @@ import { ClientRouter } from 'astro:transitions'
 interface Props {
 	title: string
 	lang?: 'en' | 'es'
+	description?: string
+	image?: string
+	type?: 'website' | 'article'
 }
 
-const { title, lang = 'en' } = Astro.props
+const DEFAULT_DESCRIPTION =
+	"Baltazar Andersson's portfolio, made with AstroJS in addition with Svelte and TailwindCSS."
+const DEFAULT_IMAGE = '/images/og/default.webp'
+
+const {
+	title,
+	lang = 'en',
+	description = DEFAULT_DESCRIPTION,
+	image = DEFAULT_IMAGE,
+	type = 'website'
+} = Astro.props
+
+// Absolute URLs are required by social crawlers (LinkedIn, X) for og:image and og:url.
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href
+const imageUrl = new URL(image, Astro.site).href
 ---
 
 <!doctype html>
 <html lang={lang} class="dark">
 	<head>
 		<meta charset="UTF-8" />
-		<meta
-			name="description"
-			content="Baltazar Andersson's portfolio, made with AstroJS in addition with Svelte and TailwindCSS."
-		/>
+		<meta name="description" content={description} />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		<link rel="canonical" href={canonicalUrl} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+
+		<!-- Open Graph (LinkedIn, Facebook) -->
+		<meta property="og:type" content={type} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:image" content={imageUrl} />
+		<meta property="og:site_name" content="Baltazar Andersson" />
+		<meta property="og:locale" content={lang === 'es' ? 'es_ES' : 'en_US'} />
+
+		<!-- Twitter / X -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageUrl} />
 		<script is:inline>
 			// Apply the stored theme before paint, on first load and after every
 			// view-transition swap (ClientRouter resets <html> to its static class).

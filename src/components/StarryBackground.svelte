@@ -49,7 +49,9 @@
 		let [cr, cg, cb] = readStarColor()
 
 		function readStarColor(): [number, number, number] {
-			const raw = getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim()
+			const raw = getComputedStyle(document.documentElement)
+				.getPropertyValue('--color-primary')
+				.trim()
 			const parts = raw.split(/\s+/).map(Number)
 			if (parts.length === 3 && parts.every((n) => !Number.isNaN(n))) {
 				return [parts[0], parts[1], parts[2]]
@@ -174,7 +176,10 @@
 			;[cr, cg, cb] = readStarColor()
 			if (prefersReduced) draw(0, readOrbs())
 		})
-		themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+		themeObserver.observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['class']
+		})
 
 		resize()
 		setupStars()

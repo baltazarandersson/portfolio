@@ -23,9 +23,17 @@ This file is the operating guide for agents working in this repository. Keep it 
 - Format: `yarn run format`
 - Format check: `yarn run format:check`
 - Spellcheck: `yarn run spellcheck`
+- Fast gate (format:check + check + spellcheck): `yarn run gate`
 - Production build: `yarn build`
 
 Use `yarn run check`, not `yarn check`, because Yarn Classic treats `yarn check` as its own command.
+
+A Husky `pre-commit` hook runs `yarn run gate` on every commit (installed via the `prepare` script). Do not bypass it with `--no-verify` unless explicitly asked.
+
+## Build And Deploy Notes
+
+- Deploy target is Vercel (Linux x64), build command `yarn build`. The lockfile is generated on Windows, so `package.json` pins the Linux Sharp binary in `optionalDependencies` (`@img/sharp-linux-x64`, `@img/sharp-libvips-linux-x64`) and a `resolutions` entry collapses Sharp to a single version. Removing either reintroduces the `MissingSharp` build failure on Vercel — keep them in sync with the `sharp` version.
+- `astro.config.mjs` sets `site`; per-page Open Graph/Twitter tags in `Layout.astro` need it to build absolute `og:image`/canonical URLs. Blog posts may set a `heroImage` (public path) used as the share image; pages without one fall back to `/images/og/default.webp`.
 
 ## Iteration Protocol
 

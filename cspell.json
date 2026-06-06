@@ -10,7 +10,12 @@
 		"baltazarander",
 		"baltazarandersson",
 		"Codespaces",
+		"colour",
+		"Compartir",
+		"copiado",
+		"Copiar",
 		"disenando",
+		"enlace",
 		"estado",
 		"evenodd",
 		"frontmatter",
@@ -18,6 +23,7 @@
 		"Hamburguer",
 		"heming",
 		"Heming",
+		"libvips",
 		"linecap",
 		"linejoin",
 		"minmax",
@@ -26,12 +32,14 @@
 		"noreferrer",
 		"Platzi",
 		"Preact",
+		"rediseno",
 		"svgrepo",
 		"tailwind",
 		"tailwindcss",
 		"tsconfigs",
 		"Vercel",
 		"Volver",
+		"WCAG",
 		"webwright",
 		"xlink"
 	],
@@ -40,6 +48,7 @@
 		"src/mocks/**",
 		"dist/**",
 		"webwright/**",
-		"src/content/blog/disenando-el-estado-de-handoff-que-nadie-nota.md"
+		"src/content/blog/disenando-el-estado-de-handoff-que-nadie-nota.md",
+		"src/content/blog/changelog-v2-rediseno-del-portfolio.md"
 	]
 }

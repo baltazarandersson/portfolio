@@ -40,7 +40,7 @@
 
 <div
 	style="--width:{barWidth}px; --left:{barLeft}px;"
-	class="absolute bottom-0 hidden h-1 w-40 rounded-t-sm bg-orange-500 duration-150 dark:bg-orange-400 sm:block"
+	class="absolute bottom-0 hidden h-1 w-40 rounded-t-sm bg-orange-500 duration-150 dark:bg-orange-400 md:block"
 />
 
 <style>
