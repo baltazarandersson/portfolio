@@ -28,7 +28,8 @@
 		"tailwindcss",
 		"tsconfigs",
 		"Vercel",
+		"webwright",
 		"xlink"
 	],
-	"ignorePaths": ["node_modules/**", "src/mocks/**", "dist/**"]
+	"ignorePaths": ["node_modules/**", "src/mocks/**", "dist/**", "webwright/**"]
 }

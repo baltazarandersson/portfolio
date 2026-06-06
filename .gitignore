@@ -30,3 +30,6 @@ coverage/
 
 # general log files
 *.log
+
+# local webwright audit/evidence scaffolding
+webwright/

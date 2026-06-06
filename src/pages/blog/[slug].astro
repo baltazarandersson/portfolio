@@ -2,8 +2,10 @@
 import Layout from '@layouts/Layout.astro'
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
-import ActionLink from '@components/ActionLink.astro'
 import Container from '@components/Container.astro'
+import ArticleHeader from '@components/Blog/ArticleHeader.astro'
+import Prose from '@components/Blog/Prose.astro'
+import TableOfContents from '@components/Blog/TableOfContents.astro'
 
 type Props = {
 	post: CollectionEntry<'blog'>
@@ -19,46 +21,50 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props
-const { Content } = await render(post)
+const { Content, headings } = await render(post)
 
-const formatDate = (date: Date) =>
-	date.toLocaleDateString('en', { month: 'long', day: 'numeric', year: 'numeric' })
-const formatDateTime = (date: Date) => date.toISOString()
+const tableOfContentsItems = headings
+	.filter((heading) => heading.depth === 2)
+	.map((heading) => ({ id: heading.slug, label: heading.text }))
+
+const hasToc = tableOfContentsItems.length > 0
 ---
 
 <Layout title={`${post.data.title} | Baltazar Andersson`}>
-	<Container as="main" variant="article" class="relative py-28">
-		<ActionLink class="text-sm text-primary transition-colors hover:text-amber-600" href="/blog/">
-			Back to blog
-		</ActionLink>
-
-		<header class="mt-8 space-y-4">
-			<time
-				datetime={formatDateTime(post.data.publishedAt)}
-				class="text-sm text-zinc-500 dark:text-indigo-100/60"
+	<Container
+		as="main"
+		variant={hasToc ? 'section' : 'article'}
+		class="relative py-24 sm:py-28 lg:py-32"
+	>
+		<div
+			class:list={[
+				'grid gap-8 sm:gap-10',
+				hasToc ? 'lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start lg:gap-12' : ''
+			]}
+		>
+			<article
+				class="min-w-0 rounded-3xl border border-zinc-200 bg-white/70 p-5 shadow-sm backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40 sm:p-8 lg:p-10"
 			>
-				{formatDate(post.data.publishedAt)}
-			</time>
-			<h1 class="font-heming text-4xl text-zinc-900 dark:text-indigo-50">{post.data.title}</h1>
-			<p class="leading-7 text-zinc-600 dark:text-indigo-100/80">{post.data.description}</p>
-		</header>
+				<ArticleHeader
+					title={post.data.title}
+					description={post.data.description}
+					publishedAt={post.data.publishedAt}
+					updatedAt={post.data.updatedAt}
+					tags={post.data.tags}
+					backHref="/blog/"
+				/>
+				<Prose>
+					<Content />
+				</Prose>
+			</article>
 
-		<article class="blog-content mt-12 text-zinc-700 dark:text-indigo-50/90">
-			<Content />
-		</article>
+			{
+				hasToc && (
+					<aside class="hidden lg:sticky lg:top-28 lg:block" aria-label="Article table of contents">
+						<TableOfContents items={tableOfContentsItems} />
+					</aside>
+				)
+			}
+		</div>
 	</Container>
 </Layout>
-
-<style>
-	.blog-content :global(p) {
-		@apply mb-5 leading-8;
-	}
-
-	.blog-content :global(h2) {
-		@apply mb-4 mt-10 font-heming text-2xl text-zinc-900 dark:text-indigo-50;
-	}
-
-	.blog-content :global(a) {
-		@apply text-primary underline underline-offset-4;
-	}
-</style>

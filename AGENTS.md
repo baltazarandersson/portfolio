@@ -7,8 +7,10 @@ This file is the operating guide for agents working in this repository. Keep it 
 - Stack: Astro 6, Svelte 5, Tailwind CSS 3, TypeScript 6, Yarn 1, Node 22+.
 - App type: static Astro portfolio with Svelte islands for client interactivity.
 - Pages live in `src/pages`.
+- Local design-system mock routes live in `src/pages/design-system` and should stay unlinked from production navigation unless explicitly promoted.
 - Blog content uses Astro Content Collections in `src/content/blog` with schema in `src/content.config.ts`.
 - Shared UI lives in `src/components`.
+- Blog-specific UI primitives live in `src/components/Blog` and should remain static Astro components unless interactivity is explicitly needed.
 - Landing data currently lives in `src/mocks` and is accessed through thin services in `src/services`.
 - Utilities live in `src/utils`, shared constants in `src/constants`, and shared types in `src/types`.
 
@@ -67,6 +69,7 @@ Use `yarn run check`, not `yarn check`, because Yarn Classic treats `yarn check`
 - Prefer semantic design-system primitives in `src/components` before repeating Tailwind utility clusters.
 - Use `Container` for page width/padding, `Heading` with separate `as` and `variant`, and `Text` with valid semantic tags.
 - Use `Card`, `ActionLink`, `IconLink`, and `Badge` for reusable surfaces, links, icon-only links, and compact labels.
+- Use `src/components/Blog` primitives for blog mocks and future blog pages before adding one-off article/card markup.
 - For stacking contexts, use explicit local layering instead of global negative z-index when possible.
 - The header should stay above page content; project cards should keep their image/overlay layering local.
 - Blog content is Markdown-first. Do not add MDX support unless a post explicitly needs embedded components.

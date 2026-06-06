@@ -1,0 +1,89 @@
+---
+import ActionLink from '../ActionLink.astro'
+import Heading from '../Heading.astro'
+import Text from '../Text.astro'
+import PostMeta from './PostMeta.astro'
+import TagList from './TagList.astro'
+
+type DateValue = Date | string
+type BlogTag = string | { label: string; href?: string }
+
+interface Props {
+	eyebrow?: string
+	title: string
+	description?: string
+	publishedAt: DateValue
+	updatedAt?: DateValue
+	readingTime?: number | string
+	tags?: BlogTag[]
+	backHref?: string
+	backLabel?: string
+	class?: string
+}
+
+const {
+	eyebrow,
+	title,
+	description,
+	publishedAt,
+	updatedAt,
+	readingTime,
+	tags = [],
+	backHref,
+	backLabel = 'Back to blog',
+	class: className = ''
+} = Astro.props
+
+const hasBackSlot = Astro.slots.has('back')
+---
+
+<header class:list={['py-10 sm:py-14 lg:py-16', className]}>
+	<div class="border-b border-zinc-300 pb-8 dark:border-zinc-800 sm:pb-10 lg:pb-12">
+		{
+			(backHref || hasBackSlot) && (
+				<div class="mb-8 font-heming text-sm font-bold uppercase tracking-[0.18em] sm:mb-10">
+					{backHref && (
+						<ActionLink
+							href={backHref}
+							class="text-zinc-500 transition hover:text-primary dark:text-zinc-400"
+						>
+							{backLabel}
+						</ActionLink>
+					)}
+					<slot name="back" />
+				</div>
+			)
+		}
+		{
+			eyebrow && (
+				<Text
+					as="p"
+					variant="caption"
+					class="font-heming font-extrabold uppercase tracking-[0.2em] text-primary"
+				>
+					{eyebrow}
+				</Text>
+			)
+		}
+		<PostMeta
+			publishedAt={publishedAt}
+			updatedAt={updatedAt}
+			readingTime={readingTime}
+			class:list={[eyebrow ? 'mt-3' : '']}
+		/>
+		<Heading as="h1" variant="display" class="mt-5 text-start leading-tight sm:mt-6">
+			{title}
+		</Heading>
+		{
+			description && (
+				<Text
+					variant="lead"
+					class="mt-5 max-w-2xl leading-8 text-zinc-600 dark:text-zinc-300 sm:mt-6"
+				>
+					{description}
+				</Text>
+			)
+		}
+		<TagList tags={tags} class="mt-7 sm:mt-9" />
+	</div>
+</header>

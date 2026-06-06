@@ -1,0 +1,241 @@
+---
+import Layout from '@layouts/Layout.astro'
+import ActionLink from '@components/ActionLink.astro'
+import Card from '@components/Card.astro'
+import Container from '@components/Container.astro'
+import Heading from '@components/Heading.astro'
+import Text from '@components/Text.astro'
+import ArticleHeader from '@components/Blog/ArticleHeader.astro'
+import BlogHero from '@components/Blog/BlogHero.astro'
+import PostCard from '@components/Blog/PostCard.astro'
+import Prose from '@components/Blog/Prose.astro'
+import TableOfContents from '@components/Blog/TableOfContents.astro'
+
+const featuredPost = {
+	title: 'Choosing the smallest useful product surface',
+	description:
+		'Notes from trimming a client dashboard down to the decisions people actually make each morning.',
+	href: '/blog/product-surface/',
+	publishedAt: '2026-05-18',
+	readingTime: '5 min read',
+	tags: ['Product', 'UI']
+}
+
+const postExamples = [
+	{
+		title: 'A release note that saved a meeting',
+		description:
+			'How a plain-language changelog helped support, product, and design make the same call.',
+		href: '/blog/release-note/',
+		publishedAt: '2026-04-29',
+		readingTime: '3 min read',
+		tags: ['Writing']
+	},
+	{
+		title: 'When a quieter empty state works better',
+		description: 'Replacing a clever illustration with clear next steps in a scheduling flow.',
+		href: '/blog/empty-state/',
+		publishedAt: '2026-03-12',
+		readingTime: '4 min read',
+		tags: ['Design']
+	}
+]
+
+const tableOfContentsItems = [
+	{ id: 'context', label: 'Context' },
+	{ id: 'decision', label: 'The decision' },
+	{ id: 'tradeoffs', label: 'Tradeoffs' },
+	{ id: 'shape', label: 'Final shape' }
+]
+---
+
+<Layout title="Blog Design Lab | Baltazar Andersson">
+	<Container
+		as="main"
+		variant="section"
+		class="relative space-y-20 py-24 sm:space-y-24 sm:py-28 lg:space-y-28 lg:py-32"
+	>
+		<Card
+			as="section"
+			variant="plain"
+			class="rounded-2xl border border-dashed border-zinc-300 bg-zinc-100/60 p-5 dark:border-indigo-50/15 dark:bg-zinc-950/30 sm:p-7 lg:p-8"
+		>
+			<ActionLink class="text-sm text-primary transition-colors hover:text-amber-600" href="/">
+				Back to portfolio
+			</ActionLink>
+			<div class="mt-5 max-w-3xl space-y-3">
+				<Heading as="h1" variant="eyebrow" class="text-left text-zinc-900 dark:text-indigo-50">
+					Blog Design Lab
+				</Heading>
+				<Text class="leading-7 text-zinc-600 dark:text-indigo-100/75">
+					Local, unlinked mock for the first blog component batch. This page previews the simple,
+					classic direction before the real Markdown-only blog pages adopt it.
+				</Text>
+			</div>
+		</Card>
+
+		<BlogHero
+			eyebrow="Writing"
+			title="Notes on building useful product interfaces"
+			description="Short essays about app development decisions, UI tradeoffs, and the small pieces of writing that keep teams aligned. Markdown first, low ceremony, and grounded in shipped work."
+			class="!py-0"
+		/>
+
+		<section class="space-y-8 sm:space-y-10" aria-labelledby="post-card-examples">
+			<div class="space-y-3">
+				<Heading
+					as="h2"
+					variant="eyebrow"
+					id="post-card-examples"
+					class="text-left text-zinc-900 dark:text-indigo-50"
+				>
+					Post Cards
+				</Heading>
+				<Text class="max-w-2xl leading-7 text-zinc-600 dark:text-indigo-100/75">
+					One featured story for the index lead, followed by quieter compact entries for regular
+					posts.
+				</Text>
+			</div>
+
+			<div class="grid gap-6 sm:gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-10">
+				<PostCard {...featuredPost} featured />
+				<div class="grid gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-1">
+					{postExamples.map((post) => <PostCard {...post} compact />)}
+				</div>
+			</div>
+		</section>
+
+		<section class="space-y-8 sm:space-y-10" aria-labelledby="article-preview">
+			<div class="space-y-3">
+				<Heading
+					as="h2"
+					variant="eyebrow"
+					id="article-preview"
+					class="text-left text-zinc-900 dark:text-indigo-50"
+				>
+					Article Preview
+				</Heading>
+				<Text class="max-w-2xl leading-7 text-zinc-600 dark:text-indigo-100/75">
+					A desktop reading layout with side navigation and a mobile-first article flow.
+				</Text>
+			</div>
+
+			<div class="grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start lg:gap-12">
+				<article
+					class="min-w-0 rounded-3xl border border-zinc-200 bg-white/70 p-5 shadow-sm backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40 sm:p-8 lg:p-10"
+				>
+					<ArticleHeader
+						eyebrow="Product notes"
+						title="Designing the handoff state nobody notices"
+						description="A practical look at reducing noise between a scheduling app and the people who operate it daily."
+						publishedAt="2026-06-02"
+						readingTime="6 min read"
+						tags={['App development', 'Product decisions', 'UI tradeoffs']}
+					/>
+
+					<Prose>
+						<h2 id="context">Context</h2>
+						<p>
+							The first version of the handoff screen tried to explain every system event. It was
+							accurate, but the operators using it only needed to know whether a task was ready,
+							blocked, or waiting on someone else.
+						</p>
+						<p>
+							We kept the blog format close to Markdown because the same constraint helps product
+							notes: fewer presentation choices, more attention on the decision.
+						</p>
+
+						<h2 id="decision">The decision</h2>
+						<p>
+							The revised screen groups work by status and moves rare details behind a secondary
+							link. The main action stays visible, while <code>needs-review</code> remains a useful internal
+							state instead of user-facing copy.
+						</p>
+						<ul>
+							<li>Keep the daily view focused on the next operational step.</li>
+							<li>Use status labels that match how support talks to customers.</li>
+							<li>Move audit details into a quiet, scan-friendly secondary area.</li>
+						</ul>
+						<blockquote>
+							<p>
+								A good handoff state should feel obvious enough that nobody remembers learning it.
+							</p>
+						</blockquote>
+
+						<h2 id="tradeoffs">Tradeoffs</h2>
+						<p>
+							The simpler view hides some diagnostic detail. That is acceptable because the support
+							team reaches for diagnostics after a problem is reported, not while sorting the
+							morning queue.
+						</p>
+						<pre><code>status: ready
+primaryAction: "Send confirmation"
+secondaryDetail: "View activity log"</code></pre>
+
+						<figure
+							class="not-prose my-8 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-indigo-50/10 dark:bg-zinc-900/80 sm:my-10"
+						>
+							<div class="grid min-h-56 place-items-center p-6 text-center sm:p-8 lg:p-10">
+								<div>
+									<p class="font-heming text-2xl text-zinc-900 dark:text-indigo-50">
+										Interface sketch
+									</p>
+									<p class="mt-2 max-w-md text-sm leading-6 text-zinc-600 dark:text-indigo-100/70">
+										Local placeholder for a future Markdown image: three status columns, one primary
+										action, and muted audit metadata.
+									</p>
+								</div>
+							</div>
+							<figcaption
+								class="border-t border-zinc-200 px-5 py-3 text-sm text-zinc-500 dark:border-indigo-50/10 dark:text-indigo-100/60"
+							>
+								A styled placeholder keeps the lab self-contained without external images.
+							</figcaption>
+						</figure>
+
+						<h2 id="shape">Final shape</h2>
+						<p>
+							The final direction favors readable defaults and small escape hatches. The table below
+							captures the practical split between the visible interface and supporting details.
+						</p>
+						<table>
+							<thead>
+								<tr>
+									<th>Area</th>
+									<th>Visible copy</th>
+									<th>Detail level</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Queue</td>
+									<td>Ready to send</td>
+									<td>Low</td>
+								</tr>
+								<tr>
+									<td>Task detail</td>
+									<td>Waiting on approval</td>
+									<td>Medium</td>
+								</tr>
+								<tr>
+									<td>Activity log</td>
+									<td>Reviewed by operations</td>
+									<td>High</td>
+								</tr>
+							</tbody>
+						</table>
+						<hr />
+						<p>
+							The result is not flashy. It is a stable writing and reading pattern for explaining
+							why a product surface changed and what the team learned from the change.
+						</p>
+					</Prose>
+				</article>
+
+				<aside class="hidden lg:sticky lg:top-28 lg:block" aria-label="Article table of contents">
+					<TableOfContents items={tableOfContentsItems} />
+				</aside>
+			</div>
+		</section>
+	</Container>
+</Layout>

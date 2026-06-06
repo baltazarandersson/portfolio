@@ -1,0 +1,93 @@
+---
+import ActionLink from '../ActionLink.astro'
+import Card from '../Card.astro'
+import Heading from '../Heading.astro'
+import Text from '../Text.astro'
+import PostMeta from './PostMeta.astro'
+import TagList from './TagList.astro'
+
+type DateValue = Date | string
+type BlogTag = string | { label: string; href?: string }
+
+interface Props {
+	title: string
+	description: string
+	href: string
+	publishedAt: DateValue
+	updatedAt?: DateValue
+	readingTime?: number | string
+	tags?: BlogTag[]
+	featured?: boolean
+	compact?: boolean
+	eyebrow?: string
+	class?: string
+}
+
+const {
+	title,
+	description,
+	href,
+	publishedAt,
+	updatedAt,
+	readingTime,
+	tags = [],
+	featured = false,
+	compact = false,
+	eyebrow,
+	class: className = ''
+} = Astro.props
+
+const titleVariant = featured ? 'section' : compact ? 'h6' : 'subsection'
+const textVariant = featured ? 'lead' : compact ? 'small' : 'body'
+---
+
+<Card
+	as="article"
+	variant="plain"
+	class:list={[
+		'group rounded-2xl border border-zinc-300 bg-zinc-200/55 backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-zinc-200/80 motion-reduce:transition-none dark:border-zinc-800 dark:bg-zinc-800/50 dark:hover:border-primary/50 dark:hover:bg-zinc-800/80',
+		compact ? 'p-5 sm:p-6' : 'p-6 sm:p-7',
+		featured ? 'lg:p-10' : '',
+		className
+	]}
+>
+	<div class="flex h-full flex-col gap-6 sm:gap-7">
+		<div class="space-y-3">
+			{
+				eyebrow && (
+					<Text
+						as="p"
+						variant="caption"
+						class="font-heming font-extrabold uppercase tracking-[0.2em] text-primary"
+					>
+						{eyebrow}
+					</Text>
+				)
+			}
+			<PostMeta publishedAt={publishedAt} updatedAt={updatedAt} readingTime={readingTime} />
+		</div>
+		<div class="space-y-3 sm:space-y-4">
+			<Heading as="h2" variant={titleVariant} class="text-start leading-tight tracking-wider">
+				<ActionLink
+					href={href}
+					class="underline decoration-transparent underline-offset-4 transition group-hover:text-primary group-hover:decoration-primary/60"
+				>
+					{title}
+				</ActionLink>
+			</Heading>
+			<Text variant={textVariant} class="leading-7 text-zinc-600 dark:text-zinc-300">
+				{description}
+			</Text>
+		</div>
+		<div class="mt-auto flex flex-col gap-5 pt-1 sm:gap-6 sm:pt-2">
+			<TagList tags={tags} />
+			<ActionLink
+				href={href}
+				aria-label={`Read ${title}`}
+				class="w-fit font-heming text-sm font-bold uppercase tracking-[0.18em] text-primary underline decoration-primary/40 underline-offset-4 transition hover:decoration-primary"
+			>
+				Read article
+			</ActionLink>
+		</div>
+	</div>
+</Card>

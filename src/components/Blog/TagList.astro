@@ -1,0 +1,49 @@
+---
+import ActionLink from '../ActionLink.astro'
+import Badge from '../Badge.astro'
+
+type BlogTag = string | { label: string; href?: string }
+
+interface Props {
+	tags?: BlogTag[]
+	ariaLabel?: string
+	class?: string
+	badgeClass?: string
+}
+
+const { tags = [], ariaLabel = 'Post tags', class: className = '', badgeClass = '' } = Astro.props
+
+const normalizedTags = tags.map((tag) => (typeof tag === 'string' ? { label: tag } : tag))
+---
+
+{
+	normalizedTags.length > 0 && (
+		<ul aria-label={ariaLabel} class:list={['flex flex-wrap gap-2.5', className]}>
+			{normalizedTags.map((tag) => (
+				<li>
+					{tag.href ? (
+						<ActionLink href={tag.href} class="block rounded-full">
+							<Badge
+								class:list={[
+									'rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3.5 py-1.5 font-heming text-xs font-bold uppercase leading-none tracking-[0.16em] text-indigo-700 transition hover:border-primary/60 hover:text-primary dark:border-indigo-300/20 dark:bg-indigo-300/10 dark:text-indigo-200',
+									badgeClass
+								]}
+							>
+								{tag.label}
+							</Badge>
+						</ActionLink>
+					) : (
+						<Badge
+							class:list={[
+								'rounded-full border border-zinc-300 bg-zinc-100/80 px-3.5 py-1.5 font-heming text-xs font-bold uppercase leading-none tracking-[0.16em] text-zinc-600 dark:border-zinc-700 dark:bg-zinc-900/60 dark:text-zinc-300',
+								badgeClass
+							]}
+						>
+							{tag.label}
+						</Badge>
+					)}
+				</li>
+			))}
+		</ul>
+	)
+}

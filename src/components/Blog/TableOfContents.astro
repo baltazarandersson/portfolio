@@ -1,0 +1,141 @@
+---
+import ActionLink from '../ActionLink.astro'
+
+interface TocItem {
+	id: string
+	label: string
+	depth?: 2 | 3
+}
+
+interface Props {
+	items: TocItem[]
+	ariaLabel?: string
+	class?: string
+}
+
+const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.props
+---
+
+{
+	items.length > 0 && (
+		<nav
+			aria-label={ariaLabel}
+			data-blog-toc
+			class:list={[
+				'rounded-2xl border border-zinc-200 bg-white/60 p-5 backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40',
+				className
+			]}
+		>
+			<p class="font-heming text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+				On this page
+			</p>
+			<div class="relative mt-5 border-l border-zinc-200 dark:border-zinc-800">
+				<span
+					data-toc-indicator
+					aria-hidden="true"
+					style="opacity: 0"
+					class="pointer-events-none absolute -left-px top-0 h-0 w-0.5 rounded-full bg-primary transition-[transform,height,opacity] duration-200 ease-out motion-reduce:transition-none"
+				/>
+				<ol class="space-y-3 pl-5">
+					{items.map((item) => (
+						<li class:list={[item.depth === 3 ? 'pl-4' : '']}>
+							<ActionLink
+								href={`#${item.id}`}
+								data-toc-link={item.id}
+								class="block text-sm leading-6 text-zinc-600 transition hover:text-primary dark:text-zinc-300"
+							>
+								{item.label}
+							</ActionLink>
+						</li>
+					))}
+				</ol>
+			</div>
+		</nav>
+	)
+}
+
+<script>
+	import { HEADER_HEIGHT } from '@constants/index'
+
+	type TocTarget = { link: HTMLAnchorElement; heading: HTMLElement }
+
+	function initBlogToc(nav: HTMLElement) {
+		const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'))
+		const indicator = nav.querySelector<HTMLElement>('[data-toc-indicator]')
+		if (links.length === 0 || !indicator) return
+
+		const targets = links
+			.map((link) => {
+				const id = link.getAttribute('data-toc-link')
+				const heading = id ? document.getElementById(id) : null
+				return heading ? { link, heading } : null
+			})
+			.filter((target): target is TocTarget => target !== null)
+
+		if (targets.length === 0) return
+
+		let activeLink: HTMLAnchorElement | null = null
+
+		// The indicator is absolutely positioned inside the rail (its offset
+		// parent), so translate relative to the rail, not the outer nav.
+		const rail = indicator.parentElement as HTMLElement
+
+		function moveIndicator(link: HTMLAnchorElement) {
+			const railRect = rail.getBoundingClientRect()
+			const linkRect = link.getBoundingClientRect()
+			indicator!.style.height = `${linkRect.height}px`
+			indicator!.style.transform = `translateY(${linkRect.top - railRect.top}px)`
+			indicator!.style.opacity = '1'
+		}
+
+		function setActive(link: HTMLAnchorElement) {
+			if (link === activeLink) return
+			activeLink = link
+			for (const target of targets) {
+				const isActive = target.link === link
+				target.link.classList.toggle('text-primary', isActive)
+				target.link.classList.toggle('text-zinc-600', !isActive)
+				target.link.classList.toggle('dark:text-zinc-300', !isActive)
+				if (isActive) target.link.setAttribute('aria-current', 'location')
+				else target.link.removeAttribute('aria-current')
+			}
+			moveIndicator(link)
+		}
+
+		function resolveActiveLink() {
+			// Near the page bottom the trailing headings can't reach the top band,
+			// so pin the last item once the viewport hits the document end.
+			const reachedBottom =
+				window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2
+			if (reachedBottom) return targets[targets.length - 1].link
+
+			// Slightly below the heading's scroll-margin-top (7rem) so a clicked
+			// anchor lands as the active item.
+			const offset = HEADER_HEIGHT + 48
+			let active = targets[0].link
+			for (const target of targets) {
+				if (target.heading.getBoundingClientRect().top <= offset) active = target.link
+				else break
+			}
+			return active
+		}
+
+		let ticking = false
+		function onScroll() {
+			if (ticking) return
+			ticking = true
+			requestAnimationFrame(() => {
+				setActive(resolveActiveLink())
+				ticking = false
+			})
+		}
+
+		window.addEventListener('scroll', onScroll, { passive: true })
+		window.addEventListener('resize', () => {
+			if (activeLink) moveIndicator(activeLink)
+		})
+		onScroll()
+	}
+
+	document.querySelectorAll<HTMLElement>('[data-blog-toc]').forEach(initBlogToc)
+</script>

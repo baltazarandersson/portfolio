@@ -1,0 +1,243 @@
+---
+interface Props {
+	as?: 'article' | 'section' | 'div'
+	class?: string
+}
+
+const { as = 'div', class: className = '' } = Astro.props as Props
+const Component = as
+---
+
+<Component class:list={['blog-prose py-8 sm:py-10 lg:py-12', className]}>
+	<slot />
+</Component>
+
+<style is:global>
+	.blog-prose {
+		color: rgb(63 63 70);
+		font-size: 1rem;
+		line-height: 1.85;
+	}
+
+	.blog-prose > :first-child {
+		margin-block-start: 0;
+	}
+
+	@media (min-width: 640px) {
+		.blog-prose {
+			font-size: 1.0625rem;
+		}
+	}
+
+	.dark .blog-prose {
+		color: rgb(212 212 216);
+	}
+
+	.blog-prose :where(h2, h3, h4, h5, h6) {
+		color: rgb(24 24 27);
+		font-family: 'Heming Variable', ui-monospace, monospace;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		line-height: 1.15;
+		margin-block: 2.15em 0.8em;
+		/* Clear the fixed header (80px) plus breathing room on anchor scroll. */
+		scroll-margin-top: 7rem;
+	}
+
+	.dark .blog-prose :where(h2, h3, h4, h5, h6) {
+		color: rgb(244 244 245);
+	}
+
+	.blog-prose h2 {
+		font-size: clamp(2rem, 5vw, 3rem);
+	}
+
+	.blog-prose h3 {
+		font-size: clamp(1.5rem, 3vw, 2.25rem);
+	}
+
+	.blog-prose h4 {
+		font-size: clamp(1.25rem, 2vw, 1.65rem);
+	}
+
+	.blog-prose :where(h5, h6) {
+		font-size: 1.1rem;
+	}
+
+	.blog-prose :where(p, ul, ol, blockquote, pre, figure, table) {
+		margin-block: 1.2rem;
+	}
+
+	@media (min-width: 640px) {
+		.blog-prose :where(p, ul, ol, blockquote, pre, figure, table) {
+			margin-block: 1.35rem;
+		}
+	}
+
+	.blog-prose :where(p, li) {
+		max-width: 68ch;
+	}
+
+	.blog-prose a {
+		border-radius: 0.125rem;
+		color: rgb(var(--color-primary));
+		text-decoration-color: rgb(var(--color-primary) / 0.35);
+		text-decoration-line: underline;
+		text-underline-offset: 0.25em;
+		transition: text-decoration-color 150ms ease;
+	}
+
+	.blog-prose a:hover {
+		text-decoration-color: rgb(var(--color-primary));
+	}
+
+	.blog-prose a:focus-visible {
+		outline: 2px solid rgb(var(--color-focus, var(--color-primary)));
+		outline-offset: 3px;
+	}
+
+	.blog-prose :where(ul, ol) {
+		padding-inline-start: 1.35rem;
+	}
+
+	.blog-prose :where(ul, ol) :where(ul, ol) {
+		margin-block: 0.55rem;
+	}
+
+	.blog-prose ul {
+		list-style: disc;
+	}
+
+	.blog-prose ol {
+		list-style: decimal;
+	}
+
+	.blog-prose li + li {
+		margin-block-start: 0.45rem;
+	}
+
+	.blog-prose blockquote {
+		border-inline-start: 3px solid rgb(var(--color-primary) / 0.75);
+		color: rgb(82 82 91);
+		font-size: 1.05rem;
+		font-style: italic;
+		padding: 0.35rem 0 0.35rem 1.25rem;
+	}
+
+	@media (min-width: 640px) {
+		.blog-prose blockquote {
+			padding-inline-start: 1.5rem;
+		}
+	}
+
+	.dark .blog-prose blockquote {
+		color: rgb(212 212 216);
+	}
+
+	.blog-prose :not(pre) > code {
+		background: rgb(228 228 231 / 0.75);
+		border: 1px solid rgb(212 212 216);
+		border-radius: 0.3rem;
+		color: rgb(67 56 202);
+		font-size: 0.9em;
+		padding: 0.12em 0.35em;
+	}
+
+	.dark .blog-prose :not(pre) > code {
+		background: rgb(39 39 42 / 0.85);
+		border-color: rgb(63 63 70);
+		color: rgb(199 210 254);
+	}
+
+	.blog-prose pre {
+		background: rgb(24 24 27);
+		border: 1px solid rgb(63 63 70);
+		border-radius: 0.75rem;
+		color: rgb(244 244 245);
+		overflow-x: auto;
+		padding: 1rem;
+	}
+
+	@media (min-width: 640px) {
+		.blog-prose pre {
+			padding: 1.25rem;
+		}
+	}
+
+	.blog-prose pre code {
+		background: transparent;
+		border: 0;
+		color: inherit;
+		font-size: 0.9rem;
+		padding: 0;
+		white-space: pre;
+	}
+
+	.blog-prose img {
+		border-radius: 0.75rem;
+		max-width: 100%;
+	}
+
+	.blog-prose figure {
+		max-width: 100%;
+	}
+
+	.blog-prose figcaption {
+		color: rgb(113 113 122);
+		font-size: 0.875rem;
+		line-height: 1.5;
+		margin-block-start: 0.65rem;
+		text-align: center;
+	}
+
+	.dark .blog-prose figcaption {
+		color: rgb(161 161 170);
+	}
+
+	.blog-prose hr {
+		border: 0;
+		border-top: 1px solid rgb(212 212 216);
+		margin-block: 2.5rem;
+	}
+
+	@media (min-width: 640px) {
+		.blog-prose hr {
+			margin-block: 3rem;
+		}
+	}
+
+	.dark .blog-prose hr {
+		border-top-color: rgb(63 63 70);
+	}
+
+	.blog-prose table {
+		border-collapse: collapse;
+		display: block;
+		font-size: 0.95rem;
+		overflow-x: auto;
+		width: 100%;
+	}
+
+	.blog-prose th,
+	.blog-prose td {
+		border: 1px solid rgb(212 212 216);
+		padding: 0.65rem 0.85rem;
+		text-align: left;
+		vertical-align: top;
+	}
+
+	.dark .blog-prose th,
+	.dark .blog-prose td {
+		border-color: rgb(63 63 70);
+	}
+
+	.blog-prose th {
+		background: rgb(228 228 231 / 0.75);
+		font-family: 'Heming Variable', ui-monospace, monospace;
+		font-weight: 700;
+	}
+
+	.dark .blog-prose th {
+		background: rgb(39 39 42 / 0.85);
+	}
+</style>

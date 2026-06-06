@@ -1,0 +1,60 @@
+---
+import Text from '../Text.astro'
+
+type DateValue = Date | string
+
+interface Props {
+	publishedAt: DateValue
+	updatedAt?: DateValue
+	categories?: string[]
+	readingTime?: number | string
+	class?: string
+}
+
+const { publishedAt, updatedAt, categories = [], readingTime, class: className = '' } = Astro.props
+
+const dateFormatter = new Intl.DateTimeFormat('en', {
+	month: 'short',
+	day: 'numeric',
+	year: 'numeric'
+})
+
+const toDate = (value: DateValue) => (value instanceof Date ? value : new Date(value))
+const isValidDate = (value: Date) => !Number.isNaN(value.valueOf())
+const formatDate = (value: DateValue) => {
+	const date = toDate(value)
+
+	return isValidDate(date) ? dateFormatter.format(date) : String(value)
+}
+const getDateTime = (value: DateValue) => {
+	if (value instanceof Date) return value.toISOString()
+
+	const date = toDate(value)
+
+	return isValidDate(date) ? date.toISOString() : value
+}
+const formatReadingTime = (value: number | string) =>
+	typeof value === 'number' ? `${value} min read` : value
+---
+
+<Text
+	as="p"
+	variant="caption"
+	class:list={[
+		'flex flex-wrap items-center gap-x-4 gap-y-2 font-heming font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400',
+		className
+	]}
+>
+	<span>
+		Published <time datetime={getDateTime(publishedAt)}>{formatDate(publishedAt)}</time>
+	</span>
+	{
+		updatedAt && (
+			<span>
+				Updated <time datetime={getDateTime(updatedAt)}>{formatDate(updatedAt)}</time>
+			</span>
+		)
+	}
+	{categories.length > 0 && <span>{categories.join(' / ')}</span>}
+	{readingTime && <span>{formatReadingTime(readingTime)}</span>}
+</Text>
