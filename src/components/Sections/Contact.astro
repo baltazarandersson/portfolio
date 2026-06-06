@@ -7,17 +7,21 @@ import FileDownloadIcon from '@components/Icons/FileDownloadIcon.svelte'
 import Text from '@components/Text.astro'
 import ActionLink from '@components/ActionLink.astro'
 import Card from '@components/Card.astro'
+import { getLang, useTranslations } from '@i18n/utils'
 
 interface Props {
 	id?: SectionType
 }
 
 const { id = '' } = Astro.props
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+const blogHref = `${lang === 'es' ? '/es' : ''}/blog/`
 ---
 
 <Section class="p-layout flex items-start" id={id}>
 	<div class="mt-20 flex w-full flex-col gap-20">
-		<Heading as="h2" variant="section">Get in touch</Heading>
+		<Heading as="h2" variant="section">{t('contact.title')}</Heading>
 
 		<div class="flex flex-col justify-center gap-12 font-heming lg:w-fit">
 			<Socials
@@ -35,7 +39,7 @@ const { id = '' } = Astro.props
 				<div class="shrink-0">
 					<FileDownloadIcon client:idle />
 				</div>
-				<Text as="span" variant="p2">Download my CV</Text>
+				<Text as="span" variant="p2">{t('contact.downloadCv')}</Text>
 			</ActionLink>
 		</div>
 
@@ -44,16 +48,16 @@ const { id = '' } = Astro.props
 				class="flex flex-col gap-4 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:text-left"
 			>
 				<div>
-					<Heading as="h3" variant="h3">Want to read more?</Heading>
+					<Heading as="h3" variant="h3">{t('contact.readMoreTitle')}</Heading>
 					<Text as="p" variant="p2" class="text-muted dark:text-zinc-400">
-						Visit the blog for technical articles, tutorials, and development thoughts.
+						{t('contact.readMoreText')}
 					</Text>
 				</div>
 				<ActionLink
-					href="/blog/"
+					href={blogHref}
 					class="flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 font-medium text-zinc-50 transition-colors hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface dark:focus-visible:ring-offset-zinc-900"
 				>
-					<Text as="span" variant="p2">Go to blog</Text>
+					<Text as="span" variant="p2">{t('contact.goToBlog')}</Text>
 				</ActionLink>
 			</div>
 		</Card>

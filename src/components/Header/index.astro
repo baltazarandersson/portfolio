@@ -7,11 +7,38 @@ import Hamburguer from './Hamburguer.svelte'
 import Drawer from '@components/Drawer.svelte'
 import NavSection from '@components/NavSection.svelte'
 import BlogTitleSwap from './BlogTitleSwap.svelte'
+import LocaleSwitcher from './LocaleSwitcher.astro'
+import { getLang, useTranslations } from '@i18n/utils'
+import type { Lang } from '@i18n/ui'
+
+interface Props {
+	alternates: Record<Lang, string>
+}
+
+const { alternates } = Astro.props
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 
 const [presentationSection, ...otherSections] = SECTIONS
 
+const navLabels: Record<string, string> = {
+	experience: t('nav.experience'),
+	projects: t('nav.projects'),
+	contact: t('nav.contact'),
+	blog: t('nav.blog')
+}
+const drawerItems = otherSections.map((section) => ({ section, label: navLabels[section] }))
+
+const localePrefix = lang === 'es' ? '/es' : ''
+const homeHref = `${localePrefix}/`
+const blogHref = `${localePrefix}/blog/`
+
 const height = `${HEADER_HEIGHT}px`
-const isBlogArticle = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname !== '/blog/'
+const path = Astro.url.pathname
+const isBlogArticle =
+	(path.startsWith('/blog/') && path !== '/blog/') ||
+	(path.startsWith('/es/blog/') && path !== '/es/blog/')
 ---
 
 <script>
@@ -28,26 +55,37 @@ const isBlogArticle = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathn
 	<div class="p-layout relative flex h-full w-full items-center justify-between">
 		{
 			isBlogArticle ? (
-				<BlogTitleSwap client:idle />
+				<BlogTitleSwap
+					client:idle
+					homeHref={homeHref}
+					backHref={blogHref}
+					backLabel={t('post.backToBlog')}
+				/>
 			) : (
-				<NavSection section={presentationSection} label={HEADER_TITLE} client:idle />
+				<NavSection section={presentationSection} label={HEADER_TITLE} lang={lang} client:idle />
 			)
 		}
 
-		<nav class="hidden gap-4 md:flex lg:gap-8">
+		<nav class="hidden items-center gap-4 md:flex lg:gap-8">
 			<Text as="span" variant="p3">{`<`}</Text>
-			{otherSections.map((section) => <NavSection client:idle {section} />)}
+			{
+				otherSections.map((section) => (
+					<NavSection client:idle {section} label={navLabels[section]} lang={lang} />
+				))
+			}
+			<LocaleSwitcher alternates={alternates} />
 			<ThemeSwitch client:idle />
 			<Text as="span" variant="p3">{`/ >`}</Text>
 		</nav>
 		<NavBar client:only />
 		<div class="flex h-10 items-center gap-4 md:hidden">
+			<LocaleSwitcher alternates={alternates} />
 			<ThemeSwitch client:idle />
 			<Hamburguer client:idle />
 		</div>
 	</div>
 </header>
-<Drawer client:idle items={otherSections} />
+<Drawer client:idle items={drawerItems} lang={lang} />
 <style define:vars={{ height }}>
 	header {
 		height: var(--height);

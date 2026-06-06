@@ -5,6 +5,7 @@ import Heading from '../Heading.astro'
 import Text from '../Text.astro'
 import PostMeta from './PostMeta.astro'
 import TagList from './TagList.astro'
+import { useTranslations } from '@i18n/utils'
 
 type DateValue = Date | string
 type BlogTag = string | { label: string; href?: string }
@@ -36,6 +37,8 @@ const {
 	eyebrow,
 	class: className = ''
 } = Astro.props
+
+const t = useTranslations(Astro.currentLocale)
 
 const titleVariant = featured ? 'section' : compact ? 'h6' : 'subsection'
 const textVariant = featured ? 'lead' : compact ? 'small' : 'body'
@@ -88,7 +91,7 @@ const textVariant = featured ? 'lead' : compact ? 'small' : 'body'
 				aria-hidden="true"
 				class="relative z-10 w-fit font-heming text-sm font-bold uppercase tracking-[0.18em] text-primary underline decoration-primary/40 underline-offset-4 transition group-hover:decoration-primary"
 			>
-				Read article
+				{t('post.readArticle')}
 			</ActionLink>
 		</div>
 	</div>

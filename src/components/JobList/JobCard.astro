@@ -8,6 +8,7 @@ import TechnologiesList from '@components/TechnologiesList/index.astro'
 import { parseTags } from '@services/tags'
 import { Image } from 'astro:assets'
 import Card from '@components/Card.astro'
+import { getLang, useTranslations } from '@i18n/utils'
 
 interface Props {
 	job: JobType
@@ -20,6 +21,9 @@ const {
 const parsedToDate = to || Date.now()
 
 const technologies = await parseTags({ tags: stack })
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 ---
 
 <Card
@@ -35,20 +39,22 @@ const technologies = await parseTags({ tags: stack })
 	<div class="flex flex-col items-center justify-start gap-x-4 sm:flex-row">
 		<Text variant="p2">
 			<time
-				>{formatTimestamp({ timestamp: from })} ~ {
-					to ? formatTimestamp({ timestamp: to }) : 'Present'
+				>{formatTimestamp({ timestamp: from, language: lang })} ~ {
+					to ? formatTimestamp({ timestamp: to, language: lang }) : t('job.present')
 				}</time
 			>
 		</Text>
 		<Text variant="p4" class="text-muted dark:text-zinc-400">
-			({formatDuration(getMonthsBetweenDates(from, parsedToDate))})
+			({formatDuration(getMonthsBetweenDates(from, parsedToDate), lang)})
 		</Text>
 	</div>
 	<Text>
 		{description}
 	</Text>
 	<div class="flex items-center justify-center gap-8 sm:justify-start">
-		<Text as="span" variant="p4" class="hidden font-heming font-bold sm:inline">STACK</Text>
+		<Text as="span" variant="p4" class="hidden font-heming font-bold sm:inline"
+			>{t('job.stack')}</Text
+		>
 
 		<TechnologiesList {technologies} />
 	</div>

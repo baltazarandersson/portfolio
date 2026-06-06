@@ -4,6 +4,7 @@ import JobList from '@components/JobList/index.astro'
 import Section from '@components/Section.astro'
 import type { SectionType } from 'types/index'
 import { getJobs } from '@services/jobs'
+import { getLang, useTranslations } from '@i18n/utils'
 
 interface Props {
 	id?: SectionType
@@ -11,12 +12,14 @@ interface Props {
 
 const { id = '' } = Astro.props
 
-const jobs = await getJobs()
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+const jobs = await getJobs(lang)
 ---
 
 <Section class="p-layout flex items-start" id={id}>
 	<div class="mt-20 flex w-full flex-col gap-20">
-		<Heading as="h2" variant="section">Professional experience</Heading>
+		<Heading as="h2" variant="section">{t('experience.title')}</Heading>
 		<JobList {jobs} />
 	</div>
 </Section>

@@ -1,5 +1,6 @@
 ---
 import Text from '../Text.astro'
+import { getLang, useTranslations } from '@i18n/utils'
 
 type DateValue = Date | string
 
@@ -13,7 +14,10 @@ interface Props {
 
 const { publishedAt, updatedAt, categories = [], readingTime, class: className = '' } = Astro.props
 
-const dateFormatter = new Intl.DateTimeFormat('en', {
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+
+const dateFormatter = new Intl.DateTimeFormat(lang, {
 	month: 'short',
 	day: 'numeric',
 	year: 'numeric'
@@ -34,7 +38,7 @@ const getDateTime = (value: DateValue) => {
 	return isValidDate(date) ? date.toISOString() : value
 }
 const formatReadingTime = (value: number | string) =>
-	typeof value === 'number' ? `${value} min read` : value
+	typeof value === 'number' ? `${value} ${t('post.minRead')}` : value
 ---
 
 <Text
@@ -46,12 +50,13 @@ const formatReadingTime = (value: number | string) =>
 	]}
 >
 	<span>
-		Published <time datetime={getDateTime(publishedAt)}>{formatDate(publishedAt)}</time>
+		{t('post.published')}
+		<time datetime={getDateTime(publishedAt)}>{formatDate(publishedAt)}</time>
 	</span>
 	{
 		updatedAt && (
 			<span>
-				Updated <time datetime={getDateTime(updatedAt)}>{formatDate(updatedAt)}</time>
+				{t('post.updated')} <time datetime={getDateTime(updatedAt)}>{formatDate(updatedAt)}</time>
 			</span>
 		)
 	}

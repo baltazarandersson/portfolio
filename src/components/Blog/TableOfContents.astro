@@ -1,5 +1,6 @@
 ---
 import ActionLink from '../ActionLink.astro'
+import { useTranslations } from '@i18n/utils'
 
 interface TocItem {
 	id: string
@@ -13,7 +14,8 @@ interface Props {
 	class?: string
 }
 
-const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.props
+const t = useTranslations(Astro.currentLocale)
+const { items, ariaLabel = t('post.tocAria'), class: className = '' } = Astro.props
 ---
 
 {
@@ -27,7 +29,7 @@ const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.
 			]}
 		>
 			<p class="font-heming text-xs font-bold uppercase tracking-[0.2em] text-muted dark:text-zinc-400">
-				On this page
+				{t('post.tocTitle')}
 			</p>
 			<div class="relative mt-5 border-l border-border dark:border-zinc-800">
 				<span

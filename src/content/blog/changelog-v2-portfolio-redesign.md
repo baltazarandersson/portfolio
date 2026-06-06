@@ -89,8 +89,59 @@ Think of this as the **v2 base** — the platform the next features build on.
 - **Consistent focus rings and checked contrast.** Focus states come from the
   tokens, and the light-mode accent was tuned to meet WCAG AA for text.
 
+## What shipped since v2.0
+
+The v2 base did its job — features stopped fighting the foundation. Two small
+releases followed.
+
+### v2.1 — Sharing & SEO
+
+Posts now carry proper Open Graph and Twitter metadata, so a link finally unfurls
+with a title, description, and image on LinkedIn and X. Each post can set its own
+share image, and an in-page share button uses the native share sheet on mobile
+with a copy-link fallback on desktop. Projects got a refresh too: a card for this
+very site, and on phones the list now spotlights one project at a time — whichever
+sits closest to the middle of the screen.
+
+<figure data-layout="row">
+  <div class="device-row">
+    <img
+      src="/images/blog/changelog-v2/projects-desktop.webp"
+      alt="Projects on desktop: hovering a card reveals its details over the screenshot."
+      loading="lazy"
+    />
+    <img
+      src="/images/blog/changelog-v2/projects-mobile.webp"
+      alt="Projects on mobile: only the card closest to the middle of the screen shows its details."
+      loading="lazy"
+    />
+  </div>
+  <figcaption>Projects side by side: hover to reveal on desktop, one-at-a-time spotlight on mobile.</figcaption>
+</figure>
+
+### v2.2 — Bilingual (EN/ES)
+
+The whole site now speaks English and Spanish. English lives at the root, Spanish
+under `/es/`, and a single switcher in the header swaps the entire site — landing,
+blog, and chrome — instead of the old per-post toggle that only appeared when a
+translation happened to exist.
+
+<figure data-layout="row">
+  <div class="device-row">
+    <img
+      src="/images/blog/changelog-v2/i18n-desktop.webp"
+      alt="The home page in Spanish on desktop, with the EN·ES switcher in the header."
+      loading="lazy"
+    />
+    <img
+      src="/images/blog/changelog-v2/i18n-mobile.webp"
+      alt="The home page in Spanish on mobile, with the language switcher beside the theme toggle."
+      loading="lazy"
+    />
+  </div>
+  <figcaption>One global EN·ES switcher in the header, paired with the theme toggle on every breakpoint.</figcaption>
+</figure>
+
 ## What's next
 
-The v2 base exists so features stop fighting the foundation. Likely next steps:
-more written posts, per-post Open Graph images, and polishing the reading
-experience. Versions from here will be small and frequent.
+More written posts and continued polish. Versions from here stay small and frequent.

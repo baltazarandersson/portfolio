@@ -10,7 +10,8 @@
 	import PlatziIcon from './Icons/PlatziIcon.svelte'
 	import { onDestroy } from 'svelte'
 
-	export let items: SectionType[]
+	export let items: { section: SectionType; label: string }[]
+	export let lang: 'en' | 'es' = 'en'
 	let isDrawerOpenVal: boolean
 
 	const unsubscribeDrawer = drawerStore.subscribe((val) => {
@@ -44,7 +45,7 @@
 		<ul class="flex flex-col items-end gap-8">
 			{#each items as item}
 				<li>
-					<NavSection section={item} />
+					<NavSection section={item.section} label={item.label} {lang} />
 				</li>
 			{/each}
 		</ul>

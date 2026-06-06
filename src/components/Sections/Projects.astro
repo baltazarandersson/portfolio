@@ -3,14 +3,15 @@ import Section from '@components/Section.astro'
 import ProjectList from '@components/ProjectList/index.astro'
 import { getProjects } from '@services/projects'
 import type { SectionType } from 'types/index'
-
-const projects = await getProjects()
+import { getLang } from '@i18n/utils'
 
 interface Props {
 	id?: SectionType
 }
 
 const { id = '' } = Astro.props
+
+const projects = await getProjects(getLang(Astro.currentLocale))
 ---
 
 <Section id={id} class="flex flex-col">

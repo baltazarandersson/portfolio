@@ -207,6 +207,40 @@ const Component = as
 		color: rgb(161 161 170);
 	}
 
+	/* Paired desktop + mobile screenshots of the same screen. */
+	.blog-prose figure[data-layout='row'] .device-row {
+		align-items: flex-end;
+		display: flex;
+		gap: 1rem;
+	}
+
+	.blog-prose figure[data-layout='row'] .device-row img {
+		margin: 0;
+		width: auto;
+	}
+
+	.blog-prose figure[data-layout='row'] .device-row img:first-child {
+		flex: 1 1 0;
+		min-width: 0;
+		width: 100%;
+	}
+
+	.blog-prose figure[data-layout='row'] .device-row img:last-child {
+		flex: 0 0 auto;
+		width: clamp(96px, 24%, 190px);
+	}
+
+	@media (max-width: 640px) {
+		.blog-prose figure[data-layout='row'] .device-row {
+			align-items: center;
+			flex-direction: column;
+		}
+
+		.blog-prose figure[data-layout='row'] .device-row img:last-child {
+			width: clamp(150px, 55%, 240px);
+		}
+	}
+
 	.blog-prose hr {
 		border: 0;
 		border-top: 1px solid rgb(var(--color-border));

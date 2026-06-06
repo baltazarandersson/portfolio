@@ -5,6 +5,7 @@
 
 	export let backLabel = 'Back to blog'
 	export let backHref = '/blog/'
+	export let homeHref = '/'
 
 	let showBack = false
 	let observer: IntersectionObserver | null = null
@@ -47,7 +48,7 @@
 
 <div class="relative grid text-lg font-heming">
 	<a
-		href="/"
+		href={homeHref}
 		class="col-start-1 row-start-1 rounded-sm transition-opacity duration-200 hover:text-orange-500 motion-reduce:transition-none dark:hover:text-orange-400"
 		class:pointer-events-none={showBack}
 		style:opacity={showBack ? 0 : 1}

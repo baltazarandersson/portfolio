@@ -1,0 +1,83 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n'
+import Card from '@components/Card.astro'
+import Container from '@components/Container.astro'
+import Heading from '@components/Heading.astro'
+import Text from '@components/Text.astro'
+import PostCard from '@components/Blog/PostCard.astro'
+import TagList from '@components/Blog/TagList.astro'
+import { getPostsByLang, getPostSlug } from '@i18n/blog'
+import { getLang, useTranslations } from '@i18n/utils'
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+
+const posts = await getPostsByLang(lang)
+
+const postCount = posts.length
+const topics = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) =>
+	a.localeCompare(b)
+)
+---
+
+<Container as="main" variant="section" class="relative py-24 sm:py-28 lg:py-32">
+	<div class="grid gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16">
+		<aside class="h-max space-y-6 lg:sticky lg:top-28">
+			<div class="space-y-3">
+				<Text
+					as="p"
+					variant="caption"
+					class="font-heming font-extrabold uppercase tracking-[0.24em] text-primary"
+				>
+					{t('blog.eyebrow')}
+				</Text>
+				<Heading as="h1" variant="section" class="text-start text-foreground dark:text-indigo-50">
+					{t('blog.heading')}
+				</Heading>
+				<Text variant="body" class="leading-7 text-muted dark:text-zinc-400">
+					{t('blog.intro')}
+				</Text>
+			</div>
+
+			{
+				postCount > 0 && (
+					<div class="space-y-4 border-t border-border pt-6 dark:border-zinc-800">
+						<p class="font-heming text-sm font-bold uppercase tracking-[0.18em] text-muted dark:text-zinc-400">
+							{postCount} {postCount === 1 ? t('blog.article') : t('blog.articles')}
+						</p>
+						{topics.length > 0 && <TagList tags={topics} ariaLabel={t('blog.topics')} />}
+					</div>
+				)
+			}
+		</aside>
+
+		<section aria-label={t('blog.heading')}>
+			{
+				postCount > 0 ? (
+					<div class="grid gap-6 sm:gap-8">
+						{posts.map((post, index) => (
+							<PostCard
+								title={post.data.title}
+								description={post.data.description}
+								href={getRelativeLocaleUrl(lang, `/blog/${getPostSlug(post.id)}/`)}
+								publishedAt={post.data.publishedAt}
+								updatedAt={post.data.updatedAt}
+								readingTime={post.data.readingTime}
+								tags={post.data.tags}
+								featured={index === 0}
+							/>
+						))}
+					</div>
+				) : (
+					<Card
+						as="section"
+						variant="plain"
+						class="rounded-2xl border border-dashed border-border p-6 text-foreground backdrop-blur-md dark:border-indigo-50/20 dark:text-indigo-100/70"
+					>
+						{t('blog.empty')}
+					</Card>
+				)
+			}
+		</section>
+	</div>
+</Container>

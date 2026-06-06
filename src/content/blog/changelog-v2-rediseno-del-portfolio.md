@@ -93,9 +93,61 @@ próximas features.
 - **Focus rings consistentes y contraste revisado.** Los estados de foco salen de
   los tokens, y el acento del modo claro se ajustó para cumplir WCAG AA en texto.
 
+## Qué salió desde la v2.0
+
+La base v2 cumplió su trabajo: las features dejaron de pelear con los cimientos.
+Después vinieron dos releases chicas.
+
+### v2.1 — Compartir y SEO
+
+Ahora los posts tienen metadata de Open Graph y Twitter como corresponde, así que
+un link por fin se muestra con título, descripción e imagen en LinkedIn y X. Cada
+post puede definir su propia imagen para compartir, y un botón de compartir usa el
+share nativo en mobile con fallback a copiar el enlace en desktop. Los proyectos
+también se renovaron: una card para este mismo sitio, y en el teléfono el listado
+ahora destaca un proyecto a la vez — el que queda más cerca del centro de la
+pantalla.
+
+<figure data-layout="row">
+  <div class="device-row">
+    <img
+      src="/images/blog/changelog-v2/projects-desktop.webp"
+      alt="Proyectos en desktop: al pasar el mouse por una card se revelan sus detalles sobre la captura."
+      loading="lazy"
+    />
+    <img
+      src="/images/blog/changelog-v2/projects-mobile.webp"
+      alt="Proyectos en mobile: solo la card más cercana al centro de la pantalla muestra sus detalles."
+      loading="lazy"
+    />
+  </div>
+  <figcaption>Proyectos lado a lado: hover para revelar en desktop, spotlight de a uno en mobile.</figcaption>
+</figure>
+
+### v2.2 — Bilingüe (EN/ES)
+
+Todo el sitio ahora habla inglés y español. El inglés vive en la raíz, el español
+bajo `/es/`, y un único selector en el header cambia el sitio entero — landing,
+blog y chrome — en vez del viejo toggle por post que solo aparecía cuando existía
+una traducción.
+
+<figure data-layout="row">
+  <div class="device-row">
+    <img
+      src="/images/blog/changelog-v2/i18n-desktop.webp"
+      alt="La home en español en desktop, con el selector EN·ES en el header."
+      loading="lazy"
+    />
+    <img
+      src="/images/blog/changelog-v2/i18n-mobile.webp"
+      alt="La home en español en mobile, con el selector de idioma al lado del switch de tema."
+      loading="lazy"
+    />
+  </div>
+  <figcaption>Un único selector EN·ES global en el header, junto al switch de tema en todos los breakpoints.</figcaption>
+</figure>
+
 ## Qué sigue
 
-La base v2 existe para que las features dejen de pelear con los cimientos.
-Próximos pasos probables: más posts escritos, imágenes Open Graph por post y pulir
-la experiencia de lectura. De acá en más las versiones van a ser chicas y
-frecuentes.
+Más posts escritos y seguir puliendo. De acá en más las versiones van a ser chicas
+y frecuentes.

@@ -22,6 +22,8 @@
 		"hamburguer",
 		"Hamburguer",
 		"heming",
+		"hreflang",
+		"hreflangs",
 		"Heming",
 		"libvips",
 		"linecap",
@@ -38,6 +40,7 @@
 		"tailwindcss",
 		"tsconfigs",
 		"Vercel",
+		"voseo",
 		"Volver",
 		"WCAG",
 		"webwright",
@@ -49,6 +52,7 @@
 		"dist/**",
 		"webwright/**",
 		"src/content/blog/disenando-el-estado-de-handoff-que-nadie-nota.md",
-		"src/content/blog/changelog-v2-rediseno-del-portfolio.md"
+		"src/content/blog/changelog-v2-rediseno-del-portfolio.md",
+		"src/i18n/ui.ts"
 	]
 }

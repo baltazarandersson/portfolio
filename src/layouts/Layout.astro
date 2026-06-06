@@ -3,29 +3,40 @@ import BgBall from '@components/BgBall.svelte'
 import Header from '@components/Header/index.astro'
 import StarryBackground from '@components/StarryBackground.svelte'
 import { ClientRouter } from 'astro:transitions'
+import { getLang, useTranslations, getLocaleAlternates } from '@i18n/utils'
+import type { Lang } from '@i18n/ui'
+
 interface Props {
 	title: string
-	lang?: 'en' | 'es'
 	description?: string
 	image?: string
 	type?: 'website' | 'article'
+	/** Per-locale URLs for the language switcher. Defaults to the path-derived pair;
+	    blog posts pass explicit alternates computed from their translationKey. */
+	alternates?: Record<Lang, string>
 }
 
-const DEFAULT_DESCRIPTION =
-	"Baltazar Andersson's portfolio, made with AstroJS in addition with Svelte and TailwindCSS."
 const DEFAULT_IMAGE = '/images/og/default.webp'
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
 
 const {
 	title,
-	lang = 'en',
-	description = DEFAULT_DESCRIPTION,
+	description = t('meta.description'),
 	image = DEFAULT_IMAGE,
-	type = 'website'
+	type = 'website',
+	alternates = getLocaleAlternates(Astro.url.pathname)
 } = Astro.props
 
 // Absolute URLs are required by social crawlers (LinkedIn, X) for og:image and og:url.
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href
 const imageUrl = new URL(image, Astro.site).href
+const hreflangs: { hreflang: string; href: string }[] = [
+	{ hreflang: 'en', href: new URL(alternates.en, Astro.site).href },
+	{ hreflang: 'es', href: new URL(alternates.es, Astro.site).href },
+	{ hreflang: 'x-default', href: new URL(alternates.en, Astro.site).href }
+]
 ---
 
 <!doctype html>
@@ -36,6 +47,7 @@ const imageUrl = new URL(image, Astro.site).href
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
 		<link rel="canonical" href={canonicalUrl} />
+		{hreflangs.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
 
@@ -69,7 +81,7 @@ const imageUrl = new URL(image, Astro.site).href
 	</head>
 	<body class="scroll-smooth bg-surface font-helvetica text-foreground">
 		<StarryBackground client:only />
-		<Header />
+		<Header alternates={alternates} />
 		<slot />
 		<BgBall client:only />
 	</body>

@@ -35,6 +35,15 @@ A Husky `pre-commit` hook runs `yarn run gate` on every commit (installed via th
 - Deploy target is Vercel (Linux x64), build command `yarn build`. The lockfile is generated on Windows, so `package.json` pins the Linux Sharp binary in `optionalDependencies` (`@img/sharp-linux-x64`, `@img/sharp-libvips-linux-x64`) and a `resolutions` entry collapses Sharp to a single version. Removing either reintroduces the `MissingSharp` build failure on Vercel — keep them in sync with the `sharp` version.
 - `astro.config.mjs` sets `site`; per-page Open Graph/Twitter tags in `Layout.astro` need it to build absolute `og:image`/canonical URLs. Blog posts may set a `heroImage` (public path) used as the share image; pages without one fall back to `/images/og/default.webp`.
 
+## Internationalization (i18n)
+
+- The site is bilingual (EN/ES) via Astro's built-in i18n routing (`i18n` in `astro.config.mjs`, `defaultLocale: 'en'`, `prefixDefaultLocale: false`): English at `/`, Spanish under `/es/`.
+- All UI strings live in `src/i18n/ui.ts` (one entry per key, both languages). Helpers are in `src/i18n/utils.ts` (`getLang`, `useTranslations`, `getLocaleAlternates`) and `src/i18n/blog.ts` (locale-aware blog paths + post `translationKey` → alternates). Import via the `@i18n/*` alias.
+- **Astro components** read the locale from `Astro.currentLocale`: `const t = useTranslations(Astro.currentLocale)`. Add new copy as a key in `ui.ts` (both languages) — never hardcode user-facing English in components.
+- **Svelte islands** cannot read `Astro.currentLocale`; pass `lang` (and/or already-translated labels) down as props from the Astro parent (see `Header/index.astro` → `NavSection`, `Drawer`, `BlogTitleSwap`).
+- **Pages** are mirrored under `src/pages/es/**` (thin shells that render the same components, which resolve the locale from the URL). `[slug].astro` must use `export async function getStaticPaths()` (NOT an arrow `const`) to avoid `Astro.props` hoisting out of render scope.
+- **Localized data**: `src/mocks` holds `{ en, es }` (`LocalizedText`) for copy; `getJobs(lang)`/`getProjects(lang)` resolve it. Spanish copy follows the blog's warm, voseo (Argentine) voice. `src/mocks/**` and `src/i18n/ui.ts` are in `cspell` `ignorePaths`.
+
 ## Iteration Protocol
 
 - Inspect before changing code. Read the relevant files and current conventions first.

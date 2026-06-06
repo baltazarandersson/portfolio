@@ -4,12 +4,14 @@ import Text from '@components/Text.astro'
 import Underline from '@components/Underline.astro'
 import Section from '@components/Section.astro'
 import type { SectionType } from 'types/index'
+import { useTranslations } from '@i18n/utils'
 
 interface Props {
 	id?: SectionType
 }
 
 const { id = '' } = Astro.props
+const t = useTranslations(Astro.currentLocale)
 ---
 
 <Section
@@ -18,12 +20,13 @@ const { id = '' } = Astro.props
 >
 	<div class="flex w-full flex-col gap-8">
 		<Heading>
-			Hi! <br class="hidden sm:block" />
-			My name is <span class="relative">Baltazar<Underline /></span>
+			{t('presentation.greeting')}
+			<br class="hidden sm:block" />
+			{t('presentation.intro')}{' '}
+			<span class="relative">Baltazar<Underline /></span>
 		</Heading>
 		<Text variant="p3" class="text-center text-muted dark:text-zinc-400 sm:text-start lg:w-3/5">
-			Frontend developer who aims to specialize in crafting user interfaces with React, focusing on
-			performance and clean code to ensure a smooth and engaging user experience.
+			{t('presentation.lead')}
 		</Text>
 	</div>
 </Section>

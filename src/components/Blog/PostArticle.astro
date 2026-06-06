@@ -1,0 +1,69 @@
+---
+import { render } from 'astro:content'
+import type { CollectionEntry } from 'astro:content'
+import Container from '@components/Container.astro'
+import ArticleHeader from '@components/Blog/ArticleHeader.astro'
+import ShareLinks from '@components/Blog/ShareLinks.svelte'
+import Prose from '@components/Blog/Prose.astro'
+import TableOfContents from '@components/Blog/TableOfContents.astro'
+import { getLang, useTranslations } from '@i18n/utils'
+
+interface Props {
+	post: CollectionEntry<'blog'>
+}
+
+const { post } = Astro.props
+const { Content, headings } = await render(post)
+
+const lang = getLang(Astro.currentLocale)
+const t = useTranslations(lang)
+const backHref = lang === 'es' ? '/es/blog/' : '/blog/'
+const postUrl = new URL(Astro.url.pathname, Astro.site).href
+
+const tableOfContentsItems = headings
+	.filter((heading) => heading.depth === 2)
+	.map((heading) => ({ id: heading.slug, label: heading.text }))
+
+const hasToc = tableOfContentsItems.length > 0
+---
+
+<Container
+	as="main"
+	variant={hasToc ? 'section' : 'article'}
+	class="relative py-24 sm:py-28 lg:py-32"
+>
+	<div
+		class:list={[
+			'grid gap-8 sm:gap-10',
+			hasToc ? 'lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start lg:gap-12' : ''
+		]}
+	>
+		<article
+			class="min-w-0 rounded-3xl border border-border bg-surface-elevated/70 p-5 shadow-sm backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40 sm:p-8 lg:p-10"
+		>
+			<ArticleHeader
+				title={post.data.title}
+				description={post.data.description}
+				publishedAt={post.data.publishedAt}
+				updatedAt={post.data.updatedAt}
+				readingTime={post.data.readingTime}
+				tags={post.data.tags}
+				backHref={backHref}
+				backLabel={t('post.backToBlog')}
+			>
+				<ShareLinks slot="actions" client:idle url={postUrl} title={post.data.title} lang={lang} />
+			</ArticleHeader>
+			<Prose>
+				<Content />
+			</Prose>
+		</article>
+
+		{
+			hasToc && (
+				<aside class="hidden lg:sticky lg:top-28 lg:block">
+					<TableOfContents items={tableOfContentsItems} />
+				</aside>
+			)
+		}
+	</div>
+</Container>
