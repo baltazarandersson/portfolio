@@ -4,6 +4,7 @@ import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
 import Container from '@components/Container.astro'
 import ArticleHeader from '@components/Blog/ArticleHeader.astro'
+import LanguageSwitcher from '@components/Blog/LanguageSwitcher.astro'
 import Prose from '@components/Blog/Prose.astro'
 import TableOfContents from '@components/Blog/TableOfContents.astro'
 
@@ -23,6 +24,17 @@ export async function getStaticPaths() {
 const { post } = Astro.props
 const { Content, headings } = await render(post)
 
+const getSlug = (id: string) => id.replace(/\.md$/, '')
+const publishedPosts = await getCollection('blog', ({ data }) => !data.draft)
+const languageSwitcherLinks = post.data.translationKey
+	? publishedPosts
+			.filter((translatedPost) => translatedPost.data.translationKey === post.data.translationKey)
+			.map((translatedPost) => ({
+				language: translatedPost.data.language,
+				href: `/blog/${getSlug(translatedPost.id)}/`
+			}))
+	: []
+
 const tableOfContentsItems = headings
 	.filter((heading) => heading.depth === 2)
 	.map((heading) => ({ id: heading.slug, label: heading.text }))
@@ -30,7 +42,7 @@ const tableOfContentsItems = headings
 const hasToc = tableOfContentsItems.length > 0
 ---
 
-<Layout title={`${post.data.title} | Baltazar Andersson`}>
+<Layout title={`${post.data.title} | Baltazar Andersson`} lang={post.data.language}>
 	<Container
 		as="main"
 		variant={hasToc ? 'section' : 'article'}
@@ -43,16 +55,23 @@ const hasToc = tableOfContentsItems.length > 0
 			]}
 		>
 			<article
-				class="min-w-0 rounded-3xl border border-zinc-200 bg-white/70 p-5 shadow-sm backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40 sm:p-8 lg:p-10"
+				class="min-w-0 rounded-3xl border border-border bg-surface-elevated/70 p-5 shadow-sm backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40 sm:p-8 lg:p-10"
 			>
 				<ArticleHeader
 					title={post.data.title}
 					description={post.data.description}
 					publishedAt={post.data.publishedAt}
 					updatedAt={post.data.updatedAt}
+					readingTime={post.data.readingTime}
 					tags={post.data.tags}
 					backHref="/blog/"
-				/>
+				>
+					<LanguageSwitcher
+						slot="actions"
+						currentLanguage={post.data.language}
+						links={languageSwitcherLinks}
+					/>
+				</ArticleHeader>
 				<Prose>
 					<Content />
 				</Prose>

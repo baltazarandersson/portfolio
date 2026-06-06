@@ -58,16 +58,16 @@ const tableOfContentsItems = [
 		<Card
 			as="section"
 			variant="plain"
-			class="rounded-2xl border border-dashed border-zinc-300 bg-zinc-100/60 p-5 dark:border-indigo-50/15 dark:bg-zinc-950/30 sm:p-7 lg:p-8"
+			class="rounded-2xl border border-dashed border-border bg-surface-muted/60 p-5 dark:border-indigo-50/15 dark:bg-zinc-950/30 sm:p-7 lg:p-8"
 		>
 			<ActionLink class="text-sm text-primary transition-colors hover:text-amber-600" href="/">
 				Back to portfolio
 			</ActionLink>
 			<div class="mt-5 max-w-3xl space-y-3">
-				<Heading as="h1" variant="eyebrow" class="text-left text-zinc-900 dark:text-indigo-50">
+				<Heading as="h1" variant="eyebrow" class="text-left text-foreground dark:text-indigo-50">
 					Blog Design Lab
 				</Heading>
-				<Text class="leading-7 text-zinc-600 dark:text-indigo-100/75">
+				<Text class="leading-7 text-foreground dark:text-indigo-100/75">
 					Local, unlinked mock for the first blog component batch. This page previews the simple,
 					classic direction before the real Markdown-only blog pages adopt it.
 				</Text>
@@ -87,11 +87,11 @@ const tableOfContentsItems = [
 					as="h2"
 					variant="eyebrow"
 					id="post-card-examples"
-					class="text-left text-zinc-900 dark:text-indigo-50"
+					class="text-left text-foreground dark:text-indigo-50"
 				>
 					Post Cards
 				</Heading>
-				<Text class="max-w-2xl leading-7 text-zinc-600 dark:text-indigo-100/75">
+				<Text class="max-w-2xl leading-7 text-foreground dark:text-indigo-100/75">
 					One featured story for the index lead, followed by quieter compact entries for regular
 					posts.
 				</Text>
@@ -111,18 +111,18 @@ const tableOfContentsItems = [
 					as="h2"
 					variant="eyebrow"
 					id="article-preview"
-					class="text-left text-zinc-900 dark:text-indigo-50"
+					class="text-left text-foreground dark:text-indigo-50"
 				>
 					Article Preview
 				</Heading>
-				<Text class="max-w-2xl leading-7 text-zinc-600 dark:text-indigo-100/75">
+				<Text class="max-w-2xl leading-7 text-foreground dark:text-indigo-100/75">
 					A desktop reading layout with side navigation and a mobile-first article flow.
 				</Text>
 			</div>
 
 			<div class="grid gap-8 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_14rem] lg:items-start lg:gap-12">
 				<article
-					class="min-w-0 rounded-3xl border border-zinc-200 bg-white/70 p-5 shadow-sm backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40 sm:p-8 lg:p-10"
+					class="min-w-0 rounded-3xl border border-border bg-surface-elevated/70 p-5 shadow-sm backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40 sm:p-8 lg:p-10"
 				>
 					<ArticleHeader
 						eyebrow="Product notes"
@@ -173,21 +173,21 @@ primaryAction: "Send confirmation"
 secondaryDetail: "View activity log"</code></pre>
 
 						<figure
-							class="not-prose my-8 overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 dark:border-indigo-50/10 dark:bg-zinc-900/80 sm:my-10"
+							class="not-prose my-8 overflow-hidden rounded-2xl border border-border bg-surface-muted dark:border-indigo-50/10 dark:bg-zinc-900/80 sm:my-10"
 						>
 							<div class="grid min-h-56 place-items-center p-6 text-center sm:p-8 lg:p-10">
 								<div>
-									<p class="font-heming text-2xl text-zinc-900 dark:text-indigo-50">
+									<p class="font-heming text-2xl text-foreground dark:text-indigo-50">
 										Interface sketch
 									</p>
-									<p class="mt-2 max-w-md text-sm leading-6 text-zinc-600 dark:text-indigo-100/70">
+									<p class="mt-2 max-w-md text-sm leading-6 text-foreground dark:text-indigo-100/70">
 										Local placeholder for a future Markdown image: three status columns, one primary
 										action, and muted audit metadata.
 									</p>
 								</div>
 							</div>
 							<figcaption
-								class="border-t border-zinc-200 px-5 py-3 text-sm text-zinc-500 dark:border-indigo-50/10 dark:text-indigo-100/60"
+								class="border-t border-border px-5 py-3 text-sm text-muted dark:border-indigo-50/10 dark:text-indigo-100/60"
 							>
 								A styled placeholder keeps the lab self-contained without external images.
 							</figcaption>

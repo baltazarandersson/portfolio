@@ -21,7 +21,7 @@ const {
 
 <li class="group relative isolate flex h-full min-h-[300px] w-full overflow-hidden">
 	<Card
-		class="relative z-10 flex h-full w-full flex-col items-start justify-between border-b-2 border-zinc-300 px-12 py-16 transition-opacity duration-200 hover:border-zinc-300 group-focus-within:opacity-100 group-hover:opacity-100 dark:border-transparent dark:hover:border-zinc-700 lg:border-2 lg:opacity-0"
+		class="relative z-10 flex h-full w-full flex-col items-start justify-between border-b-2 border-border px-12 py-16 transition-opacity duration-200 hover:border-border group-focus-within:opacity-100 group-hover:opacity-100 dark:border-transparent dark:hover:border-zinc-700 lg:border-2 lg:opacity-0"
 	>
 		<div class="flex flex-col items-start gap-2">
 			<Heading
@@ -43,7 +43,7 @@ const {
 				<IconLink
 					href={repository}
 					ariaLabel={`${title} repository`}
-					class="h-6 w-6 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
+					class="h-6 w-6 sm:h-10 sm:w-10 sm:bg-surface-muted sm:p-2 sm:text-foreground"
 				>
 					<GitHubIcon client:idle />
 				</IconLink>
@@ -52,7 +52,7 @@ const {
 						<IconLink
 							href={deploy}
 							ariaLabel={`${title} live demo`}
-							class="h-6 w-6 sm:h-10 sm:w-10 sm:bg-zinc-300 sm:p-2 sm:text-zinc-800"
+							class="h-6 w-6 sm:h-10 sm:w-10 sm:bg-surface-muted sm:p-2 sm:text-foreground"
 						>
 							<ExternalLinkIcon />
 						</IconLink>

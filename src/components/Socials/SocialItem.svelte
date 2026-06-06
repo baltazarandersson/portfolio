@@ -37,7 +37,7 @@
 		aria-label={linkAriaLabel}
 		target="_blank"
 		rel="noopener noreferrer"
-		class={`flex items-start justify-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-200 dark:focus-visible:ring-orange-400 dark:focus-visible:ring-offset-zinc-900 ${SIZES[size]}`}
+		class={`flex items-start justify-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface dark:focus-visible:ring-orange-400 dark:focus-visible:ring-offset-zinc-900 ${SIZES[size]}`}
 		><slot /></a
 	>
 </li>

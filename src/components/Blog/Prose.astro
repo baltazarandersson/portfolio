@@ -14,7 +14,7 @@ const Component = as
 
 <style is:global>
 	.blog-prose {
-		color: rgb(63 63 70);
+		color: rgb(var(--color-text));
 		font-size: 1rem;
 		line-height: 1.85;
 	}
@@ -34,7 +34,7 @@ const Component = as
 	}
 
 	.blog-prose :where(h2, h3, h4, h5, h6) {
-		color: rgb(24 24 27);
+		color: rgb(var(--color-text));
 		font-family: 'Heming Variable', ui-monospace, monospace;
 		font-weight: 700;
 		letter-spacing: 0.08em;
@@ -118,7 +118,7 @@ const Component = as
 
 	.blog-prose blockquote {
 		border-inline-start: 3px solid rgb(var(--color-primary) / 0.75);
-		color: rgb(82 82 91);
+		color: rgb(var(--color-text-muted));
 		font-size: 1.05rem;
 		font-style: italic;
 		padding: 0.35rem 0 0.35rem 1.25rem;
@@ -135,10 +135,10 @@ const Component = as
 	}
 
 	.blog-prose :not(pre) > code {
-		background: rgb(228 228 231 / 0.75);
-		border: 1px solid rgb(212 212 216);
+		background: rgb(var(--color-surface-muted) / 0.75);
+		border: 1px solid rgb(var(--color-border));
 		border-radius: 0.3rem;
-		color: rgb(67 56 202);
+		color: rgb(var(--color-primary));
 		font-size: 0.9em;
 		padding: 0.12em 0.35em;
 	}
@@ -174,16 +174,29 @@ const Component = as
 	}
 
 	.blog-prose img {
-		border-radius: 0.75rem;
+		border: 1px solid rgb(var(--color-border));
+		border-radius: 0.85rem;
+		box-shadow: 0 10px 30px rgb(0 0 0 / 0.12);
+		display: block;
 		max-width: 100%;
+	}
+
+	.dark .blog-prose img {
+		border-color: rgb(63 63 70);
+		box-shadow: 0 10px 30px rgb(0 0 0 / 0.45);
 	}
 
 	.blog-prose figure {
+		margin-inline: 0;
 		max-width: 100%;
 	}
 
+	.blog-prose figure img {
+		width: 100%;
+	}
+
 	.blog-prose figcaption {
-		color: rgb(113 113 122);
+		color: rgb(var(--color-text-muted));
 		font-size: 0.875rem;
 		line-height: 1.5;
 		margin-block-start: 0.65rem;
@@ -196,7 +209,7 @@ const Component = as
 
 	.blog-prose hr {
 		border: 0;
-		border-top: 1px solid rgb(212 212 216);
+		border-top: 1px solid rgb(var(--color-border));
 		margin-block: 2.5rem;
 	}
 
@@ -220,7 +233,7 @@ const Component = as
 
 	.blog-prose th,
 	.blog-prose td {
-		border: 1px solid rgb(212 212 216);
+		border: 1px solid rgb(var(--color-border));
 		padding: 0.65rem 0.85rem;
 		text-align: left;
 		vertical-align: top;
@@ -232,7 +245,7 @@ const Component = as
 	}
 
 	.blog-prose th {
-		background: rgb(228 228 231 / 0.75);
+		background: rgb(var(--color-surface-muted) / 0.75);
 		font-family: 'Heming Variable', ui-monospace, monospace;
 		font-weight: 700;
 	}

@@ -35,22 +35,23 @@ const {
 } = Astro.props
 
 const hasBackSlot = Astro.slots.has('back')
+const hasActionsSlot = Astro.slots.has('actions')
 ---
 
-<header class:list={['py-10 sm:py-14 lg:py-16', className]}>
-	<div class="border-b border-zinc-300 pb-8 dark:border-zinc-800 sm:pb-10 lg:pb-12">
+<header class:list={[className]}>
+	<div class="border-b border-border pb-8 dark:border-zinc-800 sm:pb-10 lg:pb-12">
 		{
-			(backHref || hasBackSlot) && (
-				<div class="mb-8 font-heming text-sm font-bold uppercase tracking-[0.18em] sm:mb-10">
-					{backHref && (
-						<ActionLink
-							href={backHref}
-							class="text-zinc-500 transition hover:text-primary dark:text-zinc-400"
-						>
-							{backLabel}
-						</ActionLink>
-					)}
-					<slot name="back" />
+			(backHref || hasBackSlot || hasActionsSlot) && (
+				<div class="mb-6 flex items-center justify-between gap-4 font-heming text-sm font-bold uppercase tracking-[0.18em] text-muted dark:text-zinc-400 sm:mb-8">
+					<div>
+						{backHref && (
+							<ActionLink href={backHref} data-article-back class="transition hover:text-primary">
+								{backLabel}
+							</ActionLink>
+						)}
+						<slot name="back" />
+					</div>
+					<slot name="actions" />
 				</div>
 			)
 		}
@@ -78,7 +79,7 @@ const hasBackSlot = Astro.slots.has('back')
 			description && (
 				<Text
 					variant="lead"
-					class="mt-5 max-w-2xl leading-8 text-zinc-600 dark:text-zinc-300 sm:mt-6"
+					class="mt-5 max-w-2xl leading-8 text-foreground dark:text-zinc-300 sm:mt-6"
 				>
 					{description}
 				</Text>

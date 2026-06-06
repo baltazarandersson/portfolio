@@ -1,6 +1,6 @@
 import type { ThemeType } from 'types/index'
 
-export const SECTIONS = ['presentation', 'experience', 'projects', 'contact']
+export const SECTIONS = ['presentation', 'experience', 'projects', 'contact', 'blog']
 
 export const DEFAULT_LANGUAGE = 'en-EN'
 
@@ -11,3 +11,5 @@ export const HEADER_HEIGHT = 80
 export const MOBILE_WIDTH = 1024
 
 export const DEFAULT_THEME: ThemeType = 'dark'
+
+export const HEADER_TITLE = 'Portfolio'

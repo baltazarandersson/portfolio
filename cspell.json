@@ -10,6 +10,8 @@
 		"baltazarander",
 		"baltazarandersson",
 		"Codespaces",
+		"disenando",
+		"estado",
 		"evenodd",
 		"frontmatter",
 		"hamburguer",
@@ -20,6 +22,7 @@
 		"linejoin",
 		"minmax",
 		"miterlimit",
+		"nadie",
 		"noreferrer",
 		"Platzi",
 		"Preact",
@@ -28,8 +31,15 @@
 		"tailwindcss",
 		"tsconfigs",
 		"Vercel",
+		"Volver",
 		"webwright",
 		"xlink"
 	],
-	"ignorePaths": ["node_modules/**", "src/mocks/**", "dist/**", "webwright/**"]
+	"ignorePaths": [
+		"node_modules/**",
+		"src/mocks/**",
+		"dist/**",
+		"webwright/**",
+		"src/content/blog/disenando-el-estado-de-handoff-que-nadie-nota.md"
+	]
 }

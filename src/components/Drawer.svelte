@@ -37,7 +37,7 @@
 
 {#if isDrawerOpenVal}
 	<div
-		class={`p-layout fixed bottom-0 left-0 right-0 z-40 flex flex-col justify-between bg-zinc-100 py-10 dark:bg-zinc-900`}
+		class={`p-layout fixed bottom-0 left-0 right-0 z-40 flex flex-col justify-between bg-surface py-10 dark:bg-zinc-900`}
 		style={`top: ${HEADER_HEIGHT}px;`}
 		transition:slideDrawer={{ x: 500, duration: 300 }}
 	>

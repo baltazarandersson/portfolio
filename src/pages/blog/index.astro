@@ -6,62 +6,96 @@ import Container from '@components/Container.astro'
 import Heading from '@components/Heading.astro'
 import Text from '@components/Text.astro'
 import PostCard from '@components/Blog/PostCard.astro'
+import TagList from '@components/Blog/TagList.astro'
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+const preferredLanguage = 'en'
+const getSlug = (id: string) => id.replace(/\.md$/, '')
+
+const publishedPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 	(a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf()
 )
 
-const getSlug = (id: string) => id.replace(/\.md$/, '')
+const posts = publishedPosts.filter((post, _index, allPosts) => {
+	const { translationKey } = post.data
+
+	if (!translationKey) return true
+
+	const translatedPosts = allPosts.filter(
+		(translatedPost) => translatedPost.data.translationKey === translationKey
+	)
+	const preferredPost =
+		translatedPosts.find((translatedPost) => translatedPost.data.language === preferredLanguage) ??
+		translatedPosts[0]
+
+	return post.id === preferredPost.id
+})
+
+const postCount = posts.length
+const topics = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b) =>
+	a.localeCompare(b)
+)
 ---
 
 <Layout title="Blog | Baltazar Andersson">
-	<Container
-		as="main"
-		variant="article"
-		class="relative space-y-12 py-24 sm:space-y-16 sm:py-28 lg:py-32"
-	>
-		<section class="space-y-3">
-			<Text
-				as="p"
-				variant="caption"
-				class="font-heming font-extrabold uppercase tracking-[0.24em] text-primary"
-			>
-				Blog
-			</Text>
-			<Heading as="h1" variant="section" class="text-start text-zinc-900 dark:text-indigo-50">
-				Writing
-			</Heading>
-			<Text variant="lead" class="max-w-2xl leading-8 text-zinc-600 dark:text-zinc-300">
-				Notes and articles will live here once published.
-			</Text>
-		</section>
-
-		<section aria-label="Blog posts">
-			{
-				posts.length > 0 ? (
-					<div class="grid gap-6 sm:gap-8">
-						{posts.map((post, index) => (
-							<PostCard
-								title={post.data.title}
-								description={post.data.description}
-								href={`/blog/${getSlug(post.id)}/`}
-								publishedAt={post.data.publishedAt}
-								updatedAt={post.data.updatedAt}
-								tags={post.data.tags}
-								featured={index === 0}
-							/>
-						))}
-					</div>
-				) : (
-					<Card
-						as="section"
-						variant="plain"
-						class="rounded-2xl border border-dashed border-zinc-300 p-6 text-zinc-600 backdrop-blur-md dark:border-indigo-50/20 dark:text-indigo-100/70"
+	<Container as="main" variant="section" class="relative py-24 sm:py-28 lg:py-32">
+		<div class="grid gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16">
+			<aside class="h-max space-y-6 lg:sticky lg:top-28">
+				<div class="space-y-3">
+					<Text
+						as="p"
+						variant="caption"
+						class="font-heming font-extrabold uppercase tracking-[0.24em] text-primary"
 					>
-						No published posts yet.
-					</Card>
-				)
-			}
-		</section>
+						Blog
+					</Text>
+					<Heading as="h1" variant="section" class="text-start text-foreground dark:text-indigo-50">
+						Writing
+					</Heading>
+					<Text variant="body" class="leading-7 text-muted dark:text-zinc-400">
+						Notes on building useful interfaces, plus release notes for this site.
+					</Text>
+				</div>
+
+				{
+					postCount > 0 && (
+						<div class="space-y-4 border-t border-border pt-6 dark:border-zinc-800">
+							<p class="font-heming text-sm font-bold uppercase tracking-[0.18em] text-muted dark:text-zinc-400">
+								{postCount} {postCount === 1 ? 'article' : 'articles'}
+							</p>
+							{topics.length > 0 && <TagList tags={topics} ariaLabel="Topics" />}
+						</div>
+					)
+				}
+			</aside>
+
+			<section aria-label="Blog posts">
+				{
+					postCount > 0 ? (
+						<div class="grid gap-6 sm:gap-8">
+							{posts.map((post, index) => (
+								<PostCard
+									title={post.data.title}
+									description={post.data.description}
+									href={`/blog/${getSlug(post.id)}/`}
+									publishedAt={post.data.publishedAt}
+									updatedAt={post.data.updatedAt}
+									readingTime={post.data.readingTime}
+									tags={post.data.tags}
+									featured={index === 0}
+								/>
+							))}
+						</div>
+					) : (
+						<Card
+							as="section"
+							variant="plain"
+							class="rounded-2xl border border-dashed border-border p-6 text-foreground backdrop-blur-md dark:border-indigo-50/20 dark:text-indigo-100/70"
+						>
+							No published posts yet.
+						</Card>
+					)
+				}
+			</section>
+		</div>
 	</Container>
 </Layout>

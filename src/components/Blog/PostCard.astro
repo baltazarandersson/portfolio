@@ -45,7 +45,7 @@ const textVariant = featured ? 'lead' : compact ? 'small' : 'body'
 	as="article"
 	variant="plain"
 	class:list={[
-		'group rounded-2xl border border-zinc-300 bg-zinc-200/55 backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-zinc-200/80 motion-reduce:transition-none dark:border-zinc-800 dark:bg-zinc-800/50 dark:hover:border-primary/50 dark:hover:bg-zinc-800/80',
+		'group relative isolate rounded-2xl border border-border bg-surface-muted/55 backdrop-blur-md transition duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface-muted/80 motion-reduce:transition-none dark:border-zinc-800 dark:bg-zinc-800/50 dark:hover:border-primary/50 dark:hover:bg-zinc-800/80',
 		compact ? 'p-5 sm:p-6' : 'p-6 sm:p-7',
 		featured ? 'lg:p-10' : '',
 		className
@@ -70,21 +70,23 @@ const textVariant = featured ? 'lead' : compact ? 'small' : 'body'
 			<Heading as="h2" variant={titleVariant} class="text-start leading-tight tracking-wider">
 				<ActionLink
 					href={href}
-					class="underline decoration-transparent underline-offset-4 transition group-hover:text-primary group-hover:decoration-primary/60"
+					class="underline decoration-transparent underline-offset-4 transition after:absolute after:inset-0 after:z-0 after:content-[''] group-hover:text-primary group-hover:decoration-primary/60"
 				>
 					{title}
 				</ActionLink>
 			</Heading>
-			<Text variant={textVariant} class="leading-7 text-zinc-600 dark:text-zinc-300">
+			<Text variant={textVariant} class="leading-7 text-foreground dark:text-zinc-300">
 				{description}
 			</Text>
 		</div>
 		<div class="mt-auto flex flex-col gap-5 pt-1 sm:gap-6 sm:pt-2">
-			<TagList tags={tags} />
+			<TagList tags={tags} class="relative z-10" />
 			<ActionLink
 				href={href}
 				aria-label={`Read ${title}`}
-				class="w-fit font-heming text-sm font-bold uppercase tracking-[0.18em] text-primary underline decoration-primary/40 underline-offset-4 transition hover:decoration-primary"
+				tabindex="-1"
+				aria-hidden="true"
+				class="relative z-10 w-fit font-heming text-sm font-bold uppercase tracking-[0.18em] text-primary underline decoration-primary/40 underline-offset-4 transition group-hover:decoration-primary"
 			>
 				Read article
 			</ActionLink>

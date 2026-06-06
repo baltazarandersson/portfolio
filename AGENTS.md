@@ -9,6 +9,7 @@ This file is the operating guide for agents working in this repository. Keep it 
 - Pages live in `src/pages`.
 - Local design-system mock routes live in `src/pages/design-system` and should stay unlinked from production navigation unless explicitly promoted.
 - Blog content uses Astro Content Collections in `src/content/blog` with schema in `src/content.config.ts`.
+- Blog translations use separate Markdown entries with matching `translationKey` and `language: en`/`language: es`; the blog index should show one entry per translation group.
 - Shared UI lives in `src/components`.
 - Blog-specific UI primitives live in `src/components/Blog` and should remain static Astro components unless interactivity is explicitly needed.
 - Landing data currently lives in `src/mocks` and is accessed through thin services in `src/services`.

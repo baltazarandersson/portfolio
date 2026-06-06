@@ -1,15 +1,17 @@
 ---
 import Text from '@components/Text.astro'
-import { SECTIONS, HEADER_HEIGHT } from '@constants/index'
+import { SECTIONS, HEADER_HEIGHT, HEADER_TITLE } from '@constants/index'
 import NavBar from '@components/Header/NavBar.svelte'
 import ThemeSwitch from '@components/ThemeSwitch.svelte'
 import Hamburguer from './Hamburguer.svelte'
 import Drawer from '@components/Drawer.svelte'
 import NavSection from '@components/NavSection.svelte'
+import BlogTitleSwap from './BlogTitleSwap.svelte'
 
 const [presentationSection, ...otherSections] = SECTIONS
 
 const height = `${HEADER_HEIGHT}px`
+const isBlogArticle = Astro.url.pathname.startsWith('/blog/') && Astro.url.pathname !== '/blog/'
 ---
 
 <script>
@@ -21,10 +23,16 @@ const height = `${HEADER_HEIGHT}px`
 	homeNavEl?.addEventListener('click', closeDrawer)
 </script>
 <header
-	class="fixed z-50 flex w-full items-center justify-between border-b-2 border-zinc-200 bg-zinc-200 bg-opacity-80 font-heming backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/80 dark:bg-opacity-40"
+	class="fixed z-50 flex w-full items-center justify-between border-b-2 border-border bg-surface-muted bg-opacity-80 font-heming backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-900/80 dark:bg-opacity-40"
 >
 	<div class="p-layout relative flex h-full w-full items-center justify-between">
-		<NavSection section={presentationSection} label="Baltazar Andersson" client:idle />
+		{
+			isBlogArticle ? (
+				<BlogTitleSwap client:idle />
+			) : (
+				<NavSection section={presentationSection} label={HEADER_TITLE} client:idle />
+			)
+		}
 
 		<nav class="hidden gap-4 md:flex lg:gap-8">
 			<Text as="span" variant="p3">{`<`}</Text>

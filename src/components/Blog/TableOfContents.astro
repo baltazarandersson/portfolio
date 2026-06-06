@@ -22,14 +22,14 @@ const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.
 			aria-label={ariaLabel}
 			data-blog-toc
 			class:list={[
-				'rounded-2xl border border-zinc-200 bg-white/60 p-5 backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40',
+				'rounded-2xl border border-border bg-surface-elevated/60 p-5 backdrop-blur-md dark:border-indigo-50/10 dark:bg-zinc-950/40',
 				className
 			]}
 		>
-			<p class="font-heming text-xs font-bold uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
+			<p class="font-heming text-xs font-bold uppercase tracking-[0.2em] text-muted dark:text-zinc-400">
 				On this page
 			</p>
-			<div class="relative mt-5 border-l border-zinc-200 dark:border-zinc-800">
+			<div class="relative mt-5 border-l border-border dark:border-zinc-800">
 				<span
 					data-toc-indicator
 					aria-hidden="true"
@@ -42,7 +42,7 @@ const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.
 							<ActionLink
 								href={`#${item.id}`}
 								data-toc-link={item.id}
-								class="block text-sm leading-6 text-zinc-600 transition hover:text-primary dark:text-zinc-300"
+								class="block text-sm leading-6 text-foreground transition hover:text-primary dark:text-zinc-300"
 							>
 								{item.label}
 							</ActionLink>
@@ -58,11 +58,14 @@ const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.
 	import { HEADER_HEIGHT } from '@constants/index'
 
 	type TocTarget = { link: HTMLAnchorElement; heading: HTMLElement }
+	type Cleanup = () => void
 
-	function initBlogToc(nav: HTMLElement) {
+	let cleanupTablesOfContents: Cleanup | null = null
+
+	function initBlogToc(nav: HTMLElement): Cleanup | null {
 		const links = Array.from(nav.querySelectorAll<HTMLAnchorElement>('[data-toc-link]'))
 		const indicator = nav.querySelector<HTMLElement>('[data-toc-indicator]')
-		if (links.length === 0 || !indicator) return
+		if (links.length === 0 || !indicator) return null
 
 		const targets = links
 			.map((link) => {
@@ -72,9 +75,11 @@ const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.
 			})
 			.filter((target): target is TocTarget => target !== null)
 
-		if (targets.length === 0) return
+		if (targets.length === 0) return null
 
 		let activeLink: HTMLAnchorElement | null = null
+		let frameId = 0
+		let disposed = false
 
 		// The indicator is absolutely positioned inside the rail (its offset
 		// parent), so translate relative to the rail, not the outer nav.
@@ -88,17 +93,22 @@ const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.
 			indicator!.style.opacity = '1'
 		}
 
-		function setActive(link: HTMLAnchorElement) {
-			if (link === activeLink) return
+		function setActive(link: HTMLAnchorElement, force = false) {
+			const changed = link !== activeLink
+			if (!changed && !force) return
 			activeLink = link
-			for (const target of targets) {
-				const isActive = target.link === link
-				target.link.classList.toggle('text-primary', isActive)
-				target.link.classList.toggle('text-zinc-600', !isActive)
-				target.link.classList.toggle('dark:text-zinc-300', !isActive)
-				if (isActive) target.link.setAttribute('aria-current', 'location')
-				else target.link.removeAttribute('aria-current')
+
+			if (changed) {
+				for (const target of targets) {
+					const isActive = target.link === link
+					target.link.classList.toggle('text-primary', isActive)
+					target.link.classList.toggle('text-foreground', !isActive)
+					target.link.classList.toggle('dark:text-zinc-300', !isActive)
+					if (isActive) target.link.setAttribute('aria-current', 'location')
+					else target.link.removeAttribute('aria-current')
+				}
 			}
+
 			moveIndicator(link)
 		}
 
@@ -120,22 +130,56 @@ const { items, ariaLabel = 'Table of contents', class: className = '' } = Astro.
 			return active
 		}
 
+		function refreshActive(force = false) {
+			if (disposed) return
+			setActive(resolveActiveLink(), force)
+		}
+
 		let ticking = false
 		function onScroll() {
-			if (ticking) return
+			if (ticking || disposed) return
 			ticking = true
-			requestAnimationFrame(() => {
-				setActive(resolveActiveLink())
+			frameId = requestAnimationFrame(() => {
+				refreshActive()
 				ticking = false
 			})
 		}
 
+		function onResize() {
+			refreshActive(true)
+		}
+
 		window.addEventListener('scroll', onScroll, { passive: true })
-		window.addEventListener('resize', () => {
-			if (activeLink) moveIndicator(activeLink)
-		})
-		onScroll()
+		window.addEventListener('resize', onResize)
+		window.addEventListener('hashchange', onScroll)
+
+		refreshActive(true)
+		frameId = requestAnimationFrame(() => refreshActive(true))
+
+		return () => {
+			disposed = true
+			window.removeEventListener('scroll', onScroll)
+			window.removeEventListener('resize', onResize)
+			window.removeEventListener('hashchange', onScroll)
+			if (frameId) cancelAnimationFrame(frameId)
+		}
 	}
 
-	document.querySelectorAll<HTMLElement>('[data-blog-toc]').forEach(initBlogToc)
+	function initTablesOfContents() {
+		cleanupTablesOfContents?.()
+		const cleanups = Array.from(document.querySelectorAll<HTMLElement>('[data-blog-toc]'))
+			.map(initBlogToc)
+			.filter((cleanup): cleanup is Cleanup => cleanup !== null)
+
+		cleanupTablesOfContents = () => cleanups.forEach((cleanup) => cleanup())
+	}
+
+	function cleanupBeforeSwap() {
+		cleanupTablesOfContents?.()
+		cleanupTablesOfContents = null
+	}
+
+	initTablesOfContents()
+	document.addEventListener('astro:page-load', initTablesOfContents)
+	document.addEventListener('astro:before-swap', cleanupBeforeSwap)
 </script>

@@ -6,6 +6,7 @@ import Socials from '@components/Socials/index.svelte'
 import FileDownloadIcon from '@components/Icons/FileDownloadIcon.svelte'
 import Text from '@components/Text.astro'
 import ActionLink from '@components/ActionLink.astro'
+import Card from '@components/Card.astro'
 
 interface Props {
 	id?: SectionType
@@ -37,5 +38,24 @@ const { id = '' } = Astro.props
 				<Text as="span" variant="p2">Download my CV</Text>
 			</ActionLink>
 		</div>
+
+		<Card variant="plain" class="w-full lg:w-fit">
+			<div
+				class="flex flex-col gap-4 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:text-left"
+			>
+				<div>
+					<Heading as="h3" variant="h3">Want to read more?</Heading>
+					<Text as="p" variant="p2" class="text-muted dark:text-zinc-400">
+						Visit the blog for technical articles, tutorials, and development thoughts.
+					</Text>
+				</div>
+				<ActionLink
+					href="/blog/"
+					class="flex items-center justify-center gap-2 rounded-lg bg-orange-500 px-6 py-3 font-medium text-zinc-50 transition-colors hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 focus-visible:ring-offset-2 focus-visible:ring-offset-surface dark:focus-visible:ring-offset-zinc-900"
+				>
+					<Text as="span" variant="p2">Go to blog</Text>
+				</ActionLink>
+			</div>
+		</Card>
 	</div>
 </Section>
