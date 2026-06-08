@@ -10,10 +10,10 @@ type Props = {
 } & Record<string, unknown>
 
 const variantClasses: Record<SectionVariant, string> = {
-	landing: 'min-h-screen w-full py-20',
-	content: 'w-full py-16 md:py-24',
-	compact: 'w-full py-10 md:py-16',
-	plain: 'w-full'
+	landing: 'min-h-screen w-full min-w-0 py-20',
+	content: 'w-full min-w-0 py-16 md:py-24',
+	compact: 'w-full min-w-0 py-10 md:py-16',
+	plain: 'w-full min-w-0'
 }
 
 const { variant = 'landing', class: className = '', id = '', ...attrs } = Astro.props as Props

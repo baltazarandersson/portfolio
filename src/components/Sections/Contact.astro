@@ -19,16 +19,12 @@ const t = useTranslations(lang)
 const blogHref = `${lang === 'es' ? '/es' : ''}/blog/`
 ---
 
-<Section class="p-layout flex items-start" id={id}>
-	<div class="mt-20 flex w-full flex-col gap-20">
+<Section class="p-layout flex flex-col items-start" id={id}>
+	<div class="mt-8 flex w-full flex-1 flex-col gap-8 md:mt-10 md:gap-10">
 		<Heading as="h2" variant="section">{t('contact.title')}</Heading>
 
 		<div class="flex flex-col justify-center gap-12 font-heming lg:w-fit">
-			<Socials
-				client:idle
-				class="grid grid-flow-row grid-cols-1 gap-4 lg:w-fit lg:grid-cols-2 lg:gap-8"
-				labels
-			/>
+			<Socials client:idle class="grid grid-flow-row grid-cols-2 gap-4 lg:w-fit lg:gap-8" labels />
 
 			<ActionLink
 				href="/Baltazar%20Andersson%20CV.pdf"
@@ -43,7 +39,7 @@ const blogHref = `${lang === 'es' ? '/es' : ''}/blog/`
 			</ActionLink>
 		</div>
 
-		<Card variant="plain" class="w-full lg:w-fit">
+		<Card variant="plain" class="mt-auto w-full lg:w-fit">
 			<div
 				class="flex flex-col gap-4 text-center lg:flex-row lg:items-center lg:justify-between lg:gap-8 lg:text-left"
 			>

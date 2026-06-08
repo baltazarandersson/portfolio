@@ -33,3 +33,7 @@ coverage/
 
 # local webwright audit/evidence scaffolding
 webwright/
+
+# Skills and writing experiments
+.agents/
+.codex/

@@ -16,8 +16,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: portfolioV2Thumb,
 		title: 'Portfolio v2',
 		description: {
-			en: 'This very site, rebuilt from scratch. It grew into a small design system with its own blog and a warm light theme, made with Astro and Svelte.',
-			es: 'Este mismo sitio, reconstruido desde cero. Creció hasta ser un pequeño design system con su propio blog y un tema claro cálido, hecho con Astro y Svelte.'
+			en: 'This very site, rebuilt from scratch. It ended up becoming a small design system with its own blog and a warm light theme, built with Astro and Svelte.',
+			es: 'Este mismo sitio, reconstruido desde cero. Terminó convirtiéndose en un pequeño sistema de diseño con blog propio y un tema claro cálido, hecho con Astro y Svelte.'
 		},
 		tags: ['astro', 'svelte', 'tailwind', 'typescript'],
 		repository: 'https://github.com/baltazarandersson/portfolio',
@@ -38,8 +38,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: chattioThumb,
 		title: 'Chattio',
 		description: {
-			en: 'Messaging app I created to learn about real time requests, user authentication and cloud storage.',
-			es: 'App de mensajería que armé para aprender sobre pedidos en tiempo real, autenticación de usuarios y almacenamiento en la nube.'
+			en: 'Messaging app I built to learn about real-time interaction, user authentication, and cloud storage.',
+			es: 'App de mensajería que hice para aprender sobre interacción en tiempo real, autenticación de usuarios y almacenamiento en la nube.'
 		},
 		tags: ['react', 'firebase', 'tailwind'],
 		repository: 'https://github.com/baltazarandersson/chattio-app',
@@ -49,8 +49,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: countryQuizThumb,
 		title: 'Country Quiz',
 		description: {
-			en: 'Quiz game I made to practice with Redux Toolkit & Redux thunks, try to score your best!',
-			es: 'Juego de preguntas que hice para practicar Redux Toolkit y thunks, ¡tratá de sacar tu mejor puntaje!'
+			en: 'Quiz game I built to practice Redux Toolkit and thunks.',
+			es: 'Juego de preguntas que hice para practicar Redux Toolkit y thunks.'
 		},
 		tags: ['react', 'redux', 'tailwind'],
 		repository: 'https://github.com/baltazarandersson/country-quiz',
@@ -60,8 +60,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: giffiThumb,
 		title: 'GIFFI',
 		description: {
-			en: 'GIF search engine made with React. I learned about Routers, infinite scrolling, React context and more.',
-			es: 'Buscador de GIFs hecho con React. Aprendí sobre routers, scroll infinito, React context y más.'
+			en: 'GIF search engine built with React. It helped me learn about routing, infinite scrolling, context, and other library patterns.',
+			es: 'Buscador de GIFs hecho con React. Me sirvió para aprender sobre rutas, scroll infinito, contexto y otros patrones de la librería.'
 		},
 		tags: ['react', 'firebase'],
 		repository: 'https://github.com/baltazarandersson/react-giffi-app',
@@ -71,8 +71,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: avostoreThumb,
 		title: 'Avostore',
 		description: {
-			en: 'Store in where I learned about Next.js, React context, and all about the Typescript world.',
-			es: 'Tienda donde aprendí sobre Next.js, React context y todo el mundo de TypeScript.'
+			en: 'Store app where I learned about Next.js, React Context, and the TypeScript ecosystem.',
+			es: 'Tienda donde aprendí sobre Next.js, React Context y el ecosistema de TypeScript.'
 		},
 		tags: ['next', 'react', 'tailwind', 'typescript'],
 		repository: 'https://github.com/baltazarandersson/avostore',
@@ -82,8 +82,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: glacssifyThumb,
 		title: 'Glacssify',
 		description: {
-			en: "Tiny project I made to practice the styled-components library. You can create your own 'glass' effect and copy the css.",
-			es: "Proyecto chiquito que hice para practicar styled-components. Podés crear tu propio efecto 'glass' y copiar el CSS."
+			en: 'Small project I built to practice styled-components and play with glassmorphism effects. It lets you generate the style and copy the CSS.',
+			es: 'Proyecto chico que hice para practicar styled-components y jugar con efectos glassmorphism. Permite generar el estilo y copiar el CSS.'
 		},
 		tags: ['react', 'styled_components'],
 		repository: 'https://github.com/baltazarandersson/react-glacssify',
@@ -104,8 +104,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: forecastThumb,
 		title: 'BOLT',
 		description: {
-			en: 'Forecast app to get the weather from almost everywhere in the world in where I learned about the React basics.',
-			es: 'App del clima para ver el pronóstico de casi cualquier lugar del mundo, donde aprendí las bases de React.'
+			en: 'Weather app to check the forecast from almost anywhere in the world. It was one of my first projects for learning the basics of React.',
+			es: 'App del clima para consultar el pronóstico de casi cualquier lugar del mundo. Fue uno de mis primeros proyectos para aprender las bases de React.'
 		},
 		tags: ['react'],
 		repository: 'https://github.com/baltazarandersson/react-weather-forecast',
@@ -115,8 +115,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: lolprofileThumb,
 		title: 'LOL Profile',
 		description: {
-			en: 'Project made to apply my knowledge of asynchronism and DOM manipulation with the LoL API.',
-			es: 'Proyecto para aplicar lo que sé de asincronismo y manipulación del DOM con la API de LoL.'
+			en: 'Project built to apply async concepts and DOM manipulation using the League of Legends API.',
+			es: 'Proyecto para aplicar conceptos de asincronismo y manipulación del DOM usando la API de League of Legends.'
 		},
 		tags: ['javascript'],
 		repository: 'https://github.com/baltazarandersson/riot-league-profile',
@@ -126,8 +126,8 @@ const projects: ProjectWithKeysType[] = [
 		thumbnail: simonsaysThumb,
 		title: 'Simon says',
 		description: {
-			en: 'The classic simon says game made with vanilla javascript.',
-			es: 'El clásico juego Simon dice, hecho con JavaScript vanilla.'
+			en: 'The classic Simon Says game, built with plain JavaScript.',
+			es: 'El clásico Simon dice, hecho con JavaScript puro.'
 		},
 		tags: ['javascript'],
 		repository: 'https://github.com/baltazarandersson/Fundamentos-JS',

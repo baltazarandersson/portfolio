@@ -80,10 +80,10 @@ const hreflangs: { hreflang: string; href: string }[] = [
 		<ClientRouter />
 	</head>
 	<body class="scroll-smooth bg-surface font-helvetica text-foreground">
-		<StarryBackground client:only />
+		<StarryBackground client:only transition:persist />
 		<Header alternates={alternates} />
 		<slot />
-		<BgBall client:only />
+		<BgBall client:only transition:persist />
 	</body>
 </html>
 <style is:global>

@@ -15,47 +15,112 @@ interface Props {
 }
 
 const {
-	job: { position, type, from, to, description, stack, logo, company }
+	job: { position, from, to, description, stack, stackGroups, logo, company }
 } = Astro.props
 
 const parsedToDate = to || Date.now()
 
-const technologies = await parseTags({ tags: stack })
-
 const lang = getLang(Astro.currentLocale)
 const t = useTranslations(lang)
+
+const stackSections = await Promise.all(
+	(stackGroups?.length ? stackGroups : [{ label: t('job.stack'), tags: stack ?? [] }]).map(
+		async (group) => ({
+			...group,
+			technologies: await parseTags({ tags: group.tags })
+		})
+	)
+)
+
+const formatJobDate = (timestamp: number) => {
+	const formattedDate = formatTimestamp({ timestamp, language: lang })
+
+	return formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1)
+}
 ---
 
 <Card
 	as="li"
 	variant="plain"
-	class="flex flex-col gap-8 rounded-sm border-2 border-border bg-surface-muted px-4 py-8 dark:border-zinc-700 dark:bg-zinc-800 sm:px-8"
+	class="group relative isolate overflow-hidden rounded-2xl border border-border bg-surface-muted/55 p-5 backdrop-blur-md transition duration-200 hover:border-primary/50 hover:bg-surface-muted/80 motion-reduce:transition-none dark:border-zinc-800 dark:bg-zinc-800/50 dark:hover:border-primary/50 dark:hover:bg-zinc-800/80 sm:p-6 lg:p-8"
 >
-	<div class="flex w-full flex-col items-center justify-between gap-4 md:flex-row">
-		<Image class="h-8" src={logo} alt={`${company}-logo`} />
-		<Text>{position} ~ {type}</Text>
-	</div>
+	<div class="flex h-full flex-col gap-5 sm:gap-6">
+		<div class="flex items-start gap-4 sm:gap-5">
+			<div class="flex shrink-0 self-stretch">
+				<div
+					class="grid h-full min-h-14 w-[7.5rem] place-items-center rounded-xl border border-zinc-900/10 bg-zinc-950 px-3 shadow-sm dark:border-indigo-50/10 dark:bg-zinc-950/35 sm:min-h-16 sm:w-[8.5rem] sm:px-5"
+				>
+					<Image
+						class="h-7 w-auto max-w-full object-contain sm:h-9"
+						src={logo}
+						alt={`${company}-logo`}
+					/>
+				</div>
+			</div>
 
-	<div class="flex flex-col items-center justify-start gap-x-4 sm:flex-row">
-		<Text variant="p2">
-			<time
-				>{formatTimestamp({ timestamp: from, language: lang })} ~ {
-					to ? formatTimestamp({ timestamp: to, language: lang }) : t('job.present')
-				}</time
-			>
-		</Text>
-		<Text variant="p4" class="text-muted dark:text-zinc-400">
-			({formatDuration(getMonthsBetweenDates(from, parsedToDate), lang)})
-		</Text>
-	</div>
-	<Text>
-		{description}
-	</Text>
-	<div class="flex items-center justify-center gap-8 sm:justify-start">
-		<Text as="span" variant="p4" class="hidden font-heming font-bold sm:inline"
-			>{t('job.stack')}</Text
-		>
+			<div class="flex flex-col items-start gap-0.5 sm:hidden">
+				<Text as="span" variant="p3" class="font-heming font-bold text-primary">
+					{company}
+				</Text>
+				<Text as="span" variant="p3" class="font-heming text-foreground">
+					{position}
+				</Text>
+				<Text as="span" variant="p5" class="font-heming text-muted">
+					{formatJobDate(from)} - {to ? formatJobDate(to) : t('job.present')}
+				</Text>
+				<Text as="span" variant="p5" class="font-heming font-bold text-foreground">
+					{formatDuration(getMonthsBetweenDates(from, parsedToDate), lang)}
+				</Text>
+			</div>
 
-		<TechnologiesList {technologies} />
+			<div class="hidden flex-col items-start gap-1.5 sm:flex">
+				<div class="flex flex-wrap items-center gap-x-2 gap-y-0.5">
+					<Text
+						as="span"
+						variant="p2"
+						class="font-heming text-xl font-bold text-primary md:text-2xl"
+					>
+						{company}
+					</Text>
+					<Text as="span" variant="p2" class="text-xl text-muted md:text-2xl"> — </Text>
+					<Text as="span" variant="p2" class="font-heming text-xl text-foreground md:text-2xl">
+						{position}
+					</Text>
+				</div>
+
+				<div class="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+					<Text as="span" variant="p4" class="font-heming text-muted">
+						{formatJobDate(from)} - {to ? formatJobDate(to) : t('job.present')}
+					</Text>
+					<Text as="span" variant="p4" class="text-muted">·</Text>
+					<Text as="span" variant="p4" class="font-heming font-bold text-foreground">
+						{formatDuration(getMonthsBetweenDates(from, parsedToDate), lang)}
+					</Text>
+				</div>
+			</div>
+		</div>
+
+		<Text class="max-w-3xl leading-6 text-foreground dark:text-zinc-300 sm:leading-8">
+			{description}
+		</Text>
+
+		<div class="mt-auto flex flex-col gap-4 pt-1 sm:gap-5 sm:pt-2">
+			<div class="grid gap-4">
+				{
+					stackSections.map(({ label, technologies }) => (
+						<div class="space-y-1 md:space-y-2.5">
+							<Text
+								as="p"
+								variant="caption"
+								class="font-heming text-[0.72rem] font-bold uppercase tracking-[0.18em] text-muted dark:text-zinc-400"
+							>
+								{label}
+							</Text>
+							<TechnologiesList technologies={technologies} showLabels />
+						</div>
+					))
+				}
+			</div>
+		</div>
 	</div>
 </Card>

@@ -1,6 +1,6 @@
 ---
-title: 'v2.0.0 — Un design system y un blog de verdad'
-description: 'El portfolio pasa de una sola página a un design system con tema propio, un blog en Markdown, un light theme cálido tipo sunset y navegación más fluida. Esto es todo lo que entró en la base v2.'
+title: 'La base v2: un sistema de diseño y un blog de verdad'
+description: 'El portfolio pasó de ser una sola página a una base más sólida: sistema de diseño propio, blog en Markdown, un tema claro cálido y una navegación mucho más fluida.'
 publishedAt: 2026-06-06
 readingTime: 4 min de lectura
 language: es
@@ -10,66 +10,61 @@ tags:
   - Changelog
   - Release
   - Design system
-heroImage: /images/og/changelog-v2.webp
+heroImage: /images/og/changelog-v2-es.webp
 ---
 
-Esta release cierra un ciclo largo de trabajo de base. Hasta ahora el sitio era
-una sola página animada; **v2.0.0** lo convierte en un pequeño design system con
-un blog de verdad por detrás. A partir de acá el proyecto sigue
+Esta versión cierra un ciclo largo de trabajo de base. Hasta ahora el sitio era
+una sola página animada; **v2.0.0** lo convierte en una base más sólida: un
+pequeño sistema de diseño, un blog de verdad y una estructura lista para crecer.
+A partir de acá el proyecto sigue
 [Versionado Semántico](https://semver.org/) y todo cambio relevante queda en el
 [changelog](https://keepachangelog.com/).
 
-Pensalo como la **base v2** — la plataforma sobre la que se construyen las
-próximas features.
+Piénsalo como la **base v2**: el punto desde el que empiezan las próximas
+mejoras.
 
 ## Añadido
 
-- **Una base de design system.** El color ahora sale de un único set de tokens
-  semánticos — `surface`, `foreground`, `muted`, `border`, `primary`, `accent` —
-  conectados vía Tailwind y variables CSS. Un cambio en un solo lugar re-tematiza
-  todo el sitio.
+- **Una base de sistema de diseño.** El color ahora sale de un único conjunto de
+  tokens semánticos — `surface`, `foreground`, `muted`, `border`, `primary`,
+  `accent` — conectados vía Tailwind y variables CSS. Un cambio en un solo lugar
+  redefine el tema de todo el sitio.
 - **Un blog de verdad en `/blog`.** Los posts son Markdown, renderizados por una
-  capa `Prose` dedicada, con una **tabla de contenidos con scroll-spy** y un
-  **switcher EN/ES** que solo aparece cuando existen ambas traducciones.
-- **View transitions.** Navegar entre páginas ahora se siente como una sola app
-  en vez de recargas completas.
-- **Un fondo más vivo.** En desktop, un glow que sigue al cursor convive con otro
+  capa `Prose` dedicada, con una **tabla de contenidos que acompaña la lectura**.
+  En esa primera versión, cuando existían ambas traducciones, cada post mostraba
+  además un **selector EN/ES propio**.
+- **Transiciones entre páginas.** Navegar ahora se siente más continuo y menos
+  como una secuencia de recargas.
+- **Un fondo más vivo.** En escritorio, un glow que sigue al cursor convive con
+  otro
   que flota de forma autónoma.
 
 <figure>
   <img
-    src="/images/blog/changelog-v2/home-dark.webp"
-    alt="Home en modo oscuro: las estrellas del fondo se curvan alrededor de los glows como una lente de cristal."
-    loading="lazy"
-  />
-  <figcaption>El fondo de estrellas ahora se dibuja en canvas — los glows curvan las estrellas cercanas como una lente.</figcaption>
-</figure>
-
-<figure>
-  <img
     src="/images/blog/changelog-v2/blog-index.webp"
-    alt="Índice del blog con un sidebar fijo a la izquierda y la lista de artículos a la derecha."
+    alt="Índice del blog con una columna fija a la izquierda y la lista de artículos a la derecha."
     loading="lazy"
   />
-  <figcaption>El nuevo índice del blog: sidebar fijo con intro, conteo de artículos y topics.</figcaption>
+  <figcaption>El nuevo índice del blog: una columna fija con la introducción, el conteo de artículos y los temas.</figcaption>
 </figure>
 
 <figure>
   <img
     src="/images/blog/changelog-v2/blog-post.webp"
-    alt="Un artículo del blog en modo oscuro: la card del artículo a la izquierda y una tabla de contenidos fija 'On this page' a la derecha."
+    alt="Un artículo del blog en modo oscuro, con la tabla de contenidos fija a la derecha."
     loading="lazy"
   />
-  <figcaption>Dentro de un post: tipografía prose, tabla de contenidos con scroll-spy, y los controles de EN/ES y compartir en el header.</figcaption>
+  <figcaption>Dentro de un post: tipografía pensada para lectura y una tabla de contenidos fija que acompaña el recorrido.</figcaption>
 </figure>
 
 ## Cambiado
 
-- **Un light theme cálido "sunset".** Se fue la paleta pálida. El modo claro ahora
-  es un espacio cálido inspirado en Gruvbox: fondos de arena profundos, texto
-  marrón oscuro y acentos naranja quemado. El modo oscuro queda intacto.
-- **Todo tematizado con tokens.** Cards, header, drawer, blog y prose ya no
-  hardcodean grises — leen de los tokens, así el theming se mantiene consistente.
+- **Un modo claro cálido, tipo "sunset".** Se fue la paleta pálida. El modo claro
+  ahora es un espacio cálido inspirado en Gruvbox: fondos de arena profundos,
+  texto marrón oscuro y acentos naranja quemado. El modo oscuro queda intacto.
+- **Todo tematizado con tokens.** Cards, encabezado, drawer, blog y estilos de
+  lectura ya no dependen de grises fijos: leen de los tokens, así el sistema se
+  mantiene consistente.
 
 <figure>
   <img
@@ -82,72 +77,97 @@ próximas features.
 
 ## Corregido
 
-- **El tema ya no salta al navegar.** Con las view transitions, el tema guardado se
-  reaplica en cada cambio de página, así que claro/oscuro se mantiene.
+- **El tema ya no salta al navegar.** Con las transiciones entre páginas, el tema
+  guardado se reaplica en cada cambio, así que claro/oscuro se mantiene.
 
 ## Accesibilidad
 
-- **Las cards del blog son 100% clickeables.** Con un patrón de stretched-link
-  accesible, toda la card es el target mientras los tags y el CTA siguen
-  funcionando aparte.
-- **Focus rings consistentes y contraste revisado.** Los estados de foco salen de
+- **Las cards del blog se pueden abrir enteras.** Con un patrón accesible de
+  enlace expandido, toda la card funciona como entrada principal mientras los
+  tags y el enlace visible siguen funcionando aparte.
+- **Estados de foco consistentes y contraste revisado.** Los estados de foco salen de
   los tokens, y el acento del modo claro se ajustó para cumplir WCAG AA en texto.
 
 ## Qué salió desde la v2.0
 
-La base v2 cumplió su trabajo: las features dejaron de pelear con los cimientos.
-Después vinieron dos releases chicas.
+La base v2 cumplió su trabajo: las mejoras dejaron de pelear con los cimientos.
+Después vinieron tres versiones más chicas.
 
 ### v2.1 — Compartir y SEO
 
-Ahora los posts tienen metadata de Open Graph y Twitter como corresponde, así que
-un link por fin se muestra con título, descripción e imagen en LinkedIn y X. Cada
-post puede definir su propia imagen para compartir, y un botón de compartir usa el
-share nativo en mobile con fallback a copiar el enlace en desktop. Los proyectos
-también se renovaron: una card para este mismo sitio, y en el teléfono el listado
-ahora destaca un proyecto a la vez — el que queda más cerca del centro de la
-pantalla.
+Ahora los posts tienen metadatos de Open Graph y Twitter como corresponde, así que
+al compartir un enlace por fin aparecen título, descripción e imagen en LinkedIn
+y X. Cada post puede definir su propia imagen para compartir, y el botón de
+compartir usa la API nativa en móvil y copia el enlace en escritorio cuando hace
+falta. Los proyectos también se renovaron: apareció una card para este mismo
+sitio y, en teléfono, el listado ahora destaca un proyecto a la vez, el que
+queda más cerca del centro de la pantalla.
 
 <figure data-layout="row">
   <div class="device-row">
     <img
       src="/images/blog/changelog-v2/projects-desktop.webp"
-      alt="Proyectos en desktop: al pasar el mouse por una card se revelan sus detalles sobre la captura."
+      alt="Proyectos en escritorio: al pasar el cursor por una card se revelan sus detalles sobre la captura."
       loading="lazy"
     />
     <img
       src="/images/blog/changelog-v2/projects-mobile.webp"
-      alt="Proyectos en mobile: solo la card más cercana al centro de la pantalla muestra sus detalles."
+      alt="Proyectos en móvil: solo la card más cercana al centro de la pantalla muestra sus detalles."
       loading="lazy"
     />
   </div>
-  <figcaption>Proyectos lado a lado: hover para revelar en desktop, spotlight de a uno en mobile.</figcaption>
+  <figcaption>Proyectos lado a lado: detalles al pasar el cursor en escritorio y foco de a una card en móvil.</figcaption>
 </figure>
 
 ### v2.2 — Bilingüe (EN/ES)
 
-Todo el sitio ahora habla inglés y español. El inglés vive en la raíz, el español
-bajo `/es/`, y un único selector en el header cambia el sitio entero — landing,
-blog y chrome — en vez del viejo toggle por post que solo aparecía cuando existía
-una traducción.
+Todo el sitio ahora vive en inglés y español. El inglés queda en la raíz, el
+español bajo `/es/`, y un único selector en el header cambia toda la experiencia:
+landing, blog y navegación. Reemplaza el viejo switch por post, que solo
+aparecía cuando existía una traducción.
 
 <figure data-layout="row">
   <div class="device-row">
     <img
-      src="/images/blog/changelog-v2/i18n-desktop.webp"
-      alt="La home en español en desktop, con el selector EN·ES en el header."
+      src="/images/blog/changelog-v2/contact-desktop.webp"
+      alt="Sección de contacto ya localizada en escritorio: enlaces a redes, correo y descarga de CV junto a un CTA al blog."
       loading="lazy"
     />
     <img
-      src="/images/blog/changelog-v2/i18n-mobile.webp"
-      alt="La home en español en mobile, con el selector de idioma al lado del switch de tema."
+      src="/images/blog/changelog-v2/contact-mobile.webp"
+      alt="La misma sección de contacto ya localizada en móvil, adaptada a pantallas pequeñas."
       loading="lazy"
     />
   </div>
-  <figcaption>Un único selector EN·ES global en el header, junto al switch de tema en todos los breakpoints.</figcaption>
+  <figcaption>La sección de contacto ya localizada, en escritorio y móvil, después del salto a un sitio bilingüe.</figcaption>
+</figure>
+
+### v2.3 — Experiencia profesional
+
+v2.3 le da un lugar propio a la experiencia profesional. Antes quedaba más
+diluida dentro de la landing; ahora aparece como una sección clara y fácil de
+recorrer, con empresa, rol, período, contexto del trabajo y tecnologías
+agrupadas por tipo. También ajusta mejor el mensaje del perfil: una base fuerte
+de frontend que hoy ya se abre hacia ingeniería de producto, entrega y
+workflows con agentes.
+
+<figure data-layout="row">
+  <div class="device-row">
+    <img
+      src="/images/blog/changelog-v2/experience-desktop.webp"
+      alt="Sección de experiencia en escritorio, modo oscuro: tarjeta de VAIRIX con tecnologías agrupadas."
+      loading="lazy"
+    />
+    <img
+      src="/images/blog/changelog-v2/experience-mobile.webp"
+      alt="Sección de experiencia en móvil, modo claro: misma información adaptada a pantalla angosta."
+      loading="lazy"
+    />
+  </div>
+  <figcaption>Experiencia profesional en escritorio (modo oscuro) y móvil (modo claro).</figcaption>
 </figure>
 
 ## Qué sigue
 
-Más posts escritos y seguir puliendo. De acá en más las versiones van a ser chicas
-y frecuentes.
+Más posts escritos y seguir puliendo. A partir de ahora las versiones van a ser
+chicas y frecuentes.

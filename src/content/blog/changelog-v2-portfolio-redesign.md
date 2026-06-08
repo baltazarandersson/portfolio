@@ -1,6 +1,6 @@
 ---
-title: 'v2.0.0 — A design system and a real blog'
-description: 'The portfolio grows from a single page into a themed design system with a Markdown blog, a warm sunset light theme, and smoother navigation. Here is everything that shipped in the v2 base.'
+title: 'The v2 base: a design system and a real blog'
+description: 'The portfolio grew from a single page into a sturdier base: its own design system, a Markdown blog, a warm light theme, and much smoother navigation.'
 publishedAt: 2026-06-06
 readingTime: 4 min read
 language: en
@@ -10,54 +10,48 @@ tags:
   - Changelog
   - Release
   - Design system
-heroImage: /images/og/changelog-v2.webp
+heroImage: /images/og/changelog-v2-en.webp
 ---
 
-This release closes a long cycle of foundational work. Until now the site was a
-single animated page; **v2.0.0** turns it into a small design system with a real
-blog behind it. From here on the project follows [Semantic Versioning](https://semver.org/)
-and every meaningful change lands in the [changelog](https://keepachangelog.com/).
+This version closes a long cycle of foundational work. Until now the site was a
+single animated page; **v2.0.0** turns it into a sturdier base: a small design
+system, a real blog, and a structure ready to grow. From here on the project
+follows [Semantic Versioning](https://semver.org/) and every meaningful change
+lands in the [changelog](https://keepachangelog.com/).
 
-Think of this as the **v2 base** — the platform the next features build on.
+Think of it as the **v2 base**: the point where the next improvements begin.
 
 ## Added
 
-- **A design system foundation.** Color now flows from a single set of semantic
+- **A design system foundation.** Color now comes from a single set of semantic
   tokens — `surface`, `foreground`, `muted`, `border`, `primary`, `accent` — wired
-  through Tailwind and CSS variables. One change in one place re-themes the whole site.
+  through Tailwind and CSS variables. One change in one place re-themes the whole
+  site.
 - **A real blog at `/blog`.** Posts are Markdown, rendered through a dedicated
-  `Prose` layer, with a **scroll-spy table of contents** and an **EN/ES language
-  switcher** that only appears when both translations exist.
-- **View transitions.** Navigating between pages now feels like a single app
-  instead of full reloads.
-- **A livelier background.** On desktop a cursor-following glow now coexists with
-  an autonomous floating one.
-
-<figure>
-  <img
-    src="/images/blog/changelog-v2/home-dark.webp"
-    alt="Home in dark mode: the background stars bend around the glows like a glass lens."
-    loading="lazy"
-  />
-  <figcaption>The starfield is now drawn on canvas — the glows bend the nearby stars like a lens.</figcaption>
-</figure>
+  `Prose` layer, with a **table of contents that follows the reading flow**. In
+  that first version, posts only showed a **per-post EN/ES switcher** when both
+  translations existed.
+- **Page transitions.** Navigating now feels more continuous and less like a
+  sequence of reloads.
+- **A livelier background.** On desktop, a glow that follows the cursor now sits
+  alongside another that floats on its own.
 
 <figure>
   <img
     src="/images/blog/changelog-v2/blog-index.webp"
-    alt="Blog index with a sticky sidebar on the left and the article list on the right."
+    alt="Blog index with a sticky column on the left and the article list on the right."
     loading="lazy"
   />
-  <figcaption>The new blog index: a sticky sidebar with the intro, article count, and topics.</figcaption>
+  <figcaption>The new blog index: a sticky column with the intro, article count, and topics.</figcaption>
 </figure>
 
 <figure>
   <img
     src="/images/blog/changelog-v2/blog-post.webp"
-    alt="A blog article in dark mode: the article card on the left and a sticky 'On this page' table of contents on the right."
+    alt="A blog article in dark mode, with a sticky table of contents on the right."
     loading="lazy"
   />
-  <figcaption>Inside a post: prose typography, a scroll-spy table of contents, and the EN/ES and share controls in the header.</figcaption>
+  <figcaption>Inside a post: reading-focused typography and a sticky table of contents that follows the article structure.</figcaption>
 </figure>
 
 ## Changed
@@ -65,8 +59,9 @@ Think of this as the **v2 base** — the platform the next features build on.
 - **A warm "sunset" light theme.** The pale palette is gone. Light mode is now a
   warm, Gruvbox-inspired space: deep sand backgrounds, dark-brown text, and
   burnt-orange accents. Dark mode is untouched.
-- **Everything themed through tokens.** Cards, header, drawer, blog, and prose no
-  longer hardcode greys — they read from the tokens, so theming stays consistent.
+- **Everything themed through tokens.** Cards, header, drawer, blog, and reading
+  styles no longer rely on hardcoded greys. They read from the tokens, so the
+  system stays consistent.
 
 <figure>
   <img
@@ -79,29 +74,30 @@ Think of this as the **v2 base** — the platform the next features build on.
 
 ## Fixed
 
-- **The theme no longer flips while navigating.** With view transitions the stored
-  theme is re-applied on every page swap, so light/dark stays put.
+- **The theme no longer flips while navigating.** With page transitions, the
+  stored theme is re-applied on every page change, so light/dark stays put.
 
 ## Accessibility
 
-- **Blog cards are fully clickable.** Using an accessible stretched-link pattern,
-  the whole card is the target while tags and the call-to-action remain independent.
-- **Consistent focus rings and checked contrast.** Focus states come from the
+- **Blog cards can be opened as a whole.** Using an accessible stretched-link
+  pattern, the whole card acts as the main entry point while the tags and visible
+  link still work independently.
+- **Consistent focus states and checked contrast.** Focus states come from the
   tokens, and the light-mode accent was tuned to meet WCAG AA for text.
 
 ## What shipped since v2.0
 
-The v2 base did its job — features stopped fighting the foundation. Two small
-releases followed.
+The v2 base did its job: improvements stopped fighting the foundation. Three
+smaller releases followed.
 
 ### v2.1 — Sharing & SEO
 
-Posts now carry proper Open Graph and Twitter metadata, so a link finally unfurls
-with a title, description, and image on LinkedIn and X. Each post can set its own
-share image, and an in-page share button uses the native share sheet on mobile
-with a copy-link fallback on desktop. Projects got a refresh too: a card for this
-very site, and on phones the list now spotlights one project at a time — whichever
-sits closest to the middle of the screen.
+Posts now carry proper Open Graph and Twitter metadata, so shared links finally
+show a title, description, and image on LinkedIn and X. Each post can define its
+own share image, and the share button uses the native API on mobile and copies
+the link on desktop when needed. Projects got refreshed too: this site now has
+its own card, and on phones the list highlights one project at a time, whichever
+sits closest to the center of the screen.
 
 <figure data-layout="row">
   <div class="device-row">
@@ -112,36 +108,60 @@ sits closest to the middle of the screen.
     />
     <img
       src="/images/blog/changelog-v2/projects-mobile.webp"
-      alt="Projects on mobile: only the card closest to the middle of the screen shows its details."
+      alt="Projects on mobile: only the card closest to the center of the screen shows its details."
       loading="lazy"
     />
   </div>
-  <figcaption>Projects side by side: hover to reveal on desktop, one-at-a-time spotlight on mobile.</figcaption>
+  <figcaption>Projects side by side: hover reveals details on desktop, while mobile focuses on one card at a time.</figcaption>
 </figure>
 
 ### v2.2 — Bilingual (EN/ES)
 
-The whole site now speaks English and Spanish. English lives at the root, Spanish
-under `/es/`, and a single switcher in the header swaps the entire site — landing,
-blog, and chrome — instead of the old per-post toggle that only appeared when a
-translation happened to exist.
+The whole site now lives in English and Spanish. English stays at the root,
+Spanish under `/es/`, and a single switcher in the header changes the whole
+experience: landing, blog, and navigation. It replaces the old per-post toggle,
+which only showed up when a translation existed.
 
 <figure data-layout="row">
   <div class="device-row">
     <img
-      src="/images/blog/changelog-v2/i18n-desktop.webp"
-      alt="The home page in Spanish on desktop, with the EN·ES switcher in the header."
+      src="/images/blog/changelog-v2/contact-desktop.webp"
+      alt="Localized contact section on desktop: links to socials, email, and CV download alongside a CTA to the blog."
       loading="lazy"
     />
     <img
-      src="/images/blog/changelog-v2/i18n-mobile.webp"
-      alt="The home page in Spanish on mobile, with the language switcher beside the theme toggle."
+      src="/images/blog/changelog-v2/contact-mobile.webp"
+      alt="The same localized contact section on mobile, condensed for small screens."
       loading="lazy"
     />
   </div>
-  <figcaption>One global EN·ES switcher in the header, paired with the theme toggle on every breakpoint.</figcaption>
+  <figcaption>The contact section after localization, shown on desktop and mobile.</figcaption>
+</figure>
+
+### v2.3 — Professional experience
+
+v2.3 gives professional experience its own place. It used to feel more diluted
+inside the landing; now it reads as a clear, easy-to-scan section with company,
+role, timeframe, work context, and technologies grouped by type. It also sends
+a more accurate profile signal: a strong frontend foundation that now expands
+into product engineering, delivery, and agent workflows.
+
+<figure data-layout="row">
+  <div class="device-row">
+    <img
+      src="/images/blog/changelog-v2/experience-desktop.webp"
+      alt="Experience section on desktop, dark mode: VAIRIX card with grouped technologies."
+      loading="lazy"
+    />
+    <img
+      src="/images/blog/changelog-v2/experience-mobile.webp"
+      alt="Experience section on mobile, light mode: same information adapted to a narrow screen."
+      loading="lazy"
+    />
+  </div>
+  <figcaption>Professional experience on desktop (dark mode) and mobile (light mode).</figcaption>
 </figure>
 
 ## What's next
 
-More written posts and continued polish. Versions from here stay small and frequent.
+More written posts and continued polish. From here on, versions stay small and frequent.

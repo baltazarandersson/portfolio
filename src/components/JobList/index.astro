@@ -9,6 +9,6 @@ interface Props {
 const { jobs } = Astro.props
 ---
 
-<ul class="radiant flex w-full flex-col gap-8 lg:w-2/3">
+<ul class="radiant flex w-full flex-col gap-8">
 	{jobs.map((job) => <JobCard {job} />)}
 </ul>

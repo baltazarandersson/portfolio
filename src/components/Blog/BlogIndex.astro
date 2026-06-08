@@ -22,7 +22,7 @@ const topics = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b)
 
 <Container as="main" variant="section" class="relative py-24 sm:py-28 lg:py-32">
 	<div class="grid gap-10 lg:grid-cols-[15rem_minmax(0,1fr)] lg:gap-16">
-		<aside class="h-max space-y-6 lg:sticky lg:top-28">
+		<aside class="h-max space-y-6 lg:sticky lg:top-32">
 			<div class="space-y-3">
 				<Text
 					as="p"
@@ -45,7 +45,9 @@ const topics = [...new Set(posts.flatMap((post) => post.data.tags))].sort((a, b)
 						<p class="font-heming text-sm font-bold uppercase tracking-[0.18em] text-muted dark:text-zinc-400">
 							{postCount} {postCount === 1 ? t('blog.article') : t('blog.articles')}
 						</p>
-						{topics.length > 0 && <TagList tags={topics} ariaLabel={t('blog.topics')} />}
+						{topics.length > 0 && (
+							<TagList class="hidden lg:flex" tags={topics} ariaLabel={t('blog.topics')} />
+						)}
 					</div>
 				)
 			}

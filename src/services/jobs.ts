@@ -6,6 +6,10 @@ export async function getJobs(lang: Lang): Promise<JobType[]> {
 	return jobs.map((job) => ({
 		...job,
 		type: job.type[lang],
-		description: job.description[lang]
+		description: job.description[lang],
+		stackGroups: job.stackGroups?.map((group) => ({
+			...group,
+			label: group.label[lang]
+		}))
 	}))
 }

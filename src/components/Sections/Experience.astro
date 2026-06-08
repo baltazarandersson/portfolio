@@ -18,7 +18,7 @@ const jobs = await getJobs(lang)
 ---
 
 <Section class="p-layout flex items-start" id={id}>
-	<div class="mt-20 flex w-full flex-col gap-20">
+	<div class="mt-8 flex w-full max-w-4xl flex-col gap-8 md:mt-10 md:gap-10">
 		<Heading as="h2" variant="section">{t('experience.title')}</Heading>
 		<JobList {jobs} />
 	</div>

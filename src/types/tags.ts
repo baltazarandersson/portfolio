@@ -1,10 +1,11 @@
 export type TagType = {
 	title: string
 	alt: string
-	icon: string
 	source: string
+	icon?: string
 	iconClass?: string
 	iconDark?: string
+	shortLabel?: string
 }
 
 export type TagKeys =
@@ -20,3 +21,13 @@ export type TagKeys =
 	| 'typescript'
 	| 'astro'
 	| 'svelte'
+	| 'git'
+	| 'node'
+	| 'nestjs'
+	| 'docker'
+	| 'databases'
+	| 'linux'
+	| 'open_code'
+	| 'codex'
+	| 'claude_code'
+	| 'kilo_code'

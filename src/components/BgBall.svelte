@@ -10,18 +10,29 @@
 	let isMobileDevice = false
 	let mouseElement: HTMLDivElement | undefined
 
-	// Autonomous ball that drifts to random spots — runs on every device.
-	let floatCoords = { left: 0, top: 0 }
-	// Ball that trails the cursor — desktop only, coexists with the floating one.
-	let mouseCoords = { left: 0, top: 0 }
+	// Ambient ball — drifts around the bottom-center of the viewport.
+	let floatCoords = {
+		left: typeof window !== 'undefined' ? window.innerWidth / 2 : 0,
+		top: typeof window !== 'undefined' ? window.innerHeight : 0
+	}
+	// Ball that trails the cursor — desktop only.
+	let mouseCoords = {
+		left: typeof window !== 'undefined' ? window.innerWidth / 2 : 0,
+		top: typeof window !== 'undefined' ? window.innerHeight : 0
+	}
 
 	const ballClass =
 		'pointer-events-none fixed -z-50 h-64 w-64 overflow-hidden rounded-full bg-gradient-to-br from-amber-200 via-orange-200 to-red-300 opacity-50 blur-2xl dark:from-orange-500 dark:via-amber-600 dark:to-amber-400 dark:opacity-20'
 
-	const randomCoords = () => ({
-		left: Math.random() * window.innerWidth,
-		top: Math.random() * window.innerHeight
-	})
+	// Constrain drift to the bottom-center area so the ball never floats off-screen.
+	const getRandomCoords = () => {
+		const w = window.innerWidth
+		const h = window.innerHeight
+		return {
+			left: w / 2 + (Math.random() - 0.5) * w * 0.8,
+			top: h * 0.55 + Math.random() * h * 0.45
+		}
+	}
 
 	const handleMouseMove = ({ clientX, clientY }: MouseEvent) => {
 		if (isMobileDevice || !mouseElement) return
@@ -43,10 +54,10 @@
 		stopFloatAnimation()
 
 		floatTimeout = setTimeout(() => {
-			floatCoords = randomCoords()
+			floatCoords = getRandomCoords()
 
 			floatInterval = setInterval(() => {
-				floatCoords = randomCoords()
+				floatCoords = getRandomCoords()
 			}, 5000)
 		}, 1500)
 	}
@@ -55,7 +66,10 @@
 		innerWidth = window.innerWidth
 		isMobileDevice = innerWidth < MOBILE_WIDTH
 
-		const center = { left: window.innerWidth / 2, top: window.innerHeight }
+		const center = {
+			left: window.innerWidth / 2,
+			top: window.innerHeight
+		}
 		floatCoords = center
 		mouseCoords = center
 
@@ -73,7 +87,7 @@
 
 <svelte:window on:mousemove={handleMouseMove} bind:innerWidth />
 
-<!-- Floating ball (all devices) -->
+<!-- Ambient ball (all devices) — always anchored to bottom center -->
 <!-- data-orb lets StarryBackground read this orb's live position to bend nearby stars. -->
 <div
 	data-orb

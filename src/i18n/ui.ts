@@ -17,7 +17,7 @@ export const ui = {
 		'presentation.greeting': 'Hi!',
 		'presentation.intro': 'My name is',
 		'presentation.lead':
-			'Frontend developer who aims to specialize in crafting user interfaces with React, focusing on performance and clean code to ensure a smooth and engaging user experience.',
+			'Software developer with a frontend foundation and product mindset, building web and mobile products with a modern stack and agent workflows to iterate faster without losing engineering judgment.',
 
 		'experience.title': 'Professional experience',
 		'job.present': 'Present',
@@ -32,7 +32,7 @@ export const ui = {
 
 		'blog.eyebrow': 'Blog',
 		'blog.heading': 'Writing',
-		'blog.intro': 'Notes on building useful interfaces, plus release notes for this site.',
+		'blog.intro': 'Notes on building useful interfaces and on how this site keeps evolving.',
 		'blog.article': 'article',
 		'blog.articles': 'articles',
 		'blog.topics': 'Topics',
@@ -63,7 +63,7 @@ export const ui = {
 		'presentation.greeting': '¡Hola!',
 		'presentation.intro': 'Mi nombre es',
 		'presentation.lead':
-			'Desarrollador frontend enfocado en crear interfaces con React, cuidando el rendimiento y el código limpio para lograr una experiencia fluida y agradable.',
+			'Desarrollador de software con base frontend y mirada de producto, construyendo productos web y móviles con un stack moderno y workflows con agentes para iterar más rápido sin perder criterio técnico.',
 
 		'experience.title': 'Experiencia profesional',
 		'job.present': 'Actualidad',
@@ -71,14 +71,14 @@ export const ui = {
 
 		'contact.title': 'Hablemos',
 		'contact.downloadCv': 'Descargar mi CV',
-		'contact.readMoreTitle': '¿Querés leer más?',
+		'contact.readMoreTitle': '¿Quieres leer más?',
 		'contact.readMoreText':
-			'Pasá por el blog: artículos técnicos, tutoriales y notas sobre desarrollo.',
+			'Pasa por el blog: artículos técnicos, tutoriales y notas sobre desarrollo.',
 		'contact.goToBlog': 'Ir al blog',
 
 		'blog.eyebrow': 'Blog',
 		'blog.heading': 'Escritos',
-		'blog.intro': 'Notas sobre construir interfaces útiles, y los release notes de este sitio.',
+		'blog.intro': 'Notas sobre construir interfaces útiles y sobre la evolución de este sitio.',
 		'blog.article': 'artículo',
 		'blog.articles': 'artículos',
 		'blog.topics': 'Temas',

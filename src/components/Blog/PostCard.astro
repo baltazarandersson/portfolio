@@ -86,7 +86,7 @@ const textVariant = featured ? 'lead' : compact ? 'small' : 'body'
 			<TagList tags={tags} class="relative z-10" />
 			<ActionLink
 				href={href}
-				aria-label={`Read ${title}`}
+				aria-label={`${t('post.readArticle')}: ${title}`}
 				tabindex="-1"
 				aria-hidden="true"
 				class="relative z-10 w-fit font-heming text-sm font-bold uppercase tracking-[0.18em] text-primary underline decoration-primary/40 underline-offset-4 transition group-hover:decoration-primary"

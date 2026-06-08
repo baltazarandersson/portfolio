@@ -42,7 +42,7 @@ A Husky `pre-commit` hook runs `yarn run gate` on every commit (installed via th
 - **Astro components** read the locale from `Astro.currentLocale`: `const t = useTranslations(Astro.currentLocale)`. Add new copy as a key in `ui.ts` (both languages) — never hardcode user-facing English in components.
 - **Svelte islands** cannot read `Astro.currentLocale`; pass `lang` (and/or already-translated labels) down as props from the Astro parent (see `Header/index.astro` → `NavSection`, `Drawer`, `BlogTitleSwap`).
 - **Pages** are mirrored under `src/pages/es/**` (thin shells that render the same components, which resolve the locale from the URL). `[slug].astro` must use `export async function getStaticPaths()` (NOT an arrow `const`) to avoid `Astro.props` hoisting out of render scope.
-- **Localized data**: `src/mocks` holds `{ en, es }` (`LocalizedText`) for copy; `getJobs(lang)`/`getProjects(lang)` resolve it. Spanish copy follows the blog's warm, voseo (Argentine) voice. `src/mocks/**` and `src/i18n/ui.ts` are in `cspell` `ignorePaths`.
+- **Localized data**: `src/mocks` holds `{ en, es }` (`LocalizedText`) for copy; `getJobs(lang)`/`getProjects(lang)` resolve it. Spanish copy should stay warm and natural, usually using the user's Uruguayan `tu` forms rather than assumed Argentine voseo unless the source text asks for another register. `src/mocks/**` and `src/i18n/ui.ts` are in `cspell` `ignorePaths`.
 
 ## Iteration Protocol
 
