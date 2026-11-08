@@ -17,7 +17,7 @@ export const ui = {
 		'presentation.greeting': 'Hi!',
 		'presentation.intro': 'My name is',
 		'presentation.lead':
-			'Software developer with a frontend foundation and product mindset, building web and mobile products with a modern stack and agent workflows to iterate faster without losing engineering judgment.',
+			'Fullstack engineer from Uruguay. I started in frontend, grew into backend work in production, and build my own products with AI coding agents, keeping the specs, review and validation in my hands.',
 
 		'experience.title': 'Professional experience',
 		'job.present': 'Present',
@@ -63,7 +63,7 @@ export const ui = {
 		'presentation.greeting': '¡Hola!',
 		'presentation.intro': 'Mi nombre es',
 		'presentation.lead':
-			'Desarrollador de software con base frontend y mirada de producto, construyendo productos web y móviles con un stack moderno y workflows con agentes para iterar más rápido sin perder criterio técnico.',
+			'Fullstack engineer de Uruguay. Empecé en frontend, crecí hacia el backend en producción y construyo productos propios con agentes de IA, con las especificaciones, la revisión y la validación en mis manos.',
 
 		'experience.title': 'Experiencia profesional',
 		'job.present': 'Actualidad',
