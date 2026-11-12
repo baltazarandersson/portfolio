@@ -21,7 +21,7 @@ const projects: ProjectWithKeysType[] = [
 		},
 		tags: ['astro', 'svelte', 'tailwind', 'typescript'],
 		repository: 'https://github.com/baltazarandersson/portfolio',
-		deploy: 'https://baltazar.vercel.app/'
+		deploy: 'https://baltazar.medanolabs.com/'
 	},
 	{
 		thumbnail: devtterThumb,

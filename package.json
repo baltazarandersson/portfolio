@@ -7,6 +7,7 @@
 		"start": "astro dev",
 		"build": "yarn run check && astro build",
 		"preview": "astro preview",
+		"deploy": "yarn build && npx wrangler@4 deploy",
 		"astro": "astro",
 		"check": "astro check",
 		"format": "prettier --write .",

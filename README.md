@@ -14,7 +14,7 @@ Install with yarn
 
 ## Demo
 
-[Access the portfolio by clicking here](https://baltazar.vercel.app/)
+[Access the portfolio by clicking here](https://baltazar.medanolabs.com/)
 
 ![Collage Maker-14-Sep-2023-01-42-PM-601](https://github.com/baltazarandersson/portfolio/assets/21319545/0b3983b6-cfa0-4826-a706-d9dac5ce7bb9)
 
@@ -29,6 +29,7 @@ All commands are run from the root of the project, from a terminal:
 | `yarn run check`    | Runs Astro type and content checks               |
 | `yarn build`        | Checks and builds the production site to `dist/` |
 | `yarn preview`      | Previews the production build locally            |
+| `yarn deploy`       | Builds and publishes to baltazar.medanolabs.com  |
 | `yarn format:check` | Checks formatting with Prettier                  |
 | `yarn spellcheck`   | Runs cspell                                      |
 | `yarn astro ...`    | Runs Astro CLI commands                          |

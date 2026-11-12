@@ -1,0 +1,13 @@
+// The Worker that serves the built portfolio (dist) as static assets on baltazar.medanolabs.com.
+{
+	"name": "portfolio-baltazar",
+	"compatibility_date": "2026-11-11",
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "404-page"
+	},
+	// the site lives only on its own domain: no workers.dev address and no public preview per version
+	"workers_dev": false,
+	"preview_urls": false,
+	"routes": [{ "pattern": "baltazar.medanolabs.com", "custom_domain": true }]
+}

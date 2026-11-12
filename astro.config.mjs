@@ -4,7 +4,7 @@ import svelte from '@astrojs/svelte'
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://baltazar.vercel.app',
+	site: 'https://baltazar.medanolabs.com',
 	i18n: {
 		locales: ['en', 'es'],
 		defaultLocale: 'en',

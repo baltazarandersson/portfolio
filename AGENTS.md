@@ -32,7 +32,8 @@ A Husky `pre-commit` hook runs `yarn run gate` on every commit (installed via th
 
 ## Build And Deploy Notes
 
-- Deploy target is Vercel (Linux x64), build command `yarn build`. The lockfile is generated on Windows, so `package.json` pins the Linux Sharp binary in `optionalDependencies` (`@img/sharp-linux-x64`, `@img/sharp-libvips-linux-x64`) and a `resolutions` entry collapses Sharp to a single version. Removing either reintroduces the `MissingSharp` build failure on Vercel — keep them in sync with the `sharp` version.
+- Deploy target is a Cloudflare Worker with static assets (`wrangler.jsonc`), served only at `https://baltazar.medanolabs.com`. `yarn deploy` builds locally and publishes `dist/` through the local Wrangler session; nothing builds on push. `baltazar.vercel.app` only redirects to the new address.
+- `package.json` still pins the Linux Sharp binary in `optionalDependencies` and a `resolutions` entry for Sharp. They existed for the former Vercel (Linux x64) build and are not needed for the local build; remove them together the next time the lockfile is regenerated.
 - `astro.config.mjs` sets `site`; per-page Open Graph/Twitter tags in `Layout.astro` need it to build absolute `og:image`/canonical URLs. Blog posts may set a `heroImage` (public path) used as the share image; pages without one fall back to `/images/og/default.webp`.
 
 ## Internationalization (i18n)
